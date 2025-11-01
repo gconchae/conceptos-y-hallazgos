@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptos y Hallazgos - Tesis Doctoral</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --concept-color: #9b59b6;
+            --instrument-color: #1abc9c;
+            --methodology-color: #e67e22;
+            --finding-color: #e74c3c;
+            --intervention-color: #3498db;
+            --approach-color: #f1c40f;
+            --context-color: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .search-container {
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        #conceptSearch {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        #conceptSearch:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 6px solid var(--secondary-color);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-card.concept {
+            border-left-color: var(--concept-color);
+        }
+        
+        .category-card.instrument {
+            border-left-color: var(--instrument-color);
+        }
+        
+        .category-card.methodology {
+            border-left-color: var(--methodology-color);
+        }
+        
+        .category-card.finding {
+            border-left-color: var(--finding-color);
+        }
+        
+        .category-card.intervention {
+            border-left-color: var(--intervention-color);
+        }
+        
+        .category-card.approach {
+            border-left-color: var(--approach-color);
+        }
+        
+        .category-card.context {
+            border-left-color: var(--context-color);
+        }
+        
+        .category-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 18px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .concepts-list {
+            list-style-type: none;
+            flex-grow: 1;
+        }
+        
+        .concepts-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            padding-left: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .concepts-list li:hover {
+            background-color: #f8f9fa;
+            transform: translateX(5px);
+        }
+        
+        .concepts-list li:active {
+            transform: scale(0.98);
+        }
+        
+        .concepts-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .concept-badge {
+            display: inline-block;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 12px;
+            font-weight: 600;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .concept-badge.concept {
+            background-color: #e8daef;
+            color: #6c3483;
+        }
+        
+        .concept-badge.instrument {
+            background-color: #d1f2eb;
+            color: #1a7a5c;
+        }
+        
+        .concept-badge.methodology {
+            background-color: #fdebd0;
+            color: #b06c0f;
+        }
+        
+        .concept-badge.finding {
+            background-color: #fadbd8;
+            color: #a93226;
+        }
+        
+        .concept-badge.intervention {
+            background-color: #d6eaf8;
+            color: #21618c;
+        }
+        
+        .concept-badge.approach {
+            background-color: #fef9e7;
+            color: #9a7d0a;
+        }
+        
+        .concept-badge.context {
+            background-color: #e5e7e9;
+            color: #515a5a;
+        }
+        
+        /* Estilos del Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 40px auto;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalAppear 0.3s ease-out;
+            overflow: hidden;
+        }
+        
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 25px 30px;
+            position: relative;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .modal-subtitle {
+            font-style: italic;
+            opacity: 0.9;
+            margin-top: 8px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .modal-concept-code {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 8px;
+            margin-right: 10px;
+        }
+        
+        .modal-category {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 8px;
+            border: 1px dashed rgba(255, 255, 255, 0.5);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .close-modal:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .info-section {
+            margin-bottom: 30px;
+        }
+        
+        .info-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .info-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .highlight {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--success-color);
+            margin: 20px 0;
+        }
+        
+        .concept-values {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .concept-value {
+            background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .application-context {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .interpretation-guide {
+            background-color: #fef9e7;
+            border-left: 4px solid var(--warning-color);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .category-info {
+            background-color: #f4ecf7;
+            border-left: 4px solid #8e44ad;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .methodological-note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .category-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+            font-weight: 500;
+        }
+        
+        .category-badge::before {
+            content: "📊";
+            margin-right: 4px;
+        }
+        
+        .modal-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-btn {
+            padding: 10px 20px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .modal-loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: var(--secondary-color);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            display: none;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        .formula-container {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .formula {
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .formula-variables {
+            text-align: left;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .variable {
+            font-family: 'Courier New', monospace;
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .categories-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 20px auto;
+            }
+            
+            .modal-header {
+                padding: 20px;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+            
+            .concept-values {
+                flex-direction: column;
+            }
+            
+            .category-badge {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
+            
+            .modal-navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Conceptos y Hallazgos de Investigación</h1>
+            <p class="subtitle">Haz clic en cualquier recuadro para obtener una explicación detallada de cada concepto, metodología y hallazgo clave de nuestro estudio.</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main>
+            <h2 id="categories-heading" class="sr-only">Categorías de Conceptos</h2>
+            
+            <div class="search-container">
+                <input type="text" id="conceptSearch" placeholder="Buscar conceptos, metodologías o hallazgos...">
+                <span class="search-icon">🔍</span>
+            </div>
+            
+            <div class="no-results" id="noResults">
+                <h3>No se encontraron conceptos</h3>
+                <p>Intenta con otros términos de búsqueda</p>
+            </div>
+            
+            <div class="categories-container" id="categoriesContainer">
+                <!-- Las tarjetas de categorías se generarán dinámicamente con JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para mostrar detalles de conceptos -->
+    <div class="modal" id="conceptModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalConceptTitle">Título del concepto</h2>
+                <div id="modalConceptSubtitle" class="modal-subtitle"></div>
+                <div id="modalHeaderBadges"></div>
+                <button class="close-modal" id="closeModal" aria-label="Cerrar ventana">&times;</button>
+            </div>
+            <div class="modal-body" id="modalConceptBody">
+                <!-- El contenido del modal se cargará aquí -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-loading" id="modalLoading">
+        <p>Cargando información...</p>
+    </div>
+
+    <script>
+        // Datos de conceptos y hallazgos
+        const conceptData = {
+            'epa': {
+                id: 'epa',
+                title: 'EPA',
+                subtitle: 'Efecto de Preservación Actitudinal',
+                category: 'concepto'
+            },
+            'eca': {
+                id: 'eca', 
+                title: 'ECA',
+                subtitle: 'Escala de Conciencia Ambiental',
+                category: 'instrumento'
+            },
+            'eca_original': {
+                id: 'eca_original',
+                title: 'ECA - Estudio Original',
+                subtitle: 'Validación Psicométrica Original',
+                category: 'instrumento'
+            },
+            'quasi_experimental': {
+                id: 'quasi_experimental',
+                title: 'Diseño Cuasiexperimental',
+                subtitle: 'Pretest-Postest con Grupo Control',
+                category: 'metodología'
+            },
+            'ecological_awareness': {
+                id: 'ecological_awareness',
+                title: 'Conciencia Ecológica',
+                subtitle: 'Constructo Multidimensional',
+                category: 'concepto'
+            },
+            'attitude_behavior_gap': {
+                id: 'attitude_behavior_gap',
+                title: 'Brecha Actitud-Conducta',
+                subtitle: 'Disociación entre saber/hacer',
+                category: 'hallazgo'
+            },
+            'experimental_group': {
+                id: 'experimental_group',
+                title: 'Grupo Experimental',
+                subtitle: 'GE - Intervención Curricular',
+                category: 'metodología'
+            },
+            'control_group': {
+                id: 'control_group',
+                title: 'Grupo Control',
+                subtitle: 'GC - Condición Natural',
+                category: 'metodología'
+            },
+            'curricular_integration': {
+                id: 'curricular_integration',
+                title: 'Integración Curricular',
+                subtitle: 'Inserción de contenidos ambientales',
+                category: 'intervención'
+            },
+            'environmental_education': {
+                id: 'environmental_education',
+                title: 'Educación Ambiental',
+                subtitle: 'Enfoque pedagógico transformador',
+                category: 'enfoque'
+            },
+            'semirural_context': {
+                id: 'semirural_context',
+                title: 'Contexto Semirural',
+                subtitle: 'Valle del Cauca - Institución oficial',
+                category: 'contexto'
+            }
+        };
+
+        // Función para procesar texto y convertir **texto** a negritas
+        function processTextWithBold(text) {
+            return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        }
+
+        // Contenido detallado de cada concepto
+        const conceptContent = {
+            'epa': processTextWithBold(`### ¿Qué es?
+El Efecto de Preservación Actitudinal (EPA) es un concepto que identificamos empíricamente en nuestra investigación, donde la intervención educativa logró mantener y consolidar actitudes proambientales preexistentes en el grupo experimental, mientras el grupo control mostraba un declive actitudinal en el mismo periodo.
+
+### Fundamentación Teórica
+Este efecto se alinea con los postulados del aprendizaje experiencial de Kolb (1984) y sugiere que en contextos donde las actitudes iniciales son relativamente altas, el impacto más valioso de una intervención puede ser la prevención del declive actitudinal más que su incremento cuantitativo.
+
+### Evidencia en Nuestro Estudio
+Encontramos un tamaño del efecto grande (r=0.59) en la comparación intergrupo de la dimensión afectiva, donde el GE mantuvo sus altos niveles actitudinales (M=24.35) mientras el GC descendió significativamente (M=20.15), evidenciando este efecto de preservación.
+
+### Implicaciones Educativas
+El EPA sugiere que intervenciones ambientales sostenidas pueden funcionar como "vacunas pedagógicas" contra la apatía ambiental en contextos escolares, particularmente importante en nuestra muestra semirrural del Valle del Cauca.`),
+
+            'eca': processTextWithBold(`### ¿Qué es?
+La Escala de Conciencia Ambiental (ECA) es nuestro instrumento de medición principal, adaptado de Torres Soto y otros (2022) y validado para evaluar las tres dimensiones del constructo de conciencia ecológica en estudiantes de educación básica secundaria.
+
+### Estructura y Dimensiones
+La ECA consta de 21 ítems distribuidos en:
+- **Dimensión Cognitiva (7 ítems):** Conocimiento conceptual ambiental
+- **Dimensión Afectiva (7 ítems):** Actitudes y valores proambientales  
+- **Dimensión Conductual (7 ítems):** Prácticas ecológicas autorreportadas
+
+### Propiedades Psicométricas
+En nuestro estudio encontramos fiabilidades aceptables en afectiva (α=.626) y conductual (α=.720), pero baja en cognitiva (α=.387), lo que nos llevó a recomendar mejoras en esta subescala para futuras investigaciones.
+
+### Aplicación en Contexto
+Aplicamos la ECA en formato pretest y postest a 89 estudiantes, demostrando sensibilidad para detectar cambios atribuibles a nuestra intervención curricular de 8 semanas.`),
+
+            'eca_original': processTextWithBold(`### Estudio Original de Validación
+La Escala de Conciencia Ambiental (ECA) fue desarrollada y validada originalmente por Torres Soto et al. (2022) en un estudio psicométrico riguroso realizado en Sonora, México.
+
+### Características del Estudio Original
+- **Muestra:** 233 estudiantes de educación básica
+- **Edad promedio:** 10 años
+- **Propósito:** Validación psicométrica de la escala
+
+### Hallazgos Principales del Estudio Original
+**Fiabilidad muy alta:** La escala original demostró una excelente consistencia interna, obteniendo un coeficiente Alfa de Cronbach global de 0.93. Un valor tan alto indica que los 21 ítems medían de forma muy consistente el mismo constructo.
+
+**Estructura Unifactorial:** A diferencia de la versión adaptada (que la dividió en tres dimensiones), el Análisis Factorial Exploratorio del estudio original concluyó que la escala tenía una estructura de un solo factor. Esto significa que los autores originales determinaron que la ECA medía un único constructo general e integrado de "conciencia ambiental", en lugar de dimensiones separadas. Este único factor explicó el 65.28% de la varianza total.
+
+### Comparación con Nuestra Adaptación
+Nuestra adaptación a tres dimensiones (cognitiva, afectiva, conductual) representa una evolución del instrumento original, buscando mayor especificidad en la medición del constructo multidimensional de conciencia ecológica.`),
+
+            'quasi_experimental': processTextWithBold(`### ¿Qué es?
+Nuestro diseño cuasiexperimental pretest-postest con grupo control no equivalente es una metodología de investigación que nos permitió evaluar causalmente el impacto de la integración curricular ambiental, manteniendo validez ecológica en el contexto escolar real.
+
+### Justificación Metodológica
+Optamos por este diseño porque la asignación aleatoria estricta no era viable en el contexto escolar real. Utilizamos grupos intactos (cursos naturales) pero implementamos controles metodológicos rigurosos para fortalecer la validez interna.
+
+### Implementación en el Estudio
+- **Grupo Experimental (n=63):** Recibió la intervención de 8 semanas
+- **Grupo Control (n=26):** Continuó con el currículo regular
+- **Mediciones:** ECA aplicada en pretest y postest a ambos grupos
+
+### Fortalezas y Limitaciones
+El diseño nos permitió establecer relaciones causales plausibles mientras mantenía autenticidad ecológica, aunque reconocemos la limitación de la no aleatorización completa.`),
+
+            'ecological_awareness': processTextWithBold(`### ¿Qué es?
+La conciencia ecológica es nuestro constructo central de investigación, conceptualizado como un fenómeno multidimensional que integra componentes cognitivos, afectivos y conductuales en relación con el medio ambiente.
+
+### Marco Teórico
+Fundamentamos este constructo en aproximaciones integrales que superan visiones reduccionistas, reconociendo que el conocimiento ambiental necesariamente debe traducirse en actitudes y estas en acciones concretas para ser efectivo.
+
+### Operacionalización en Nuestro Estudio
+Medimos la conciencia ecológica a través de sus tres dimensiones en la ECA, encontrando que mientras las dimensiones cognitiva y afectiva mostraron mejoras significativas, la conductual presentó avances más modestos, reflejando la complejidad del constructo.
+
+### Relevancia Educativa
+Este enfoque multidimensional es pedagógicamente valioso porque permite identificar puntos de leverage específicos para intervenciones educativas diferenciadas según las necesidades detectadas en cada dimensión.`),
+
+            'attitude_behavior_gap': processTextWithBold(`### ¿Qué es?
+La brecha actitud-conducta es un fenómeno documentado en nuestra investigación donde encontramos disociación entre las disposiciones afectivas favorables hacia el ambiente y la implementación consistente de prácticas ecológicas.
+
+### Evidencia Empírica en Nuestro Estudio
+Mientras la dimensión afectiva mostró un efecto grande (r=0.59) de la intervención, la dimensión conductual presentó un efecto pequeño-moderado (r=0.27), confirmando la persistencia de esta brecha incluso después de la intervención educativa.
+
+### Factores Contextuales Identificados
+Atribuimos esta brecha a limitaciones estructurales como la falta de infraestructura de reciclaje en la institución, escaso apoyo familiar, y barreras institucionales que dificultan la traducción de intenciones en acciones.
+
+### Implicaciones para Política Educativa
+Este hallazgo sugiere que las intervenciones pedagógicas deben complementarse con cambios estructurales y de política institucional para cerrar efectivamente esta brecha actitud-conducta.`),
+
+            'experimental_group': processTextWithBold(`### ¿Qué es?
+El Grupo Experimental (GE) en nuestro estudio fue el conjunto de estudiantes que recibió la intervención pedagógica estructurada de integración curricular de contenidos ambientales durante 8 semanas.
+
+### Características del GE
+- **Tamaño:** 63 estudiantes de octavo grado
+- **Composición:** Estudiantes de cursos naturales (no aleatorizados)
+- **Intervención:** 8 sesiones pedagógicas con enfoque experiencial
+- **Contexto:** Institución educativa semirrural del Valle del Cauca
+
+### Rol en el Diseño Investigativo
+El GE sirvió como grupo de tratamiento para evaluar la efectividad de la intervención, comparándose con el Grupo Control que mantuvo las condiciones educativas regulares.
+
+### Resultados Clave
+El GE mostró mejoras significativas en conocimiento ambiental (aunque con cautela por fiabilidad) y mantuvo altos niveles actitudinales, evidenciando el Efecto de Preservación Actitudinal (EPA).`),
+
+            'control_group': processTextWithBold(`### ¿Qué es?
+El Grupo Control (GC) fue el conjunto de estudiantes que no recibió la intervención experimental y continuó con el currículo regular, sirviendo como referencia para comparar los efectos de la intervención.
+
+### Características del GC
+- **Tamaño:** 26 estudiantes de octavo grado
+- **Composición:** Estudiantes de cursos paralelos no intervenidos
+- **Condición:** Curriculum regular sin modificación ambiental
+- **Contexto:** Misma institución educativa semirrural
+
+### Función Metodológica
+El GC permitió controlar efectos de maduración, historia y testing que podrían confundir la interpretación de los resultados, estableciendo una línea base de comparación.
+
+### Hallazgos Relevantes
+El GC mostró un declive actitudinal significativo en la dimensión afectiva (M=20.15 vs 22.00 inicial), lo que resaltó por contraste el efecto protector de la intervención en el GE.`),
+
+            'curricular_integration': processTextWithBold(`### ¿Qué es?
+La integración curricular es nuestra estrategia de intervención que consistió en insertar sistemáticamente contenidos y actividades ambientales dentro del currículo formal de Ciencias Naturales, en lugar de abordarlos como temas aislados.
+
+### Implementación Práctica
+Desarrollamos una unidad didáctica de 8 semanas titulada "Nuestro ecosistema, nuestra responsabilidad" que integró:
+- Debates sobre dilemas socioambientales
+- Salida de campo al ecosistema local
+- Análisis de casos y resolución de problemas
+- Proyectos de acción ambiental
+
+### Fundamentación Pedagógica
+Esta aproximación se basa en el constructivismo social de Vygotsky y el aprendizaje experiencial de Kolb, privilegiando la contextualización y la significatividad de los aprendizajes.
+
+### Impacto Demostrado
+La integración curricular mostró efectividad para fortalecer conocimientos y actitudes ambientales, aunque con menor impacto en conductas, sugiriendo la necesidad de complementos estructurales.`),
+
+            'environmental_education': processTextWithBold(`### ¿Qué es?
+La Educación Ambiental (EA) en nuestro estudio es entendida como un proceso pedagógico transformador que busca desarrollar conocimientos, valores y capacidades para la acción ambiental responsable en contextos reales.
+
+### Enfoque Adoptado
+Implementamos una EA crítica y participativa que supera visiones conservacionistas tradicionales, enfatizando:
+- La complejidad de los problemas ambientales
+- La interdependencia sociedad-naturaleza
+- La acción colectiva y la ciudadanía ambiental
+- La contextualización en el territorio local
+
+### Bases Teóricas
+Nuestra aproximación se sustenta en los postulados de la UNESCO para la Educación para el Desarrollo Sostenible y en teóricos contemporáneos como Sterling (2001) y Tilbury (1995).
+
+### Contribución del Estudio
+Demostramos que una EA bien estructurada puede generar efectos significativos en conciencia ecológica, particularmente a través del Efecto de Preservación Actitudinal identificado.`),
+
+            'semirural_context': processTextWithBold(`### ¿Qué es?
+El contexto semirrural se refiere a las características específicas de la institución educativa y comunidad donde realizamos nuestra investigación, ubicada en el Valle del Cauca con particularidades socioecológicas distintivas.
+
+### Características del Contexto
+- **Ubicación:** Zona de transición urbano-rural del Valle del Cauca
+- **Recursos:** Limitada infraestructura ambiental institucional
+- **Comunidad:** Mixta agropecuaria y pequeña industria
+- **Ecosistema:** Presencia de cuerpos de agua y áreas verdes cercanas
+
+### Relevancia Investigativa
+Este contexto representa un escenario valioso para estudiar educación ambiental por su vulnerabilidad ecológica y su posición intermedia entre realidades urbanas y rurales típicas.
+
+### Implicaciones para los Resultados
+El contexto influyó en nuestros hallazgos, particularmente en la brecha actitud-conducta, donde la falta de infraestructura de apoyo limitó la traducción de intenciones en acciones consistentes.`)
+        };
+
+        // Agrupar conceptos por categoría
+        const categoriesData = [
+            {
+                id: 'concepto',
+                title: 'CONCEPTOS TEÓRICOS',
+                type: 'concepto',
+                concepts: Object.values(conceptData).filter(item => item.category === 'concepto')
+            },
+            {
+                id: 'instrumento',
+                title: 'INSTRUMENTOS DE MEDICIÓN',
+                type: 'instrumento',
+                concepts: Object.values(conceptData).filter(item => item.category === 'instrumento')
+            },
+            {
+                id: 'metodología',
+                title: 'METODOLOGÍA DE INVESTIGACIÓN',
+                type: 'metodología',
+                concepts: Object.values(conceptData).filter(item => item.category === 'metodología')
+            },
+            {
+                id: 'hallazgo',
+                title: 'HALLAZGOS PRINCIPALES',
+                type: 'hallazgo',
+                concepts: Object.values(conceptData).filter(item => item.category === 'hallazgo')
+            },
+            {
+                id: 'intervención',
+                title: 'ESTRATEGIAS DE INTERVENCIÓN',
+                type: 'intervención',
+                concepts: Object.values(conceptData).filter(item => item.category === 'intervención')
+            },
+            {
+                id: 'enfoque',
+                title: 'ENFOQUES PEDAGÓGICOS',
+                type: 'enfoque',
+                concepts: Object.values(conceptData).filter(item => item.category === 'enfoque')
+            },
+            {
+                id: 'contexto',
+                title: 'CONTEXTO DE ESTUDIO',
+                type: 'contexto',
+                concepts: Object.values(conceptData).filter(item => item.category === 'contexto')
+            }
+        ];
+
+        // Variables globales
+        let currentConceptIndex = 0;
+        let allConcepts = [];
+        let filteredConcepts = [];
+
+        // Elementos DOM
+        const categoriesContainer = document.getElementById('categoriesContainer');
+        const conceptModal = document.getElementById('conceptModal');
+        const modalConceptTitle = document.getElementById('modalConceptTitle');
+        const modalConceptSubtitle = document.getElementById('modalConceptSubtitle');
+        const modalHeaderBadges = document.getElementById('modalHeaderBadges');
+        const modalConceptBody = document.getElementById('modalConceptBody');
+        const closeModal = document.getElementById('closeModal');
+        const conceptSearch = document.getElementById('conceptSearch');
+        const noResults = document.getElementById('noResults');
+        const modalLoading = document.getElementById('modalLoading');
+
+        // Generar las tarjetas de categorías
+        function renderCategoryCards() {
+            categoriesContainer.innerHTML = '';
+            
+            categoriesData.forEach(category => {
+                if (category.concepts.length === 0) return;
+                
+                const card = document.createElement('div');
+                card.className = `category-card ${category.type}`;
+                
+                let conceptsHTML = '';
+                category.concepts.forEach(concept => {
+                    const badgeClass = concept.category;
+                    
+                    conceptsHTML += `
+                        <li onclick="openConceptModal('${concept.id}')" data-searchable="${concept.title.toLowerCase()} ${concept.subtitle.toLowerCase()}">
+                            <span class="concept-badge ${badgeClass}">${concept.category.toUpperCase()}</span>
+                            ${concept.title}
+                        </li>
+                    `;
+                });
+                
+                card.innerHTML = `
+                    <h3>${category.title}</h3>
+                    <ul class="concepts-list">
+                        ${conceptsHTML}
+                    </ul>
+                `;
+                
+                categoriesContainer.appendChild(card);
+            });
+            
+            // Preparar lista de todos los conceptos para navegación
+            allConcepts = Object.values(conceptData);
+            filteredConcepts = [...allConcepts];
+        }
+
+        // Abrir modal con información del concepto
+        function openConceptModal(contentKey) {
+            // Mostrar indicador de carga
+            modalLoading.style.display = 'block';
+            conceptModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Simular carga asíncrona para mejor UX
+            setTimeout(() => {
+                const concept = conceptData[contentKey];
+                const content = conceptContent[contentKey];
+                
+                // Actualizar el modal con la información
+                modalConceptTitle.textContent = concept.title;
+                modalConceptSubtitle.textContent = concept.subtitle;
+                
+                // Actualizar índice actual para navegación
+                currentConceptIndex = filteredConcepts.findIndex(c => c.id === contentKey);
+                
+                // Construir badges del header
+                let headerBadgesHTML = '';
+                headerBadgesHTML += `<span class="modal-concept-code">${concept.category.toUpperCase()}</span>`;
+                modalHeaderBadges.innerHTML = headerBadgesHTML;
+                
+                // Construir el contenido del modal
+                let modalContent = '';
+                
+                // Parsear el contenido markdown simple
+                const sections = content.split('### ');
+                sections.forEach(section => {
+                    if (section.trim() === '') return;
+                    
+                    const lines = section.split('\n');
+                    const title = lines[0].trim();
+                    const body = lines.slice(1).join('\n').trim();
+                    
+                    if (title && body) {
+                        modalContent += `
+                            <div class="info-section">
+                                <h3>${title}</h3>
+                                <div class="application-context">
+                                    ${body}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                
+                // Agregar navegación entre conceptos
+                modalContent += `
+                    <div class="modal-navigation">
+                        <button id="prevConcept" class="nav-btn" ${currentConceptIndex <= 0 ? 'disabled' : ''}>← Anterior</button>
+                        <button id="nextConcept" class="nav-btn" ${currentConceptIndex >= filteredConcepts.length - 1 ? 'disabled' : ''}>Siguiente →</button>
+                    </div>
+                `;
+                
+                modalConceptBody.innerHTML = modalContent;
+                
+                // Agregar event listeners para navegación
+                document.getElementById('prevConcept').addEventListener('click', navigateToPrevConcept);
+                document.getElementById('nextConcept').addEventListener('click', navigateToNextConcept);
+                
+                // Ocultar indicador de carga
+                modalLoading.style.display = 'none';
+                
+                // Enfocar el botón de cerrar para mejor accesibilidad
+                closeModal.focus();
+            }, 300);
+        }
+
+        // Navegación entre conceptos
+        function navigateToPrevConcept() {
+            if (currentConceptIndex > 0) {
+                openConceptModal(filteredConcepts[currentConceptIndex - 1].id);
+            }
+        }
+
+        function navigateToNextConcept() {
+            if (currentConceptIndex < filteredConcepts.length - 1) {
+                openConceptModal(filteredConcepts[currentConceptIndex + 1].id);
+            }
+        }
+
+        // Cerrar modal
+        function closeConceptModal() {
+            conceptModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Función de búsqueda
+        function filterConcepts(searchTerm) {
+            const allConceptElements = document.querySelectorAll('.concepts-list li');
+            let hasResults = false;
+            
+            allConceptElements.forEach(concept => {
+                const conceptText = concept.getAttribute('data-searchable');
+                if (conceptText.includes(searchTerm.toLowerCase())) {
+                    concept.style.display = 'flex';
+                    hasResults = true;
+                } else {
+                    concept.style.display = 'none';
+                }
+            });
+            
+            // Actualizar filteredConcepts para navegación
+            filteredConcepts = allConcepts.filter(concept => {
+                const searchableText = `${concept.title.toLowerCase()} ${concept.subtitle.toLowerCase()}`;
+                return searchableText.includes(searchTerm.toLowerCase());
+            });
+            
+            // Mostrar/ocultar mensaje de no resultados
+            if (hasResults || searchTerm === '') {
+                noResults.style.display = 'none';
+                categoriesContainer.style.display = 'grid';
+            } else {
+                noResults.style.display = 'block';
+                categoriesContainer.style.display = 'none';
+            }
+        }
+
+        // Navegación por teclado mejorada
+        function initKeyboardNavigation() {
+            document.addEventListener('keydown', function(event) {
+                // Cerrar modal con Escape
+                if (event.key === 'Escape' && conceptModal.style.display === 'block') {
+                    closeConceptModal();
+                }
+                
+                // Navegación con teclas en modal
+                if (conceptModal.style.display === 'block') {
+                    if (event.key === 'ArrowLeft') {
+                        navigateToPrevConcept();
+                    } else if (event.key === 'ArrowRight') {
+                        navigateToNextConcept();
+                    }
+                    
+                    // Mantener foco dentro del modal
+                    if (event.key === 'Tab') {
+                        const focusableElements = conceptModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                        if (focusableElements.length === 0) return;
+                        
+                        const firstElement = focusableElements[0];
+                        const lastElement = focusableElements[focusableElements.length - 1];
+                        
+                        if (event.shiftKey && document.activeElement === firstElement) {
+                            lastElement.focus();
+                            event.preventDefault();
+                        } else if (!event.shiftKey && document.activeElement === lastElement) {
+                            firstElement.focus();
+                            event.preventDefault();
+                        }
+                    }
+                }
+            });
+        }
+
+        // Pre-cargar contenido (simulación)
+        function preloadModalContent() {
+            console.log('Contenido de conceptos listo para cargar');
+        }
+
+        // Event listeners
+        closeModal.addEventListener('click', closeConceptModal);
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        conceptModal.addEventListener('click', function(event) {
+            if (event.target === conceptModal) {
+                closeConceptModal();
+            }
+        });
+        
+        // Búsqueda en tiempo real
+        conceptSearch.addEventListener('input', function(event) {
+            filterConcepts(event.target.value);
+        });
+        
+        // Hacer la función global para que funcione en los onclick
+        window.openConceptModal = openConceptModal;
+
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCategoryCards();
+            initKeyboardNavigation();
+            preloadModalContent();
+        });
+    </script>
+</body>
+</html>
