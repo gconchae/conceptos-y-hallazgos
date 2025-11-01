@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conceptos y Hallazgos - Tesis Doctoral</title>
+    <title>Herramientas Estadísticas - Tesis Doctoral</title>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -13,13 +13,6 @@
             --dark-color: #34495e;
             --success-color: #27ae60;
             --warning-color: #f39c12;
-            --concept-color: #9b59b6;
-            --instrument-color: #1abc9c;
-            --methodology-color: #e67e22;
-            --finding-color: #e74c3c;
-            --intervention-color: #3498db;
-            --approach-color: #f1c40f;
-            --context-color: #7f8c8d;
         }
         
         * {
@@ -68,7 +61,7 @@
             position: relative;
         }
         
-        #conceptSearch {
+        #toolSearch {
             width: 100%;
             padding: 15px 20px;
             border: 2px solid #ddd;
@@ -78,7 +71,7 @@
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
         }
         
-        #conceptSearch:focus {
+        #toolSearch:focus {
             outline: none;
             border-color: var(--secondary-color);
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
@@ -92,14 +85,14 @@
             color: #7f8c8d;
         }
         
-        .categories-container {
+        .phases-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
             margin-bottom: 30px;
         }
         
-        .category-card {
+        .phase-card {
             background: white;
             border-radius: 12px;
             padding: 25px;
@@ -112,40 +105,20 @@
             flex-direction: column;
         }
         
-        .category-card:hover {
+        .phase-card:hover {
             transform: translateY(-7px);
             box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
         }
         
-        .category-card.concept {
-            border-left-color: var(--concept-color);
+        .phase-card.parametrico {
+            border-left-color: var(--success-color);
         }
         
-        .category-card.instrument {
-            border-left-color: var(--instrument-color);
+        .phase-card.no-parametrico {
+            border-left-color: var(--warning-color);
         }
         
-        .category-card.methodology {
-            border-left-color: var(--methodology-color);
-        }
-        
-        .category-card.finding {
-            border-left-color: var(--finding-color);
-        }
-        
-        .category-card.intervention {
-            border-left-color: var(--intervention-color);
-        }
-        
-        .category-card.approach {
-            border-left-color: var(--approach-color);
-        }
-        
-        .category-card.context {
-            border-left-color: var(--context-color);
-        }
-        
-        .category-card h3 {
+        .phase-card h3 {
             color: var(--primary-color);
             margin-bottom: 18px;
             font-size: 1.4rem;
@@ -153,12 +126,12 @@
             padding-bottom: 10px;
         }
         
-        .concepts-list {
+        .tools-list {
             list-style-type: none;
             flex-grow: 1;
         }
         
-        .concepts-list li {
+        .tools-list li {
             padding: 12px 0;
             border-bottom: 1px solid #f0f0f0;
             display: flex;
@@ -170,20 +143,20 @@
             position: relative;
         }
         
-        .concepts-list li:hover {
+        .tools-list li:hover {
             background-color: #f8f9fa;
             transform: translateX(5px);
         }
         
-        .concepts-list li:active {
+        .tools-list li:active {
             transform: scale(0.98);
         }
         
-        .concepts-list li:last-child {
+        .tools-list li:last-child {
             border-bottom: none;
         }
         
-        .concept-badge {
+        .tool-badge {
             display: inline-block;
             background-color: var(--light-color);
             color: var(--dark-color);
@@ -192,43 +165,34 @@
             font-size: 0.85rem;
             margin-right: 12px;
             font-weight: 600;
-            min-width: 100px;
+            min-width: 70px;
             text-align: center;
         }
         
-        .concept-badge.concept {
-            background-color: #e8daef;
-            color: #6c3483;
+        .tool-badge.parametrico {
+            background-color: #d5f4e6;
+            color: #1e7b4f;
         }
         
-        .concept-badge.instrument {
-            background-color: #d1f2eb;
-            color: #1a7a5c;
-        }
-        
-        .concept-badge.methodology {
+        .tool-badge.no-parametrico {
             background-color: #fdebd0;
             color: #b06c0f;
         }
         
-        .concept-badge.finding {
-            background-color: #fadbd8;
-            color: #a93226;
+        .tool-badge.post-hoc {
+            background-color: #e8daef;
+            color: #6c3483;
         }
         
-        .concept-badge.intervention {
+        .tool-badge.efecto {
             background-color: #d6eaf8;
             color: #21618c;
         }
         
-        .concept-badge.approach {
-            background-color: #fef9e7;
-            color: #9a7d0a;
-        }
-        
-        .concept-badge.context {
-            background-color: #e5e7e9;
-            color: #515a5a;
+        .tool-badge.escala {
+            background-color: #f4ecf7;
+            color: #8e44ad;
+            border: 1px solid #d7bde2;
         }
         
         /* Estilos del Modal */
@@ -279,7 +243,7 @@
             margin-bottom: 5px;
         }
         
-        .modal-subtitle {
+        .modal-definition {
             font-style: italic;
             opacity: 0.9;
             margin-top: 8px;
@@ -287,7 +251,7 @@
             line-height: 1.5;
         }
         
-        .modal-concept-code {
+        .modal-tool-code {
             background-color: rgba(255, 255, 255, 0.2);
             padding: 5px 12px;
             border-radius: 20px;
@@ -297,7 +261,7 @@
             margin-right: 10px;
         }
         
-        .modal-category {
+        .modal-scale {
             background-color: rgba(255, 255, 255, 0.3);
             padding: 5px 12px;
             border-radius: 20px;
@@ -362,14 +326,14 @@
             margin: 20px 0;
         }
         
-        .concept-values {
+        .stats-values {
             display: flex;
             gap: 15px;
             margin-top: 15px;
             flex-wrap: wrap;
         }
         
-        .concept-value {
+        .stat-value {
             background: linear-gradient(135deg, var(--secondary-color), #2980b9);
             color: white;
             padding: 10px 15px;
@@ -394,7 +358,7 @@
             margin: 15px 0;
         }
         
-        .category-info {
+        .scale-info {
             background-color: #f4ecf7;
             border-left: 4px solid #8e44ad;
             padding: 15px;
@@ -411,7 +375,7 @@
             font-style: italic;
         }
         
-        .category-badge {
+        .scale-badge {
             display: inline-flex;
             align-items: center;
             background: linear-gradient(135deg, #8e44ad, #9b59b6);
@@ -423,11 +387,33 @@
             font-weight: 500;
         }
         
-        .category-badge::before {
+        .scale-badge::before {
             content: "📊";
             margin-right: 4px;
         }
-        
+
+        .methodology-path {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0 15px;
+        }
+        .methodology-path h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .methodology-path p, .methodology-path ol, .methodology-path ul {
+            margin-bottom: 10px;
+        }
+        .methodology-path ol, .methodology-path ul {
+            padding-left: 20px;
+        }
+        .methodology-path li {
+            margin-bottom: 8px;
+        }
+
         .modal-navigation {
             display: flex;
             justify-content: space-between;
@@ -483,7 +469,6 @@
             white-space: nowrap;
             border: 0;
         }
-        
         .formula-container {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             border-left: 4px solid var(--secondary-color);
@@ -521,7 +506,7 @@
         }
         
         @media (max-width: 768px) {
-            .categories-container {
+            .phases-container {
                 grid-template-columns: 1fr;
             }
             
@@ -542,11 +527,11 @@
                 padding: 20px;
             }
             
-            .concept-values {
+            .stats-values {
                 flex-direction: column;
             }
             
-            .category-badge {
+            .scale-badge {
                 font-size: 0.7rem;
                 padding: 3px 8px;
             }
@@ -565,41 +550,41 @@
 <body>
     <header>
         <div class="container">
-            <h1>Conceptos y Hallazgos de Investigación</h1>
-            <p class="subtitle">Haz clic en cualquier recuadro para obtener una explicación detallada de cada concepto, metodología y hallazgo clave de nuestro estudio.</p>
+            <h1>Herramientas y Procedimientos Estadísticos</h1>
+            <p class="subtitle">Haz clic en cualquier recuadro para obtener una explicación detallada de cada herramienta y su aplicación en nuestro estudio.</p>
         </div>
     </header>
     
     <div class="container">
         <main>
-            <h2 id="categories-heading" class="sr-only">Categorías de Conceptos</h2>
+            <h2 id="phases-heading" class="sr-only">Fases del Análisis Estadístico</h2>
             
             <div class="search-container">
-                <input type="text" id="conceptSearch" placeholder="Buscar conceptos, metodologías o hallazgos...">
+                <input type="text" id="toolSearch" placeholder="Buscar herramientas estadísticas...">
                 <span class="search-icon">🔍</span>
             </div>
             
             <div class="no-results" id="noResults">
-                <h3>No se encontraron conceptos</h3>
+                <h3>No se encontraron herramientas</h3>
                 <p>Intenta con otros términos de búsqueda</p>
             </div>
             
-            <div class="categories-container" id="categoriesContainer">
-                <!-- Las tarjetas de categorías se generarán dinámicamente con JavaScript -->
+            <div class="phases-container" id="phasesContainer">
+                <!-- Las tarjetas de fases se generarán dinámicamente con JavaScript -->
             </div>
         </main>
     </div>
 
-    <!-- Modal para mostrar detalles de conceptos -->
-    <div class="modal" id="conceptModal">
+    <!-- Modal para mostrar detalles de herramientas -->
+    <div class="modal" id="toolModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalConceptTitle">Título del concepto</h2>
-                <div id="modalConceptSubtitle" class="modal-subtitle"></div>
+                <h2 id="modalToolTitle">Título de la herramienta</h2>
+                <div id="modalToolDefinition" class="modal-definition"></div>
                 <div id="modalHeaderBadges"></div>
                 <button class="close-modal" id="closeModal" aria-label="Cerrar ventana">&times;</button>
             </div>
-            <div class="modal-body" id="modalConceptBody">
+            <div class="modal-body" id="modalToolBody">
                 <!-- El contenido del modal se cargará aquí -->
             </div>
         </div>
@@ -610,403 +595,509 @@
     </div>
 
     <script>
-        // Datos de conceptos y hallazgos
-        const conceptData = {
-            'epa': {
-                id: 'epa',
-                title: 'EPA',
-                subtitle: 'Efecto de Preservación Actitudinal',
-                category: 'concepto'
+        // Contenido específico del estudio con escalas y conexiones actualizadas
+        const studyContent = {
+            'descriptives': {
+                definition: 'Medidas que resumen y caracterizan las propiedades principales de un conjunto de datos, incluyendo tendencia central, dispersión y forma distribucional.',
+                hasScale: false,
+                content: {
+                    aplicacion: 'Calculamos medias, medianas, desviaciones estándar, rangos intercuartílicos, asimetría y curtosis para todos los puntajes de la ECA por grupo y momento de medición. Por ejemplo, encontramos que el grupo experimental inició con M=5.500 en cognitiva, M=24.21 en afectiva y M=19.76 en conductual en el pretest.',
+                    consideraciones: 'Reportamos tanto medias (para comparabilidad con literatura) como medianas (más apropiadas para datos ordinales). La inspección de asimetría y curtosis nos alertó sobre posibles violaciones de normalidad que luego confirmamos con pruebas formales de Shapiro-Wilk.',
+                    interpretacion: 'Los estadísticos descriptivos nos permitieron caracterizar la línea base de conciencia ecológica (conocimiento bajo-moderado, actitudes altas, prácticas moderadas) y contextualizar los cambios post-intervención en términos de puntos de partida diferenciales entre grupos.'
+                }
             },
-            'eca': {
-                id: 'eca', 
-                title: 'ECA',
-                subtitle: 'Escala de Conciencia Ambiental',
-                category: 'instrumento'
+            'normality': {
+                definition: 'Las pruebas de normalidad evalúan si una distribución de datos se ajusta a una distribución normal gaussiana, determinando la adecuación de pruebas estadísticas paramétricas.',
+                hasScale: false,
+                scale: 'Valor p: <0.05 (no normal) | ≥0.05 (normal)',
+                content: {
+                    aplicacion: 'Aplicamos la prueba de Shapiro-Wilk a los puntajes de las tres dimensiones de la ECA, desagregados por grupo y momento de medición. Encontramos que la mayoría de distribuciones mostraban p<.05, indicando desviaciones significativas de la normalidad, especialmente en las dimensiones cognitiva y afectiva.',
+                    consideraciones: 'Optamos por Shapiro-Wilk sobre Kolmogorov-Smirnov debido a su mayor potencia estadística con muestras menores a 50 participantes, como era el caso de nuestro grupo control (n=26). Este análisis justificó el uso de pruebas no paramétricas en nuestros análisis inferenciales.',
+                    interpretacion: 'Interpretamos p<.05 como evidencia de no-normalidad. Este hallazgo fue metodológicamente crucial, ya que determinó nuestra elección de pruebas no paramétricas (Mann-Whitney, Wilcoxon, Kruskal-Wallis) para todos los análisis comparativos en nuestra investigación.'
+                }
             },
-            'eca_original': {
-                id: 'eca_original',
-                title: 'ECA - Estudio Original',
-                subtitle: 'Validación Psicométrica Original',
-                category: 'instrumento'
+            'internal-consistency': {
+                definition: 'El coeficiente Alfa de Cronbach evalúa la consistencia interna de los ítems que componen una escala o subescala, indicando en qué medida miden un mismo constructo latente.',
+                hasScale: true,
+                scale: 'α ≥ 0.70 (aceptable) | 0.80-0.89 (bueno) | ≥0.90 (excelente) | <0.70 (inaceptable)',
+                content: {
+                    aplicacion: 'Calculamos el Alfa de Cronbach para cada dimensión de la ECA en el pretest. Encontramos valores dispares: α=.626 (afectiva), α=.720 (conductual), pero solo α=.387 en la subescala cognitiva, lo que nos alertó sobre problemas de fiabilidad en esta dimensión específica.',
+                    consideraciones: 'Verificamos que los ítems midieran constructos unidimensionales. La baja consistencia en cognitiva (α=.387) nos llevó a recomendar en el análisis psicométrico (sección 4.5.2) revisar la redacción y adaptación cultural de estos ítems para futuras aplicaciones, considerando incluso el uso del coeficiente KR-20.',
+                    interpretacion: 'Interpretamos que valores por debajo de .70 indican inconsistencia problemática. Por esto, los resultados de la dimensión cognitiva se consideraron no concluyentes en nuestra investigación, a pesar de mostrar diferencias estadísticamente significativas en los análisis inferenciales.',
+                    complementaria: 'El coeficiente Omega de McDonald es una medida de fiabilidad de consistencia interna que supera algunas limitaciones del Alfa de Cronbach. Calculamos el Omega junto con el Alfa, encontrando valores muy similares: ω=.629 (afectiva) vs α=.626, y ω=.727 (conductual) vs α=.720, lo que confirmó la robustez de nuestras mediciones en estas dimensiones.'
+                }
             },
-            'quasi_experimental': {
-                id: 'quasi_experimental',
-                title: 'Diseño Cuasiexperimental',
-                subtitle: 'Pretest-Postest con Grupo Control',
-                category: 'metodología'
+            'content-validity': {
+                definition: 'La validez de contenido evalúa el grado en que los ítems de un instrumento representan adecuadamente el dominio conceptual completo del constructo que se pretende medir.',
+                hasScale: true,
+                scale: 'S-CVI/Ave ≥ 0.90 (excelente) | ≥ 0.80 (muy bueno) | ≥ 0.70 (aceptable)',
+                content: {
+                    aplicacion: 'Evaluamos la validez de contenido de la ECA mediante juicio de expertos en educación ambiental y psicometría. Calculamos el Índice de Validez de Contenido (I-CVI) para cada ítem y el S-CVI promedio, obteniendo un valor general de S-CVI/Ave = .883, que indica una representatividad excelente del constructo.',
+                    consideraciones: 'Utilizamos un panel de 3 expertos que evaluaron cada ítem en términos de relevancia, claridad y representatividad del constructo. Este proceso nos permitió refinar la redacción de ítems ambiguos antes de la aplicación piloto.',
+                    interpretacion: 'El alto valor de S-CVI/Ave (.883) nos dio confianza en que la ECA mide efectivamente los dominios conceptuales de la conciencia ecológica según nuestra definición teórica, fortaleciendo así las inferencias derivadas de nuestros análisis.'
+                }
             },
-            'ecological_awareness': {
-                id: 'ecological_awareness',
-                title: 'Conciencia Ecológica',
-                subtitle: 'Constructo Multidimensional',
-                category: 'concepto'
+            'factor-analysis': {
+                definition: 'El Análisis Factorial Confirmatorio (AFC) es una técnica estadística que prueba si la estructura factorial preconcebida de un instrumento se ajusta adecuadamente a los datos observados.',
+                hasScale: true,
+                scale: 'CFI/TLI >0.90 (aceptable) >0.95 (excelente) | RMSEA <0.08 (aceptable) <0.05 (excelente)',
+                content: {
+                    aplicacion: 'Realizamos AFC para verificar la estructura trifactorial de la ECA (cognitiva, afectiva, conductual) utilizando software especializado. Los índices de ajuste obtenidos (CFI > 0.90, RMSEA < 0.08) respaldaron la validez estructural del instrumento en nuestro contexto.',
+                    consideraciones: 'Optamos por AFC sobre Análisis Factorial Exploratorio porque teníamos una estructura teórica preconcebida basada en la literatura. Utilizamos estimadores robustos apropiados para datos ordinales.',
+                    interpretacion: 'El adecuado ajuste del AFC confirmó que las tres dimensiones de la ECA representan constructos distintos pero relacionados, validando nuestra aproximación multidimensional a la conciencia ecológica y justificando el análisis por dimensiones separadas.'
+                }
             },
-            'attitude_behavior_gap': {
-                id: 'attitude_behavior_gap',
-                title: 'Brecha Actitud-Conducta',
-                subtitle: 'Disociación entre saber/hacer',
-                category: 'hallazgo'
+            'mann-whitney': {
+                definition: 'La prueba U de Mann-Whitney es la alternativa no paramétrica a la t-test para muestras independientes, utilizada cuando no se cumplen los supuestos de normalidad o homocedasticidad.',
+                hasScale: false,
+                content: {
+                    aplicacion: 'La aplicamos para comparar los puntajes postest entre grupo experimental (n=63) y grupo control (n=26) en las tres dimensiones de la ECA. En la dimensión afectiva obtuvimos U=339.5, p<.0001, confirmando diferencias significativas a favor del grupo que recibió la intervención curricular.',
+                    consideraciones: 'Optamos por esta prueba tras confirmar no-normalidad mediante Shapiro-Wilk (p<.05 en cognitiva y afectiva). La naturaleza ordinal de los datos y la falta de homocedasticidad justificaron esta elección metodológica en nuestro diseño cuasiexperimental.',
+                    interpretacion: 'Interpretamos que valores p<.05 indican diferencias estadísticamente significativas entre grupos. Complementamos esta interpretación con el tamaño del efecto r=0.59 en afectiva, que evidenció un impacto grande de la intervención más allá de la significancia estadística.',
+                    conexiones: `
+                        <div class="methodology-path">
+                            <h4>Nuestra Ruta de Análisis</h4>
+                            <p>Para comparar los grupos (Experimental vs. Control), seguimos esta secuencia lógica:</p>
+                            <ol>
+                                <li>
+                                    <strong>Verificación de Supuestos:</strong> Primero, evaluamos si los datos seguían una distribución normal usando la 
+                                    <a href="#" onclick="event.preventDefault(); openToolModal('normality')">Prueba de Normalidad (Shapiro-Wilk)</a>.
+                                </li>
+                                <li>
+                                    <strong>Decisión Clave:</strong> Al encontrar que los datos no eran normales, optamos por esta prueba no paramétrica.
+                                </li>
+                                <li>
+                                    <strong>Análisis de Impacto:</strong> Tras encontrar una diferencia significativa, medimos su magnitud con el 
+                                    <a href="#" onclick="event.preventDefault(); openToolModal('rosenthal')">r de Rosenthal</a> y la alternativa robusta 
+                                    <a href="#" onclick="event.preventDefault(); openToolModal('cliff')">Delta de Cliff</a>.
+                                </li>
+                            </ol>
+                        </div>
+                    `
+                }
             },
-            'experimental_group': {
-                id: 'experimental_group',
-                title: 'Grupo Experimental',
-                subtitle: 'GE - Intervención Curricular',
-                category: 'metodología'
+            'wilcoxon': {
+                definition: 'La prueba de rangos con signo de Wilcoxon es la alternativa no paramétrica a la t-test para muestras relacionadas, utilizada para comparar mediciones pretest-postest dentro de un mismo grupo.',
+                hasScale: false,
+                content: {
+                    aplicacion: 'Aplicamos el test de Wilcoxon para evaluar los cambios intra-grupo en el grupo experimental. En la dimensión cognitiva encontramos W=41.00, p<.001, indicando una mejora muy significativa tras la intervención, aunque interpretamos este resultado con cautela por la baja fiabilidad de la subescala.',
+                    consideraciones: 'Utilizamos esta prueba porque nuestros datos no cumplían el supuesto de normalidad requerido para pruebas paramétricas. Calculamos el tamaño del efecto asociado mediante r = |Z|/√N para contextualizar la significancia estadística.',
+                    interpretacion: 'Interpretamos las diferencias pretest-postest como evidencia del impacto de la intervención. El tamaño del efecto r=0.82 en cognitiva sugirió un cambio sustancial, aunque la baja fiabilidad (α=.387) nos obligó a ser conservadores en las conclusiones sobre aprendizaje conceptual.',
+                    conexiones: `
+                        <div class="methodology-path">
+                            <h4>Nuestra Ruta de Análisis</h4>
+                            <p>Para evaluar el cambio <em>dentro</em> del Grupo Experimental (Pretest vs. Postest), seguimos esta secuencia:</p>
+                            <ol>
+                                <li>
+                                    <strong>Verificación de Supuestos:</strong> Comprobamos la normalidad de los datos con la 
+                                    <a href="#" onclick="event.preventDefault(); openToolModal('normality')">Prueba de Shapiro-Wilk</a>.
+                                </li>
+                                <li>
+                                    <strong>Decisión Clave:</strong> Al no cumplirse el supuesto, se seleccionó esta prueba no paramétrica para muestras relacionadas.
+                                </li>
+                                <li>
+                                    <strong>Análisis de Impacto:</strong> Medimos la magnitud del cambio observado con el 
+                                    <a href="#" onclick="event.preventDefault(); openToolModal('rosenthal')">r de Rosenthal</a>.
+                                </li>
+                            </ol>
+                        </div>
+                    `
+                }
             },
-            'control_group': {
-                id: 'control_group',
-                title: 'Grupo Control',
-                subtitle: 'GC - Condición Natural',
-                category: 'metodología'
+            'kruskal-wallis': {
+                definition: 'La prueba H de Kruskal-Wallis es la alternativa no paramétrica al ANOVA de un factor, utilizada para comparar tres o más grupos independientes cuando no se cumplen supuestos de normalidad.',
+                hasScale: false,
+                content: {
+                    aplicacion: 'Aplicamos Kruskal-Wallis para evaluar diferencias entre los tres cursos participantes (8° Uno, 8° Dos y 8° Tres). No encontramos diferencias significativas en ninguna dimensión (p>.36 en todos los casos), lo que sugirió homogeneidad en la respuesta a la intervención entre cursos.',
+                    consideraciones: 'Utilizamos esta prueba para verificar que el efecto de la intervención fue homogéneo a través de los diferentes subgrupos que conformaban nuestra muestra, fortaleciendo así la validez interna de nuestros hallazgos principales.',
+                    interpretacion: 'La ausencia de diferencias significativas entre cursos (p>.36) nos permitió concluir que la intervención tuvo un efecto consistente en cada uno de los diferentes grupos participantes, lo que fortalece la generalización interna de nuestros resultados.',
+                    conexiones: `
+                        <div class="methodology-path">
+                            <h4>Nuestra Ruta de Análisis</h4>
+                            <p>Para comparar si existían diferencias en la conciencia ecológica entre los tres cursos participantes (Octavo Uno, Octavo Dos y Octavo Tres), seguimos esta secuencia:</p>
+                            <ol>
+                                <li>
+                                    <strong>Verificación de Supuestos:</strong> Comprobamos la normalidad de los datos con la 
+                                    <a href="#" onclick="event.preventDefault(); openToolModal('normality')">Prueba de Shapiro-Wilk</a>.
+                                </li>
+                                <li>
+                                    <strong>Decisión Clave:</strong> Al no cumplirse el supuesto de normalidad, se seleccionó esta prueba, que es la alternativa no paramétrica ideal para comparar tres o más grupos independientes.
+                                </li>
+                                <li>
+                                    <strong>Siguiente Paso (Condicional):</strong> Si hubiéramos encontrado diferencias significativas entre los cursos, habríamos necesitado la 
+                                    <a href="#" onclick="event.preventDefault(); openToolModal('dunn')">Prueba de Dunn</a> para identificar exactamente qué grupos diferían entre sí.
+                                </li>
+                                <li>
+                                    <strong>Análisis de Impacto:</strong> La magnitud del efecto para esta prueba se mide con el 
+                                    <a href="#" onclick="event.preventDefault(); openToolModal('eta-squared')">Épsilon Cuadrado (ε²)</a>.
+                                </li>
+                            </ol>
+                        </div>
+                    `
+                }
             },
-            'curricular_integration': {
-                id: 'curricular_integration',
-                title: 'Integración Curricular',
-                subtitle: 'Inserción de contenidos ambientales',
-                category: 'intervención'
+            'dunn': {
+                definition: 'La prueba de Dunn es un procedimiento post-hoc utilizado después de un Kruskal-Wallis significativo para identificar qué pares de grupos difieren específicamente, controlando las comparaciones múltiples.',
+                hasScale: false,
+                content: {
+                    aplicacion: 'Aplicamos la prueba de Dunn como análisis post-hoc tras el Kruskal-Wallis, aunque en nuestro caso no fue necesaria su aplicación exhaustiva ya que el Kruskal-Wallis no mostró diferencias significativas entre los tres cursos (8° Uno, 8° Dos y 8° Tres) en ninguna dimensión (p > .36 en todos los casos).',
+                    consideraciones: 'Teníamos preparado el procedimiento de Dunn como parte de nuestro plan analítico para el escenario donde Kruskal-Wallis resultara significativo. Utilizamos la corrección de Bonferroni para ajustar los valores p en las comparaciones por pares, que es el enfoque estándar en esta prueba.',
+                    interpretacion: 'Dado que nuestro Kruskal-Wallis no fue significativo, no procedimos con las comparaciones post-hoc de Dunn. Esto reforzó nuestra conclusión de que la intervención tuvo efectos homogéneos en todos los diferentes cursos participantes, lo cual es un hallazgo positivo para la validez interna del estudio.',
+                    conexiones: `
+                        <div class="methodology-path">
+                            <h4>Nuestra Ruta de Análisis</h4>
+                            <p>Esta prueba funciona como un análisis complementario y solo se aplica bajo una condición específica:</p>
+                            <ol>
+                                <li>
+                                    <strong>Prueba Previa:</strong> Primero, se debe ejecutar una 
+                                    <a href="#" onclick="event.preventDefault(); openToolModal('kruskal-wallis')">Prueba de Kruskal-Wallis</a> para comparar tres o más grupos, como Octavo Uno, Octavo Dos y Octavo Tres.
+                                </li>
+                                <li>
+                                    <strong>Condición de Uso:</strong> La Prueba de Dunn solo se utiliza si el resultado de Kruskal-Wallis es <strong>estadísticamente significativo</strong> (generalmente, p < .05).
+                                </li>
+                                <li>
+                                    <strong>Nuestra Decisión:</strong> En nuestro estudio, la prueba de Kruskal-Wallis no encontró diferencias significativas entre los cursos. Por lo tanto, <strong>no fue necesario aplicar la Prueba de Dunn</strong>, pero se documenta como parte del plan analítico riguroso.
+                                </li>
+                            </ol>
+                        </div>
+                    `
+                }
             },
-            'environmental_education': {
-                id: 'environmental_education',
-                title: 'Educación Ambiental',
-                subtitle: 'Enfoque pedagógico transformador',
-                category: 'enfoque'
+            'rosenthal': {
+                definition: 'El r de Rosenthal es una medida del tamaño del efecto utilizada como complemento a pruebas no paramétricas como Mann-Whitney y Wilcoxon, representando la magnitud estandarizada de las diferencias encontradas.',
+                hasScale: true,
+                scale: 'r ≈ 0.10 (efecto pequeño) | ≈ 0.30 (efecto moderado) | ≥ 0.50 (efecto grande)',
+                content: {
+                    aplicacion: 'Calculamos el r de Rosenthal para todas las comparaciones significativas mediante la fórmula r = Z/√N. En la dimensión afectiva obtuvimos r=0.59 (comparación intergrupo), mientras que en la dimensión conductual el valor fue r=0.27. Estos cálculos nos permitieron evaluar la relevancia práctica más allá de la significancia estadística.',
+                    consideraciones: 'Optamos por reportar sistemáticamente el r de Rosenthal junto con los valores p, siguiendo las recomendaciones contemporáneas de reporting en investigación educativa. Utilizamos los puntos de corte de Cohen (1988) para la interpretación estandarizada.',
+                    interpretacion: 'En nuestro estudio, interpretamos que r=0.59 en la dimensión afectiva representaba un efecto grande, confirmando el impacto sustancial de la intervención en las actitudes ambientales. Por otro lado, r=0.27 en la dimensión conductual indicaba un efecto pequeño-moderado, lo que coincidió con la persistencia de la brecha actitud-conducta que documentamos en nuestras conclusiones.',
+                    conexiones: `
+                        <div class="methodology-path">
+                            <h4>Nuestra Ruta de Análisis</h4>
+                            <p>El 'r de Rosenthal' no es una prueba principal, sino un indicador que nos dice <strong>qué tan grande e importante</strong> es un efecto. Lo usamos para complementar los resultados de:</p>
+                            <ul>
+                                <li>La <a href="#" onclick="event.preventDefault(); openToolModal('mann-whitney')">Prueba U de Mann-Whitney</a> (para comparar dos grupos independientes).</li>
+                                <li>La <a href="#" onclick="event.preventDefault(); openToolModal('wilcoxon')">Prueba de Wilcoxon</a> (para medir el cambio dentro de un grupo).</li>
+                            </ul>
+                            <p>Esto nos permite ir más allá del "sí o no" de la significancia estadística y entender la relevancia práctica de nuestros hallazgos.</p>
+                        </div>
+                    `
+                }
             },
-            'semirural_context': {
-                id: 'semirural_context',
-                title: 'Contexto Semirural',
-                subtitle: 'Valle del Cauca - Institución oficial',
-                category: 'contexto'
+            'cliff': {
+                definition: 'El delta de Cliff (δ) es una medida robusta del tamaño del efecto para comparaciones entre dos grupos independientes, que estima la probabilidad de que una observación aleatoria de un grupo sea mayor que una observación del otro grupo.',
+                hasScale: true,
+                scale: '|δ| > 0.147 (efecto pequeño) | > 0.33 (efecto medio) | > 0.47 (efecto grande)',
+                content: {
+                    aplicacion: `Calculamos el delta de Cliff como alternativa planificada al r de Rosenthal para las comparaciones Mann-Whitney. La fórmula conceptual es:
+
+                    <div class="formula-container">
+                        <div class="formula">δ = P(X > Y) - P(Y > X)</div>
+                        <div class="formula-variables">
+                            donde:<br>
+                            <span class="variable">P(X > Y)</span> = probabilidad de que un valor del grupo X sea mayor que uno del grupo Y<br>
+                            <span class="variable">P(Y > X)</span> = probabilidad de que un valor del grupo Y sea mayor que uno del grupo X
+                        </div>
+                    </div>
+
+                    Aunque no se reportan valores numéricos en los resultados principales, su cálculo formó parte del protocolo analítico descrito en la sección 3.9.4, y los hallazgos con r de Rosenthal fueron coherentes con lo que se esperaría de δ.`,
+                    consideraciones: 'Utilizamos δ porque es menos sensible a outliers y violaciones de supuestos que otras medidas de tamaño del efecto. Su interpretación en términos de probabilidad (P(X > Y) - P(Y > X)) resulta intuitiva para audiencias no técnicas.',
+                    interpretacion: 'Aunque no se presentan valores específicos de δ en los resultados finales, su uso fue considerado como una opción robusta complementaria. La interpretación de los efectos se basó principalmente en el r de Rosenthal, respaldado por intervalos de confianza bootstrap, en coherencia con el enfoque de transparencia y rigor metodológico del estudio.'
+                }
+            },
+            'eta-squared': {
+                definition: 'El Eta cuadrado (η²) es una medida del tamaño del efecto utilizada en ANOVA y su alternativa no paramétrica Kruskal-Wallis, indicando la proporción de varianza total explicada por las diferencias entre grupos.',
+                hasScale: true,
+                scale: 'ε² ≥ 0.01 (efecto pequeño) | ≥ 0.06 (efecto moderado) | ≥ 0.14 (efecto grande)',
+                content: {
+                    aplicacion: 'Calculamos ε² (épsilon cuadrado) como versión menos sesgada del eta cuadrado para el Kruskal-Wallis. Encontramos valores de ε²=0.127 (cognitiva), ε²=0.216 (afectiva) y ε²=0.046 (conductual), que confirmaron los patrones observados con el r de Rosenthal.',
+                    consideraciones: `Una fórmula comúnmente usada para calcular η² en Kruskal-Wallis es:
+
+                    <div class="formula-container">
+                        <div class="formula">η² = (H - k + 1) / (n - k)</div>
+                        <div class="formula-variables">
+                            donde:<br>
+                            <span class="variable">H</span> = estadístico de Kruskal-Wallis<br>
+                            <span class="variable">k</span> = número de grupos<br>
+                            <span class="variable">n</span> = tamaño total de la muestra
+                        </div>
+                    </div>
+
+                    η² varía entre 0 y 1, donde valores cercanos a 0 indican un tamaño de efecto pequeño y valores cercanos a 1 un tamaño de efecto grande.
+                    
+                    Optamos por ε² sobre η² por su menor sesgo en muestras pequeñas. Seguimos los puntos de corte de Cohen (1988) donde ε²≥0.14 indica efecto grande, ≥0.06 efecto moderado, y ≥0.01 efecto pequeño.`,
+                    interpretacion: 'ε²=0.216 en afectiva confirmó un efecto grande coherente con r=0.59, mientras ε²=0.046 en conductual reflejó el efecto pequeño-moderado ya identificado, proporcionando evidencia convergente sobre la magnitud del impacto de la intervención.',
+                    conexiones: `
+                        <div class="methodology-path">
+                            <h4>Nuestra Ruta de Análisis</h4>
+                            <p>El 'Épsilon Cuadrado' (una versión mejorada del Eta Cuadrado) es la medida de tamaño del efecto específica que utilizamos para cuantificar la magnitud de las diferencias encontradas con la:</p>
+                            <ul>
+                                <li><a href="#" onclick="event.preventDefault(); openToolModal('kruskal-wallis')">Prueba de Kruskal-Wallis</a>.</li>
+                            </ul>
+                            <p>Nos indica qué proporción de la variabilidad en los puntajes se puede explicar por la pertenencia a uno de los diferentes cursos analizados.</p>
+                        </div>
+                    `
+                }
             }
         };
 
-        // Función para procesar texto y convertir **texto** a negritas
-        function processTextWithBold(text) {
-            return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        }
-
-        // Contenido detallado de cada concepto
-        const conceptContent = {
-            'epa': processTextWithBold(`### ¿Qué es?
-El Efecto de Preservación Actitudinal (EPA) es un concepto que identificamos empíricamente en nuestra investigación, donde la intervención educativa logró mantener y consolidar actitudes proambientales preexistentes en el grupo experimental, mientras el grupo control mostraba un declive actitudinal en el mismo periodo.
-
-### Fundamentación Teórica
-Este efecto se alinea con los postulados del aprendizaje experiencial de Kolb (1984) y sugiere que en contextos donde las actitudes iniciales son relativamente altas, el impacto más valioso de una intervención puede ser la prevención del declive actitudinal más que su incremento cuantitativo.
-
-### Evidencia en Nuestro Estudio
-Encontramos un tamaño del efecto grande (r=0.59) en la comparación intergrupo de la dimensión afectiva, donde el GE mantuvo sus altos niveles actitudinales (M=24.35) mientras el GC descendió significativamente (M=20.15), evidenciando este efecto de preservación.
-
-### Implicaciones Educativas
-El EPA sugiere que intervenciones ambientales sostenidas pueden funcionar como "vacunas pedagógicas" contra la apatía ambiental en contextos escolares, particularmente importante en nuestra muestra semirrural del Valle del Cauca.`),
-
-            'eca': processTextWithBold(`### ¿Qué es?
-La Escala de Conciencia Ambiental (ECA) es nuestro instrumento de medición principal, adaptado de Torres Soto y otros (2022) y validado para evaluar las tres dimensiones del constructo de conciencia ecológica en estudiantes de educación básica secundaria.
-
-### Estructura y Dimensiones
-La ECA consta de 21 ítems distribuidos en:
-- **Dimensión Cognitiva (7 ítems):** Conocimiento conceptual ambiental
-- **Dimensión Afectiva (7 ítems):** Actitudes y valores proambientales  
-- **Dimensión Conductual (7 ítems):** Prácticas ecológicas autorreportadas
-
-### Propiedades Psicométricas
-En nuestro estudio encontramos fiabilidades aceptables en afectiva (α=.626) y conductual (α=.720), pero baja en cognitiva (α=.387), lo que nos llevó a recomendar mejoras en esta subescala para futuras investigaciones.
-
-### Aplicación en Contexto
-Aplicamos la ECA en formato pretest y postest a 89 estudiantes, demostrando sensibilidad para detectar cambios atribuibles a nuestra intervención curricular de 8 semanas.`),
-
-            'eca_original': processTextWithBold(`### Estudio Original de Validación
-La Escala de Conciencia Ambiental (ECA) fue desarrollada y validada originalmente por Torres Soto et al. (2022) en un estudio psicométrico riguroso realizado en Sonora, México.
-
-### Características del Estudio Original
-- **Muestra:** 233 estudiantes de educación básica
-- **Edad promedio:** 10 años
-- **Propósito:** Validación psicométrica de la escala
-
-### Hallazgos Principales del Estudio Original
-**Fiabilidad muy alta:** La escala original demostró una excelente consistencia interna, obteniendo un coeficiente Alfa de Cronbach global de 0.93. Un valor tan alto indica que los 21 ítems medían de forma muy consistente el mismo constructo.
-
-**Estructura Unifactorial:** A diferencia de la versión adaptada (que la dividió en tres dimensiones), el Análisis Factorial Exploratorio del estudio original concluyó que la escala tenía una estructura de un solo factor. Esto significa que los autores originales determinaron que la ECA medía un único constructo general e integrado de "conciencia ambiental", en lugar de dimensiones separadas. Este único factor explicó el 65.28% de la varianza total.
-
-### Comparación con Nuestra Adaptación
-Nuestra adaptación a tres dimensiones (cognitiva, afectiva, conductual) representa una evolución del instrumento original, buscando mayor especificidad en la medición del constructo multidimensional de conciencia ecológica.`),
-
-            'quasi_experimental': processTextWithBold(`### ¿Qué es?
-Nuestro diseño cuasiexperimental pretest-postest con grupo control no equivalente es una metodología de investigación que nos permitió evaluar causalmente el impacto de la integración curricular ambiental, manteniendo validez ecológica en el contexto escolar real.
-
-### Justificación Metodológica
-Optamos por este diseño porque la asignación aleatoria estricta no era viable en el contexto escolar real. Utilizamos grupos intactos (cursos naturales) pero implementamos controles metodológicos rigurosos para fortalecer la validez interna.
-
-### Implementación en el Estudio
-- **Grupo Experimental (n=63):** Recibió la intervención de 8 semanas
-- **Grupo Control (n=26):** Continuó con el currículo regular
-- **Mediciones:** ECA aplicada en pretest y postest a ambos grupos
-
-### Fortalezas y Limitaciones
-El diseño nos permitió establecer relaciones causales plausibles mientras mantenía autenticidad ecológica, aunque reconocemos la limitación de la no aleatorización completa.`),
-
-            'ecological_awareness': processTextWithBold(`### ¿Qué es?
-La conciencia ecológica es nuestro constructo central de investigación, conceptualizado como un fenómeno multidimensional que integra componentes cognitivos, afectivos y conductuales en relación con el medio ambiente.
-
-### Marco Teórico
-Fundamentamos este constructo en aproximaciones integrales que superan visiones reduccionistas, reconociendo que el conocimiento ambiental necesariamente debe traducirse en actitudes y estas en acciones concretas para ser efectivo.
-
-### Operacionalización en Nuestro Estudio
-Medimos la conciencia ecológica a través de sus tres dimensiones en la ECA, encontrando que mientras las dimensiones cognitiva y afectiva mostraron mejoras significativas, la conductual presentó avances más modestos, reflejando la complejidad del constructo.
-
-### Relevancia Educativa
-Este enfoque multidimensional es pedagógicamente valioso porque permite identificar puntos de leverage específicos para intervenciones educativas diferenciadas según las necesidades detectadas en cada dimensión.`),
-
-            'attitude_behavior_gap': processTextWithBold(`### ¿Qué es?
-La brecha actitud-conducta es un fenómeno documentado en nuestra investigación donde encontramos disociación entre las disposiciones afectivas favorables hacia el ambiente y la implementación consistente de prácticas ecológicas.
-
-### Evidencia Empírica en Nuestro Estudio
-Mientras la dimensión afectiva mostró un efecto grande (r=0.59) de la intervención, la dimensión conductual presentó un efecto pequeño-moderado (r=0.27), confirmando la persistencia de esta brecha incluso después de la intervención educativa.
-
-### Factores Contextuales Identificados
-Atribuimos esta brecha a limitaciones estructurales como la falta de infraestructura de reciclaje en la institución, escaso apoyo familiar, y barreras institucionales que dificultan la traducción de intenciones en acciones.
-
-### Implicaciones para Política Educativa
-Este hallazgo sugiere que las intervenciones pedagógicas deben complementarse con cambios estructurales y de política institucional para cerrar efectivamente esta brecha actitud-conducta.`),
-
-            'experimental_group': processTextWithBold(`### ¿Qué es?
-El Grupo Experimental (GE) en nuestro estudio fue el conjunto de estudiantes que recibió la intervención pedagógica estructurada de integración curricular de contenidos ambientales durante 8 semanas.
-
-### Características del GE
-- **Tamaño:** 63 estudiantes de octavo grado
-- **Composición:** Estudiantes de cursos naturales (no aleatorizados)
-- **Intervención:** 8 sesiones pedagógicas con enfoque experiencial
-- **Contexto:** Institución educativa semirrural del Valle del Cauca
-
-### Rol en el Diseño Investigativo
-El GE sirvió como grupo de tratamiento para evaluar la efectividad de la intervención, comparándose con el Grupo Control que mantuvo las condiciones educativas regulares.
-
-### Resultados Clave
-El GE mostró mejoras significativas en conocimiento ambiental (aunque con cautela por fiabilidad) y mantuvo altos niveles actitudinales, evidenciando el Efecto de Preservación Actitudinal (EPA).`),
-
-            'control_group': processTextWithBold(`### ¿Qué es?
-El Grupo Control (GC) fue el conjunto de estudiantes que no recibió la intervención experimental y continuó con el currículo regular, sirviendo como referencia para comparar los efectos de la intervención.
-
-### Características del GC
-- **Tamaño:** 26 estudiantes de octavo grado
-- **Composición:** Estudiantes de cursos paralelos no intervenidos
-- **Condición:** Curriculum regular sin modificación ambiental
-- **Contexto:** Misma institución educativa semirrural
-
-### Función Metodológica
-El GC permitió controlar efectos de maduración, historia y testing que podrían confundir la interpretación de los resultados, estableciendo una línea base de comparación.
-
-### Hallazgos Relevantes
-El GC mostró un declive actitudinal significativo en la dimensión afectiva (M=20.15 vs 22.00 inicial), lo que resaltó por contraste el efecto protector de la intervención en el GE.`),
-
-            'curricular_integration': processTextWithBold(`### ¿Qué es?
-La integración curricular es nuestra estrategia de intervención que consistió en insertar sistemáticamente contenidos y actividades ambientales dentro del currículo formal de Ciencias Naturales, en lugar de abordarlos como temas aislados.
-
-### Implementación Práctica
-Desarrollamos una unidad didáctica de 8 semanas titulada "Nuestro ecosistema, nuestra responsabilidad" que integró:
-- Debates sobre dilemas socioambientales
-- Salida de campo al ecosistema local
-- Análisis de casos y resolución de problemas
-- Proyectos de acción ambiental
-
-### Fundamentación Pedagógica
-Esta aproximación se basa en el constructivismo social de Vygotsky y el aprendizaje experiencial de Kolb, privilegiando la contextualización y la significatividad de los aprendizajes.
-
-### Impacto Demostrado
-La integración curricular mostró efectividad para fortalecer conocimientos y actitudes ambientales, aunque con menor impacto en conductas, sugiriendo la necesidad de complementos estructurales.`),
-
-            'environmental_education': processTextWithBold(`### ¿Qué es?
-La Educación Ambiental (EA) en nuestro estudio es entendida como un proceso pedagógico transformador que busca desarrollar conocimientos, valores y capacidades para la acción ambiental responsable en contextos reales.
-
-### Enfoque Adoptado
-Implementamos una EA crítica y participativa que supera visiones conservacionistas tradicionales, enfatizando:
-- La complejidad de los problemas ambientales
-- La interdependencia sociedad-naturaleza
-- La acción colectiva y la ciudadanía ambiental
-- La contextualización en el territorio local
-
-### Bases Teóricas
-Nuestra aproximación se sustenta en los postulados de la UNESCO para la Educación para el Desarrollo Sostenible y en teóricos contemporáneos como Sterling (2001) y Tilbury (1995).
-
-### Contribución del Estudio
-Demostramos que una EA bien estructurada puede generar efectos significativos en conciencia ecológica, particularmente a través del Efecto de Preservación Actitudinal identificado.`),
-
-            'semirural_context': processTextWithBold(`### ¿Qué es?
-El contexto semirrural se refiere a las características específicas de la institución educativa y comunidad donde realizamos nuestra investigación, ubicada en el Valle del Cauca con particularidades socioecológicas distintivas.
-
-### Características del Contexto
-- **Ubicación:** Zona de transición urbano-rural del Valle del Cauca
-- **Recursos:** Limitada infraestructura ambiental institucional
-- **Comunidad:** Mixta agropecuaria y pequeña industria
-- **Ecosistema:** Presencia de cuerpos de agua y áreas verdes cercanas
-
-### Relevancia Investigativa
-Este contexto representa un escenario valioso para estudiar educación ambiental por su vulnerabilidad ecológica y su posición intermedia entre realidades urbanas y rurales típicas.
-
-### Implicaciones para los Resultados
-El contexto influyó en nuestros hallazgos, particularmente en la brecha actitud-conducta, donde la falta de infraestructura de apoyo limitó la traducción de intenciones en acciones consistentes.`)
-        };
-
-        // Agrupar conceptos por categoría
-        const categoriesData = [
+        // Datos de las fases y herramientas
+        const phasesData = [
             {
-                id: 'concepto',
-                title: 'CONCEPTOS TEÓRICOS',
-                type: 'concepto',
-                concepts: Object.values(conceptData).filter(item => item.category === 'concepto')
+                id: 'fase1',
+                title: 'FASE 1: ANÁLISIS DESCRIPTIVO Y SUPUESTOS',
+                type: 'parametrico',
+                tools: [
+                    { 
+                        name: 'Estadísticos Descriptivos', 
+                        code: 'Media - Mediana - DE - RIQ',
+                        contentKey: 'descriptives',
+                        badgeType: 'parametrico'
+                    },
+                    { 
+                        name: 'Prueba de Normalidad', 
+                        code: 'Shapiro-Wilk',
+                        contentKey: 'normality',
+                        badgeType: 'parametrico'
+                    }
+                ]
             },
             {
-                id: 'instrumento',
-                title: 'INSTRUMENTOS DE MEDICIÓN',
-                type: 'instrumento',
-                concepts: Object.values(conceptData).filter(item => item.category === 'instrumento')
+                id: 'fase2',
+                title: 'FASE 2: VALIDACIÓN DEL INSTRUMENTO',
+                type: 'parametrico',
+                tools: [
+                    { 
+                        name: 'Consistencia Interna del Instrumento', 
+                        code: 'Coeficiente Omega',
+                        contentKey: 'internal-consistency',
+                        badgeType: 'parametrico'
+                    },
+                    { 
+                        name: 'Análisis Factorial Confirmatorio (AFC)', 
+                        code: 'Verificación de Estructura',
+                        contentKey: 'factor-analysis',
+                        badgeType: 'parametrico'
+                    },
+                    { 
+                        name: 'Validez de Contenido por Juicio de Expertos', 
+                        code: 'Índice I-CVI',
+                        contentKey: 'content-validity',
+                        badgeType: 'parametrico'
+                    }
+                ]
             },
             {
-                id: 'metodología',
-                title: 'METODOLOGÍA DE INVESTIGACIÓN',
-                type: 'metodología',
-                concepts: Object.values(conceptData).filter(item => item.category === 'metodología')
-            },
-            {
-                id: 'hallazgo',
-                title: 'HALLAZGOS PRINCIPALES',
-                type: 'hallazgo',
-                concepts: Object.values(conceptData).filter(item => item.category === 'hallazgo')
-            },
-            {
-                id: 'intervención',
-                title: 'ESTRATEGIAS DE INTERVENCIÓN',
-                type: 'intervención',
-                concepts: Object.values(conceptData).filter(item => item.category === 'intervención')
-            },
-            {
-                id: 'enfoque',
-                title: 'ENFOQUES PEDAGÓGICOS',
-                type: 'enfoque',
-                concepts: Object.values(conceptData).filter(item => item.category === 'enfoque')
-            },
-            {
-                id: 'contexto',
-                title: 'CONTEXTO DE ESTUDIO',
-                type: 'contexto',
-                concepts: Object.values(conceptData).filter(item => item.category === 'contexto')
+                id: 'analisis-no-parametrico',
+                title: 'ANÁLISIS NO PARAMÉTRICO',
+                type: 'no-parametrico',
+                tools: [
+                    { 
+                        name: 'Comparación de Dos Grupos Independientes', 
+                        code: 'Prueba U de Mann-Whitney',
+                        contentKey: 'mann-whitney',
+                        badgeType: 'no-parametrico'
+                    },
+                    { 
+                        name: 'Comparación de Mediciones Repetidas', 
+                        code: 'Prueba de Wilcoxon',
+                        contentKey: 'wilcoxon',
+                        badgeType: 'no-parametrico'
+                    },
+                    { 
+                        name: 'Comparación de Tres o Más Grupos', 
+                        code: 'Prueba de Kruskal-Wallis',
+                        contentKey: 'kruskal-wallis',
+                        badgeType: 'no-parametrico'
+                    },
+                    { 
+                        name: 'Comparaciones Múltiples Post-Hoc', 
+                        code: 'Prueba de Dunn',
+                        contentKey: 'dunn',
+                        badgeType: 'post-hoc'
+                    },
+                    { 
+                        name: 'Tamaño del Efecto para Dos Grupos', 
+                        code: 'r de Rosenthal',
+                        contentKey: 'rosenthal',
+                        badgeType: 'efecto'
+                    },
+                    { 
+                        name: 'Tamaño del Efecto Robustos', 
+                        code: 'Delta de Cliff',
+                        contentKey: 'cliff',
+                        badgeType: 'efecto'
+                    },
+                    { 
+                        name: 'Tamaño del Efecto para Múltiples Grupos', 
+                        code: 'Épsilon Cuadrado (ε²)',
+                        contentKey: 'eta-squared',
+                        badgeType: 'efecto'
+                    }
+                ]
             }
         ];
 
         // Variables globales
-        let currentConceptIndex = 0;
-        let allConcepts = [];
-        let filteredConcepts = [];
+        let currentToolIndex = 0;
+        let allTools = [];
+        let filteredTools = [];
 
         // Elementos DOM
-        const categoriesContainer = document.getElementById('categoriesContainer');
-        const conceptModal = document.getElementById('conceptModal');
-        const modalConceptTitle = document.getElementById('modalConceptTitle');
-        const modalConceptSubtitle = document.getElementById('modalConceptSubtitle');
+        const phasesContainer = document.getElementById('phasesContainer');
+        const toolModal = document.getElementById('toolModal');
+        const modalToolTitle = document.getElementById('modalToolTitle');
+        const modalToolDefinition = document.getElementById('modalToolDefinition');
         const modalHeaderBadges = document.getElementById('modalHeaderBadges');
-        const modalConceptBody = document.getElementById('modalConceptBody');
+        const modalToolBody = document.getElementById('modalToolBody');
         const closeModal = document.getElementById('closeModal');
-        const conceptSearch = document.getElementById('conceptSearch');
+        const toolSearch = document.getElementById('toolSearch');
         const noResults = document.getElementById('noResults');
         const modalLoading = document.getElementById('modalLoading');
 
-        // Generar las tarjetas de categorías
-        function renderCategoryCards() {
-            categoriesContainer.innerHTML = '';
+        // Generar las tarjetas de fases
+        function renderPhaseCards() {
+            phasesContainer.innerHTML = '';
             
-            categoriesData.forEach(category => {
-                if (category.concepts.length === 0) return;
-                
+            phasesData.forEach(phase => {
                 const card = document.createElement('div');
-                card.className = `category-card ${category.type}`;
+                card.className = `phase-card ${phase.type}`;
                 
-                let conceptsHTML = '';
-                category.concepts.forEach(concept => {
-                    const badgeClass = concept.category;
+                let toolsHTML = '';
+                phase.tools.forEach(tool => {
+                    const badgeClass = tool.badgeType || phase.type;
+                    const hasScale = studyContent[tool.contentKey].hasScale;
+                    const scaleBadge = hasScale ? '<span class="scale-badge">Escala</span>' : '';
                     
-                    conceptsHTML += `
-                        <li onclick="openConceptModal('${concept.id}')" data-searchable="${concept.title.toLowerCase()} ${concept.subtitle.toLowerCase()}">
-                            <span class="concept-badge ${badgeClass}">${concept.category.toUpperCase()}</span>
-                            ${concept.title}
+                    toolsHTML += `
+                        <li onclick="openToolModal('${tool.contentKey}')" data-searchable="${tool.name.toLowerCase()} ${tool.code.toLowerCase()}">
+                            <span class="tool-badge ${badgeClass}">${tool.code}</span>
+                            ${tool.name}
+                            ${scaleBadge}
                         </li>
                     `;
                 });
                 
                 card.innerHTML = `
-                    <h3>${category.title}</h3>
-                    <ul class="concepts-list">
-                        ${conceptsHTML}
+                    <h3>${phase.title}</h3>
+                    <ul class="tools-list">
+                        ${toolsHTML}
                     </ul>
                 `;
                 
-                categoriesContainer.appendChild(card);
+                phasesContainer.appendChild(card);
             });
             
-            // Preparar lista de todos los conceptos para navegación
-            allConcepts = Object.values(conceptData);
-            filteredConcepts = [...allConcepts];
+            // Preparar lista de todas las herramientas para navegación
+            allTools = phasesData.flatMap(phase => phase.tools);
+            filteredTools = [...allTools];
         }
 
-        // Abrir modal con información del concepto
-        function openConceptModal(contentKey) {
+        // Abrir modal con información de la herramienta
+        function openToolModal(contentKey) {
             // Mostrar indicador de carga
             modalLoading.style.display = 'block';
-            conceptModal.style.display = 'block';
+            toolModal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             
             // Simular carga asíncrona para mejor UX
             setTimeout(() => {
-                const concept = conceptData[contentKey];
-                const content = conceptContent[contentKey];
+                const tool = studyContent[contentKey];
+                const phaseTool = allTools.find(t => t.contentKey === contentKey);
                 
                 // Actualizar el modal con la información
-                modalConceptTitle.textContent = concept.title;
-                modalConceptSubtitle.textContent = concept.subtitle;
+                modalToolTitle.textContent = phaseTool.name;
+                modalToolDefinition.textContent = tool.definition;
                 
                 // Actualizar índice actual para navegación
-                currentConceptIndex = filteredConcepts.findIndex(c => c.id === contentKey);
+                currentToolIndex = filteredTools.findIndex(t => t.contentKey === contentKey);
                 
                 // Construir badges del header
                 let headerBadgesHTML = '';
-                headerBadgesHTML += `<span class="modal-concept-code">${concept.category.toUpperCase()}</span>`;
+                if (phaseTool.code) {
+                    headerBadgesHTML += `<span class="modal-tool-code">${phaseTool.code}</span>`;
+                }
+                if (tool.scale) {
+                    headerBadgesHTML += `<span class="modal-scale">${tool.scale}</span>`;
+                }
                 modalHeaderBadges.innerHTML = headerBadgesHTML;
                 
                 // Construir el contenido del modal
                 let modalContent = '';
                 
-                // Parsear el contenido markdown simple
-                const sections = content.split('### ');
-                sections.forEach(section => {
-                    if (section.trim() === '') return;
-                    
-                    const lines = section.split('\n');
-                    const title = lines[0].trim();
-                    const body = lines.slice(1).join('\n').trim();
-                    
-                    if (title && body) {
-                        modalContent += `
-                            <div class="info-section">
-                                <h3>${title}</h3>
-                                <div class="application-context">
-                                    ${body}
-                                </div>
+                if (tool.scale) {
+                    modalContent += `
+                        <div class="info-section">
+                            <h3>Escala de Interpretación</h3>
+                            <div class="scale-info">
+                                <p><strong>${tool.scale}</strong></p>
                             </div>
-                        `;
-                    }
-                });
+                        </div>
+                    `;
+                }
                 
-                // Agregar navegación entre conceptos
+                if (tool.content.aplicacion) {
+                    modalContent += `
+                        <div class="info-section">
+                            <h3>Aplicación en nuestro estudio</h3>
+                            <div class="application-context">
+                                <p>${tool.content.aplicacion}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                if (tool.content.consideraciones) {
+                    modalContent += `
+                        <div class="info-section">
+                            <h3>Consideraciones metodológicas</h3>
+                            <p>${tool.content.consideraciones}</p>
+                        </div>
+                    `;
+                }
+                
+                if (tool.content.complementaria) {
+                    modalContent += `
+                        <div class="info-section">
+                            <h3>Medida Complementaria</h3>
+                            <div class="methodological-note">
+                                <p>${tool.content.complementaria}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                if (tool.content.interpretacion) {
+                    modalContent += `
+                        <div class="info-section">
+                            <h3>Interpretación de nuestros resultados</h3>
+                            <div class="interpretation-guide">
+                                <p>${tool.content.interpretacion}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // --- INICIO DE LA MODIFICACIÓN ---
+                // Añadir la sección de conexiones metodológicas si existe
+                if (tool.content.conexiones) {
+                    modalContent += tool.content.conexiones;
+                }
+                // --- FIN DE LA MODIFICACIÓN ---
+
+                // Agregar navegación entre herramientas
                 modalContent += `
                     <div class="modal-navigation">
-                        <button id="prevConcept" class="nav-btn" ${currentConceptIndex <= 0 ? 'disabled' : ''}>← Anterior</button>
-                        <button id="nextConcept" class="nav-btn" ${currentConceptIndex >= filteredConcepts.length - 1 ? 'disabled' : ''}>Siguiente →</button>
+                        <button id="prevTool" class="nav-btn" ${currentToolIndex <= 0 ? 'disabled' : ''}>← Anterior</button>
+                        <button id="nextTool" class="nav-btn" ${currentToolIndex >= filteredTools.length - 1 ? 'disabled' : ''}>Siguiente →</button>
                     </div>
                 `;
                 
-                modalConceptBody.innerHTML = modalContent;
+                modalToolBody.innerHTML = modalContent;
                 
                 // Agregar event listeners para navegación
-                document.getElementById('prevConcept').addEventListener('click', navigateToPrevConcept);
-                document.getElementById('nextConcept').addEventListener('click', navigateToNextConcept);
+                document.getElementById('prevTool').addEventListener('click', navigateToPrevTool);
+                document.getElementById('nextTool').addEventListener('click', navigateToNextTool);
                 
                 // Ocultar indicador de carga
                 modalLoading.style.display = 'none';
@@ -1016,53 +1107,53 @@ El contexto influyó en nuestros hallazgos, particularmente en la brecha actitud
             }, 300);
         }
 
-        // Navegación entre conceptos
-        function navigateToPrevConcept() {
-            if (currentConceptIndex > 0) {
-                openConceptModal(filteredConcepts[currentConceptIndex - 1].id);
+        // Navegación entre herramientas
+        function navigateToPrevTool() {
+            if (currentToolIndex > 0) {
+                openToolModal(filteredTools[currentToolIndex - 1].contentKey);
             }
         }
 
-        function navigateToNextConcept() {
-            if (currentConceptIndex < filteredConcepts.length - 1) {
-                openConceptModal(filteredConcepts[currentConceptIndex + 1].id);
+        function navigateToNextTool() {
+            if (currentToolIndex < filteredTools.length - 1) {
+                openToolModal(filteredTools[currentToolIndex + 1].contentKey);
             }
         }
 
         // Cerrar modal
-        function closeConceptModal() {
-            conceptModal.style.display = 'none';
+        function closeToolModal() {
+            toolModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
         // Función de búsqueda
-        function filterConcepts(searchTerm) {
-            const allConceptElements = document.querySelectorAll('.concepts-list li');
+        function filterTools(searchTerm) {
+            const allToolElements = document.querySelectorAll('.tools-list li');
             let hasResults = false;
             
-            allConceptElements.forEach(concept => {
-                const conceptText = concept.getAttribute('data-searchable');
-                if (conceptText.includes(searchTerm.toLowerCase())) {
-                    concept.style.display = 'flex';
+            allToolElements.forEach(tool => {
+                const toolText = tool.getAttribute('data-searchable');
+                if (toolText.includes(searchTerm.toLowerCase())) {
+                    tool.style.display = 'flex';
                     hasResults = true;
                 } else {
-                    concept.style.display = 'none';
+                    tool.style.display = 'none';
                 }
             });
             
-            // Actualizar filteredConcepts para navegación
-            filteredConcepts = allConcepts.filter(concept => {
-                const searchableText = `${concept.title.toLowerCase()} ${concept.subtitle.toLowerCase()}`;
+            // Actualizar filteredTools para navegación
+            filteredTools = allTools.filter(tool => {
+                const searchableText = `${tool.name.toLowerCase()} ${tool.code.toLowerCase()}`;
                 return searchableText.includes(searchTerm.toLowerCase());
             });
             
             // Mostrar/ocultar mensaje de no resultados
             if (hasResults || searchTerm === '') {
                 noResults.style.display = 'none';
-                categoriesContainer.style.display = 'grid';
+                phasesContainer.style.display = 'grid';
             } else {
                 noResults.style.display = 'block';
-                categoriesContainer.style.display = 'none';
+                phasesContainer.style.display = 'none';
             }
         }
 
@@ -1070,21 +1161,21 @@ El contexto influyó en nuestros hallazgos, particularmente en la brecha actitud
         function initKeyboardNavigation() {
             document.addEventListener('keydown', function(event) {
                 // Cerrar modal con Escape
-                if (event.key === 'Escape' && conceptModal.style.display === 'block') {
-                    closeConceptModal();
+                if (event.key === 'Escape' && toolModal.style.display === 'block') {
+                    closeToolModal();
                 }
                 
                 // Navegación con teclas en modal
-                if (conceptModal.style.display === 'block') {
+                if (toolModal.style.display === 'block') {
                     if (event.key === 'ArrowLeft') {
-                        navigateToPrevConcept();
+                        navigateToPrevTool();
                     } else if (event.key === 'ArrowRight') {
-                        navigateToNextConcept();
+                        navigateToNextTool();
                     }
                     
                     // Mantener foco dentro del modal
                     if (event.key === 'Tab') {
-                        const focusableElements = conceptModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                        const focusableElements = toolModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
                         if (focusableElements.length === 0) return;
                         
                         const firstElement = focusableElements[0];
@@ -1104,30 +1195,31 @@ El contexto influyó en nuestros hallazgos, particularmente en la brecha actitud
 
         // Pre-cargar contenido (simulación)
         function preloadModalContent() {
-            console.log('Contenido de conceptos listo para cargar');
+            console.log('Contenido de modales listo para cargar');
+            // En una implementación real, aquí podrías cargar contenido adicional
         }
 
         // Event listeners
-        closeModal.addEventListener('click', closeConceptModal);
+        closeModal.addEventListener('click', closeToolModal);
         
         // Cerrar modal al hacer clic fuera del contenido
-        conceptModal.addEventListener('click', function(event) {
-            if (event.target === conceptModal) {
-                closeConceptModal();
+        toolModal.addEventListener('click', function(event) {
+            if (event.target === toolModal) {
+                closeToolModal();
             }
         });
         
         // Búsqueda en tiempo real
-        conceptSearch.addEventListener('input', function(event) {
-            filterConcepts(event.target.value);
+        toolSearch.addEventListener('input', function(event) {
+            filterTools(event.target.value);
         });
         
         // Hacer la función global para que funcione en los onclick
-        window.openConceptModal = openConceptModal;
+        window.openToolModal = openToolModal;
 
         // Inicializar la aplicación
         document.addEventListener('DOMContentLoaded', function() {
-            renderCategoryCards();
+            renderPhaseCards();
             initKeyboardNavigation();
             preloadModalContent();
         });
