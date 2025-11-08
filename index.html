@@ -4,362 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conceptos y Hallazgos - Tesis Doctoral</title>
+    
+    <!-- SEO y Metaetiquetas para compartir -->
+    <meta name="description" content="Una exploración interactiva de la narrativa, los fundamentos teóricos y los descubrimientos clave de la tesis sobre conciencia ecológica.">
+    <meta property="og:title" content="Conceptos y Hallazgos - Tesis Doctoral">
+    <meta property="og:description" content="Una exploración interactiva de la narrativa, los fundamentos teóricos y los descubrimientos clave de la tesis.">
+    <meta property="og:type" content="website">
+    
     <style>
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
-            --accent-color: #e74c3c;
             --light-color: #ecf0f1;
             --dark-color: #34495e;
             --success-color: #27ae60;
             --warning-color: #f39c12;
             --concept-color: #9b59b6;
-            --instrument-color: #1abc9c;
             --methodology-color: #e67e22;
             --finding-color: #e74c3c;
-            --intervention-color: #3498db;
-            --approach-color: #f1c40f;
-            --context-color: #7f8c8d;
+            --intervention-color: #16a085;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body { background-color: #f5f7fa; color: #333; line-height: 1.7; padding-top: 60px; }
+
+        /* --- Barra de Navegación Unificada --- */
+        .main-nav { background-color: #fff; border-bottom: 2px solid var(--light-color); position: fixed; top: 0; left: 0; width: 100%; z-index: 1001; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; height: 60px; }
+        .nav-container strong { color: var(--primary-color); margin-right: 20px; font-size: 1rem; }
+        .main-nav a { color: var(--dark-color); text-decoration: none; padding: 10px 15px; border-radius: 6px; font-weight: 600; transition: all 0.2s ease; }
+        .main-nav a:hover { background-color: var(--light-color); color: var(--secondary-color); }
+        .main-nav a.active {
+            color: var(--secondary-color);
+            background-color: #e8f4fc;
         }
         
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        header { background: linear-gradient(135deg, var(--primary-color), var(--dark-color)); color: white; padding: 30px 0; text-align: center; border-radius: 0 0 15px 15px; margin-bottom: 30px; }
+        h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; max-width: 800px; margin: 0 auto; line-height: 1.5; }
         
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-            border-radius: 0 0 15px 15px;
-            margin-bottom: 30px;
-        }
+        .search-container { margin: 20px 0; position: relative; }
+        #conceptSearch { width: 100%; padding: 15px 20px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); }
+        #conceptSearch:focus { outline: none; border-color: var(--secondary-color); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2); }
+        .search-icon { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: #7f8c8d; }
         
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-        
-        .search-container {
-            margin: 20px 0;
-            position: relative;
-        }
-        
-        #conceptSearch {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        
-        #conceptSearch:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
-        }
-        
-        .search-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #7f8c8d;
-        }
-        
-        .categories-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .category-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border-left: 6px solid var(--secondary-color);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-        }
-        
+        .categories-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        .category-card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); transition: all 0.3s ease; border-left: 6px solid var(--secondary-color); height: 100%; display: flex; flex-direction: column; }
+        .category-card:hover { transform: translateY(-7px); box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15); }
+
         .category-card.journey { border-left-color: #34495e; }
         .category-card.theory { border-left-color: var(--methodology-color); }
         .category-card.findings { border-left-color: var(--finding-color); }
         .category-card.implications { border-left-color: var(--success-color); }
         .category-card.concepts { border-left-color: var(--concept-color); }
+        .category-card.intervention { border-left-color: var(--intervention-color); }
 
+        .category-card h3 { color: var(--primary-color); margin-bottom: 18px; font-size: 1.4rem; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
         
-        .category-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 18px;
-            font-size: 1.4rem;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
-        }
+        .concepts-list { list-style-type: none; flex-grow: 1; }
+        .concepts-list li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; transition: background-color 0.2s ease; cursor: pointer; }
+        .concepts-list li:hover { background-color: #f8f9fa; }
+        .concepts-list li:last-child { border-bottom: none; }
         
-        .concepts-list {
-            list-style-type: none;
-            flex-grow: 1;
-        }
+        .concept-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; margin-right: 15px; font-weight: 600; color: white; min-width: 90px; text-align: center; flex-shrink: 0; }
+        .concept-text-container { display: flex; flex-direction: column; }
+        .concept-text-container strong { font-size: 1rem; color: var(--dark-color); margin-bottom: 2px; }
+        .concept-text-container small { font-size: 0.85rem; color: #7f8c8d; }
+        .highlight { background-color: #fff3cd; color: #664d03; padding: 2px 0; border-radius: 3px; }
         
-        .concepts-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-            border-radius: 6px;
-            padding-left: 10px;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .concepts-list li:hover {
-            background-color: #f8f9fa;
-            transform: translateX(5px);
-        }
-        
-        .concepts-list li:active {
-            transform: scale(0.98);
-        }
-        
-        .concepts-list li:last-child {
-            border-bottom: none;
-        }
+        .category-card.journey .concept-badge { background-color: #34495e; }
+        .category-card.theory .concept-badge { background-color: var(--methodology-color); }
+        .category-card.findings .concept-badge { background-color: var(--finding-color); }
+        .category-card.implications .concept-badge { background-color: var(--success-color); }
+        .category-card.concepts .concept-badge { background-color: var(--concept-color); }
+        .category-card.intervention .concept-badge { background-color: var(--intervention-color); }
         
         /* Estilos del Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 20px;
-        }
-        
-        .modal-content {
-            background-color: white;
-            margin: 40px auto;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 800px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: modalAppear 0.3s ease-out;
-            overflow: hidden;
-        }
-        
-        @keyframes modalAppear {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .modal-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
-            color: white;
-            padding: 25px 30px;
-            position: relative;
-        }
-        
-        .modal-header h2 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-        
-        .modal-subtitle {
-            font-style: italic;
-            opacity: 0.9;
-            margin-top: 8px;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: white;
-            background: none;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s;
-        }
-        
-        .close-modal:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .modal-body {
-            padding: 30px;
-        }
-        
-        .info-section {
-            margin-bottom: 30px;
-        }
-        
-        .info-section:last-child {
-            margin-bottom: 0;
-        }
-        
-        .info-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        .info-section p, .info-section ul {
-            margin-bottom: 15px;
-            line-height: 1.7;
-        }
-        .info-section ul {
-            padding-left: 20px;
-        }
-        .info-section a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: bold;
-            border-bottom: 2px dashed #d6eaf8;
-            transition: all 0.2s;
-        }
-        .info-section a:hover {
-            background-color: #d6eaf8;
-            border-bottom-style: solid;
-        }
-
-        .application-context {
-            background-color: #e8f4fc;
-            border-left: 4px solid var(--secondary-color);
-            padding: 15px;
-            border-radius: 6px;
-            margin: 15px 0;
-        }
-        
-        .related-concepts-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 10px;
-        }
-        .related-link {
-            background-color: #e8f4fc;
-            color: var(--secondary-color);
-            padding: 8px 16px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            border: 2px solid #d6eaf8;
-            transition: all 0.2s ease-in-out;
-            cursor: pointer;
-        }
-        .related-link:hover {
-            background-color: var(--secondary-color);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
-        }
-
-        .modal-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        
-        .nav-btn {
-            padding: 10px 20px;
-            background: var(--secondary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-btn:hover:not(:disabled) {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        
-        .nav-btn:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .no-results {
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-            display: none;
-        }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; overflow-y: auto; padding: 20px; }
+        .modal-content { background-color: white; margin: 40px auto; border-radius: 15px; width: 90%; max-width: 800px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); animation: modalAppear 0.3s ease-out; overflow: hidden; }
+        @keyframes modalAppear { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-header { background: linear-gradient(135deg, var(--primary-color), var(--dark-color)); color: white; padding: 25px 30px; position: relative; }
+        .modal-header h2 { font-size: 1.8rem; margin-bottom: 5px; }
+        .close-modal { position: absolute; top: 20px; right: 25px; font-size: 2rem; cursor: pointer; color: white; background: none; border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s; }
+        .close-modal:hover { background-color: rgba(255, 255, 255, 0.2); }
+        .modal-body { padding: 30px; }
+        .info-section { margin-bottom: 30px; }
+        .info-section:last-child { margin-bottom: 0; }
+        .info-section h3, .info-section h4 { color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
+        .info-section h4 { font-size: 1.1rem; border-bottom: none; margin-top: 10px; }
+        .info-section p, .info-section ul, .info-section ol { margin-bottom: 15px; line-height: 1.7; }
+        .info-section ul, .info-section ol { padding-left: 20px; }
+        .info-section a { color: var(--secondary-color); text-decoration: none; font-weight: bold; border-bottom: 2px dashed #d6eaf8; transition: all 0.2s; }
+        .info-section a:hover { background-color: #d6eaf8; border-bottom-style: solid; }
+        .application-context { background-color: #e8f4fc; border-left: 4px solid var(--secondary-color); padding: 15px; border-radius: 6px; margin: 15px 0; }
+        .thesis-image { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd; margin: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .related-concepts-container { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+        .related-link { background-color: #e8f4fc; color: var(--secondary-color); padding: 8px 16px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 2px solid #d6eaf8; transition: all 0.2s ease-in-out; cursor: pointer; }
+        .related-link:hover { background-color: var(--secondary-color); color: white; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3); }
+        .modal-navigation { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
+        .nav-btn { padding: 10px 20px; background: var(--secondary-color); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+        .nav-btn:hover:not(:disabled) { background: #2980b9; transform: translateY(-2px); }
+        .nav-btn:disabled { background: #bdc3c7; cursor: not-allowed; transform: none; }
+        .no-results { text-align: center; padding: 40px; color: #7f8c8d; display: none; }
         
         @media (max-width: 768px) {
-            .categories-container {
-                grid-template-columns: 1fr;
-            }
+            .categories-container { grid-template-columns: 1fr; }
             h1 { font-size: 1.8rem; }
             .modal-content { width: 95%; margin: 20px auto; }
             .modal-header, .modal-body { padding: 20px; }
             .modal-navigation { flex-direction: column; gap: 10px; }
             .nav-btn { width: 100%; }
+            .nav-container strong { display: none; }
+            .main-nav a { padding: 8px 10px; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <strong>Proyecto de Tesis:</strong>
+            <a href="https://gconchae.github.io/tesis-vision-general/" title="Sobre el Proyecto">Visión General</a> 
+            <a href="https://gconchae.github.io/conceptos-y-hallazgos/" class="active" title="Explora la narrativa y los hallazgos">Conceptos y Hallazgos</a>
+            <a href="https://gconchae.github.io/herramientas-estadisticas-tesis/" title="Explora la metodología y estadística">Herramientas Estadísticas</a>
+            <a href="https://gconchae.github.io/tesis-vision-general/tesis-doctoral.pdf" target="_blank" title="Descargar la tesis completa en PDF">Ver la Tesis (PDF)</a>
+        </div>
+    </nav>
+
     <header>
         <div class="container">
             <h1>Conceptos y Hallazgos de Investigación</h1>
@@ -390,7 +163,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalConceptTitle"></h2>
-                <div id="modalConceptSubtitle" class="modal-subtitle"></div>
                 <button class="close-modal" id="closeModal" aria-label="Cerrar ventana">&times;</button>
             </div>
             <div class="modal-body" id="modalConceptBody">
@@ -402,69 +174,87 @@
     <script>
         const conceptData = {
             // EL VIAJE DE LA INVESTIGACIÓN
-            'el_problema': { id: 'el_problema', title: '1. El Problema: La Llave Rota', category: 'journey' },
-            'la_pregunta': { id: 'la_pregunta', title: '2. La Pregunta y la Hipótesis', category: 'journey' },
-            'los_resultados': { id: 'los_resultados', title: '3. Los Resultados: ¿Qué Encontramos?', category: 'journey' },
-            'la_discusion': { id: 'la_discusion', title: '4. La Discusión: ¿Qué Significa?', category: 'journey' },
+            'resumen_ejecutivo': { id: 'resumen_ejecutivo', badge: 'La Tesis', title: 'Resumen Ejecutivo (Abstract)', description: 'La investigación completa en 300 palabras.', category: 'journey' },
+            'el_problema': { id: 'el_problema', badge: 'El Problema', title: 'La Llave Rota', description: 'La analogía que da inicio a la investigación.', category: 'journey' },
+            'la_pregunta': { id: 'la_pregunta', badge: 'La Pregunta', title: 'Hipótesis y Objetivos', description: 'El norte que guió nuestra exploración.', category: 'journey' },
+            'los_resultados': { id: 'los_resultados', badge: 'Los Resultados', title: '¿Qué Encontramos?', description: 'Una síntesis del impacto cuantitativo.', category: 'journey' },
+            'la_discusion': { id: 'la_discusion', badge: 'La Discusión', title: '¿Qué Significa Todo?', description: 'Interpretando los hallazgos clave.', category: 'journey' },
             
             // MARCO TEÓRICO
-            'vygotsky': { id: 'vygotsky', title: 'Vygotsky: El Aprendizaje es Social', category: 'theory' },
-            'kolb': { id: 'kolb', title: 'Kolb: Se Aprende Haciendo (y Sintiendo)', category: 'theory' },
-            'eps': { id: 'eps', title: 'EpS: Educar para Transformar', category: 'theory' },
+            'estado_del_arte': { id: 'estado_del_arte', badge: 'El Contexto', title: 'Diálogo con Otros Autores', description: 'Nuestra contribución a la conversación científica.', category: 'theory' },
+            'vygotsky': { id: 'vygotsky', badge: 'Constructivismo', title: 'Vygotsky', description: 'El aprendizaje es un proceso social.', category: 'theory' },
+            'kolb': { id: 'kolb', badge: 'Aprendizaje Experiencial', title: 'Kolb', description: 'Se aprende a través de la experiencia.', category: 'theory' },
+            'eps': { id: 'eps', badge: 'Horizonte Ético', title: 'Educación para la Sostenibilidad (EpS)', description: 'Educar para transformar el entorno.', category: 'theory' },
             
-            // HALLAZGOS CLAVE
-            'epa': { id: 'epa', title: 'El Efecto de Preservación Actitudinal (EPA)', category: 'findings' },
-            'brecha': { id: 'brecha', title: 'La Persistencia de la Brecha Actitud-Conducta', category: 'findings' },
-            'falla_psicometrica': { id: 'falla_psicometrica', title: 'El Hallazgo Metodológico Central', category: 'findings' },
+            // LA INTERVENCIÓN EN ACCIÓN
+            'intervencion_semana2': { id: 'intervencion_semana2', badge: 'Semana 2', title: 'La Salida de Campo', description: 'La "Experiencia Concreta" que ancló el afecto.', category: 'intervention' },
+            'intervencion_semana4': { id: 'intervencion_semana4', badge: 'Semana 4', title: 'El Debate Energético', description: 'Co-construyendo conocimiento a través del diálogo.', category: 'intervention' },
+            'intervencion_semana6': { id: 'intervencion_semana6', badge: 'Semana 6', title: 'El Reto Domiciliario', description: 'Llevando el aprendizaje a la acción en casa.', category: 'intervention' },
 
-            // IMPLICACIONES Y FUTURO
-            'para_docentes': { id: 'para_docentes', title: 'Para Docentes: Implicaciones Prácticas', category: 'implications' },
-            'para_instituciones': { id: 'para_instituciones', title: 'Para Instituciones: Hoja de Ruta', category: 'implications' },
-            'proyecciones_futuras': { id: 'proyecciones_futuras', title: 'Proyecciones: ¿Qué Sigue?', category: 'implications' },
+            // HALLAZGOS CLAVE
+            'epa': { id: 'epa', badge: 'Hallazgo Afectivo', title: 'Efecto de Preservación Actitudinal (EPA)', description: 'La intervención como "escudo" contra la apatía.', category: 'findings' },
+            'brecha': { id: 'brecha', badge: 'Hallazgo Conductual', title: 'La Brecha Actitud-Conducta', description: 'Por qué sentir no siempre se traduce en hacer.', category: 'findings' },
+            'falla_psicometrica': { id: 'falla_psicometrica', badge: 'Hallazgo Metodológico', title: 'El Desafío de Medir el Saber', description: 'Un resultado no concluyente que enseña una lección.', category: 'findings' },
+
+            // IMPLICACIONES Y PROYECCIONES
+            'para_docentes': { id: 'para_docentes', badge: 'Para Docentes', title: '¿Qué Puedo Hacer Mañana?', description: 'Recomendaciones prácticas para el aula.', category: 'implications' },
+            'para_instituciones': { id: 'para_instituciones', badge: 'Para Instituciones', title: 'La Hoja de Ruta', description: 'Pasando del proyecto a la cultura escolar.', category: 'implications' },
+            'proyecciones_futuras': { id: 'proyecciones_futuras', badge: 'Para la Investigación', title: '¿Cuáles son los Siguientes Pasos?', description: 'Nuevas avenidas para explorar.', category: 'implications' },
 
             // CONCEPTOS FUNDAMENTALES
-            'conciencia_ecologica': { id: 'conciencia_ecologica', title: 'Conciencia Ecológica (3D)', category: 'concepts' },
-            'integracion_curricular': { id: 'integracion_curricular', title: 'Integración Curricular', category: 'concepts' },
+            'conciencia_ecologica': { id: 'conciencia_ecologica', badge: 'Variable Clave', title: 'Conciencia Ecológica (3D)', description: 'El constructo central: Saber, Sentir y Hacer.', category: 'concepts' },
+            'integracion_curricular': { id: 'integracion_curricular', badge: 'Estrategia Clave', title: 'Integración Curricular', description: 'La intervención pedagógica que aplicamos.', category: 'concepts' },
         };
 
         const conceptContent = {
+            'resumen_ejecutivo': `<h3>Resumen de la Tesis (Abstract)</h3><div class="application-context"><p>La actual crisis socioecológica exige fortalecer la conciencia ecológica, constructo que articula conocimiento, actitudes y conductas. En respuesta a la fragmentación de la educación ambiental en contextos semirrurales de Colombia, este estudio analizó el impacto de la integración curricular de contenidos ambientales.</p><p>Se empleó un diseño cuasiexperimental pretest-postest con una muestra de 89 estudiantes de octavo grado, distribuidos en un grupo experimental (n=63) y uno de control (n=26). La intervención consistió en secuencias didácticas activas. Se midió la conciencia ecológica con una Escala de Conciencia Ambiental (ECA) adaptada, y los datos se analizaron con pruebas no paramétricas y tamaños del efecto (r).</p><p>Los resultados revelaron un impacto significativo. En la medición postest, el grupo experimental superó estadísticamente al control en las dimensiones afectiva (U=339.5, p < .001, r = 0.59) y conductual (U=598.0, p = .046, r = 0.27). La mejora en la dimensión cognitiva se considera metodológicamente no concluyente por la baja fiabilidad de la subescala. El grupo experimental mostró gran mejora cognitiva, moderada conductual y mantenimiento afectivo; impacto afectivo destacó entre grupos postest.</p><p>Se concluye que la integración curricular, mediante metodologías activas, es una estrategia eficaz para consolidar actitudes y fomentar prácticas sostenibles. La falla psicométrica en la medición del conocimiento subraya la necesidad crítica de desarrollar instrumentos más robustos. Asimismo, la consolidación de la conducta demanda un apoyo estructural e institucional que trascienda el aula.</p></div>`,
+            'estado_del_arte': `<h3>La Conversación Académica</h3><div class="application-context"><p>La investigación en Educación Ambiental (EA) es un campo dinámico. Existe un consenso creciente sobre la necesidad de superar la mera transmisión de información para adoptar enfoques más participativos y contextualizados, como señalan autores como <strong>Alfonso Cortés (2024)</strong> y <strong>Cabanillas Urbina (2024)</strong>.</p></div><h3>Los Hallazgos de Otros Autores</h3><div class="application-context"><p>Nuestra investigación dialoga con estudios que demuestran la eficacia de:</p><ul><li><strong>Experiencias directas:</strong> En línea con <strong>Pirchio et al. (2021)</strong>, nuestro estudio confirma que el contacto con la naturaleza (la salida de campo) es un potente catalizador del afecto.</li><li><strong>Enfoques sistémicos:</strong> La advertencia de <strong>Muñoz Montilla (2023)</strong> sobre las barreras estructurales resuena con nuestros hallazgos sobre la <a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">brecha actitud-conducta</a>.</li><li><strong>Modelos teóricos:</strong> Reforzamos el modelo de <strong>Hungerford y Volk (1990)</strong>, que postula que la conducta requiere conocimiento, actitud y, crucialmente, apoyo externo.</li></ul></div><h3>El Vacío que Llena esta Tesis</h3><div class="application-context"><p>A pesar de los avances, la literatura muestra tres vacíos importantes que este estudio aborda directamente:</p><ol><li>La escasez de estudios <strong>cuasiexperimentales</strong> en contextos escolares reales, especialmente en zonas <strong>semirrurales</strong> de Colombia.</li><li>La falta de análisis que midan simultáneamente las tres dimensiones (cognitiva, afectiva, conductual) para obtener una visión integral.</li><li>La necesidad crítica de <strong>validar y reflexionar sobre los instrumentos</strong> de medición, un problema que nuestro <a href="#" onclick="event.preventDefault(); openConceptModal('falla_psicometrica')">hallazgo metodológico</a> pone de relieve.</li></ol></div>`,
             'el_problema': `<h3>La Analogía de la "Llave Rota"</h3><div class="application-context"><p>Nuestra investigación parte de una imagen simple: una llave de agua goteando en una escuela. Este goteo simboliza la <strong>indiferencia normalizada</strong> frente a un problema ambiental visible y conocido. El problema no es técnico ("ingeniería del grifo"), sino cultural. La solución no es solo arreglar la llave, sino cultivar una <strong>"pedagogía de la mirada"</strong> que nos enseñe a ver el goteo como una interpelación a nuestra responsabilidad.</p></div>`,
-            'la_pregunta': `<h3>La Pregunta Central</h3><div class="application-context"><p>¿Qué efecto ejerce la integración de contenidos de educación ambiental en el currículo escolar sobre las dimensiones <strong>cognitiva, afectiva y conductual</strong> de la conciencia ecológica en estudiantes de octavo grado?</p></div><h3>La Hipótesis</h3><div class="application-context"><p>Nuestra hipótesis (H₁) fue que la intervención tendría un <strong>efecto significativo y positivo</strong>. Es decir, que una intervención bien diseñada podría, efectivamente, empezar a "cerrar la llave" de la indiferencia.</p></div>`,
-            'los_resultados': `<h3>Resumen del Veredicto</h3><div class="application-context"><p>Los datos confirmaron nuestra hipótesis principal (H₁). La intervención tuvo un impacto global positivo. Específicamente, encontramos:</p><ul><li>Un <strong>efecto grande</strong> en la dimensión <strong>Afectiva</strong> (r = .59), analizado con la <a href="https://gconchae.github.io/herramientas-estadisticas-tesis/?tool=mann-whitney" target="_blank">Prueba U de Mann-Whitney</a>.</li><li>Un efecto <strong>moderado</strong> en la dimensión <strong>Cognitiva</strong> (r = .40), aunque este resultado debe tomarse con cautela.</li><li>Un efecto <strong>pequeño-moderado</strong> en la dimensión <strong>Conductual</strong> (r = .27).</li></ul><p>En resumen: la intervención fue muy eficaz para proteger las actitudes y mejorar el conocimiento, pero más modesta para cambiar los hábitos diarios.</p></div>`,
-            'la_discusion': `<h3>Interpretando los Números</h3><div class="application-context"><p>La discusión se centra en tres grandes ideas:</p><ol><li>El <strong>Efecto de Preservación Actitudinal (EPA)</strong> explica el gran impacto en la dimensión afectiva.</li><li>La persistencia de la <strong>Brecha Actitud-Conducta</strong> explica por qué la mejora en las prácticas fue más modesta.</li><li>El <strong>Hallazgo Metodológico Central</strong> (la baja fiabilidad de la subescala cognitiva) nos enseña sobre la dificultad de medir el conocimiento ambiental.</li></ol><p>La conclusión es que la experiencia (como la salida de campo) sostiene el afecto, y el afecto es la base que habilita la conducta, pero esta última necesita de apoyos institucionales para consolidarse.</p></div>`,
-            'vygotsky': `<h3>La Idea Central</h3><div class="application-context"><p>Lev Vygotsky nos enseñó que no aprendemos solos, sino a través de la interacción con otros. El aprendizaje es un proceso social mediado por el lenguaje y la cultura. La "Zona de Desarrollo Próximo" (ZDP) es el espacio mágico donde un estudiante puede lograr algo con ayuda que aún no puede hacer solo.</p></div><h3>Aplicación en el Estudio</h3><div class="application-context"><p>Diseñamos las actividades (debates, trabajos en grupo) como <strong>"andamiajes"</strong> para mover a los estudiantes a través de su ZDP. El diálogo y la colaboración no fueron un extra, sino el motor principal para co-construir un entendimiento más profundo sobre los problemas ambientales.</p></div>`,
-            'kolb': `<h3>La Idea Central</h3><div class="application-context"><p>David Kolb propuso que el aprendizaje auténtico es un ciclo de cuatro pasos: <strong>Experiencia → Reflexión → Conceptualización → Acción</strong>. Sostiene que el conocimiento se crea a través de la transformación de la experiencia. No basta con leer sobre algo; hay que vivirlo, pensar en ello, entenderlo y luego aplicarlo.</p></div><h3>Aplicación en el Estudio</h3><div class="application-context"><p>Nuestra intervención de 8 semanas fue diseñada siguiendo exactamente este ciclo. La <strong>salida de campo al río Guabas</strong> fue la "Experiencia" que ancló el "Afecto". Los debates y bitácoras fueron la "Reflexión". Las sesiones teóricas fueron la "Conceptualización", y los proyectos finales fueron la "Acción".</p></div>`,
-            'eps': `<h3>La Idea Central</h3><div class="application-context"><p>La Educación para la Sostenibilidad (EpS), impulsada por teóricos como Stephen Sterling y Daniella Tilbury, va más allá de la ecología. Es un enfoque que busca un cambio profundo en los valores y las prácticas. Su tesis central es que la conducta sostenible solo perdura cuando existe <strong>coherencia institucional</strong>: la escuela debe practicar lo que predica.</p></div><h3>Aplicación en el Estudio</h3><div class="application-context"><p>La EpS fue nuestro "horizonte ético". Nos recordó que para cerrar la <a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">brecha actitud-conducta</a>, no basta con la pedagogía en el aula. Se necesitan <strong>apoyos institucionales</strong> (normas, roles, oportunidades, recursos) que eliminen las barreras y hagan de la sostenibilidad un hábito, no solo un proyecto.</p></div>`,
-            'epa': `<h3>¿Qué es?</h3><div class="application-context"><p>El <strong>Efecto de Preservación Actitudinal (EPA)</strong> es el hallazgo más robusto de nuestro estudio. Describe cómo la intervención logró <strong>proteger y mantener las altas actitudes</strong> proambientales del Grupo Experimental, evitando el descenso que sí se observó en el Grupo Control.</p></div><h3>Evidencia y Magnitud</h3><div class="application-context"><p>El efecto fue <strong>grande (r = .59)</strong>. Mientras el Grupo Experimental mantuvo sus puntajes afectivos, el Grupo Control mostró un claro declive. Esto sugiere que la intervención funcionó como un "escudo" o "vacuna pedagógica" contra la apatía, un efecto que es tan importante como generar nuevas actitudes.</p></div>`,
+            'la_pregunta': `<h3>La Pregunta Central</h3><div class="application-context"><p>¿Qué efecto ejerce la integración de contenidos de educación ambiental en el currículo escolar sobre las dimensiones <strong>cognitiva, afectiva y conductual</strong> de la conciencia ecológica en estudiantes de octavo grado?</p></div><h3>Los Objetivos de la Investigación</h3><div class="application-context"><h4>Objetivo General</h4><p>Analizar el impacto de la integración curricular de contenidos ambientales sobre la conciencia ecológica de los estudiantes de octavo grado, mediante una intervención pedagógica específica.</p><h4>Objetivos Específicos (en 3 Momentos)</h4><p><strong>Momento 1: Diagnóstico (Pre-intervención)</strong></p><ul><li><strong>1. Diagnosticar</strong> el nivel inicial de conciencia ecológica para establecer una línea base.</li></ul><p><strong>Momento 2: Intervención y Medición</strong></p><ul><li><strong>2. Diseñar e Implementar</strong> una intervención pedagógica con integración curricular en el Grupo Experimental.</li><li><strong>3. Medir</strong> la conciencia ecológica después de la intervención en ambos grupos.</li></ul><p><strong>Momento 3: Análisis e Interpretación</strong></p><ul><li><strong>4. Comparar</strong> los cambios entre los grupos para evaluar el efecto de la intervención.</li><li><strong>5. Interpretar</strong> la influencia de los componentes pedagógicos en las transformaciones observadas.</li></ul></div><h3>La Hipótesis</h3><div class="application-context"><p>Nuestra hipótesis (H₁) fue que la intervención tendría un <strong>efecto significativo y positivo</strong> en las tres dimensiones de la conciencia ecológica.</p></div>`,
+            'los_resultados': `<h3>Resumen del Veredicto</h3><div class="application-context"><p>Los datos confirmaron nuestra hipótesis principal (H₁). La intervención tuvo un impacto global positivo. Específicamente, encontramos:</p><ul><li>Un <strong>efecto grande</strong> en la dimensión <strong>Afectiva</strong> (r = .59), analizado con la <a href="https://gconchae.github.io/herramientas-estadisticas-tesis/?tool=mann-whitney" target="_blank">Prueba U de Mann-Whitney</a>.</li><li>Un efecto <strong>moderado</strong> en la dimensión <strong>Cognitiva</strong> (r = .40), aunque este resultado debe tomarse con cautela.</li><li>Un efecto <strong>pequeño-moderado</strong> en la dimensión <strong>Conductual</strong> (r = .27).</li></ul><p>La siguiente gráfica (Figura 10 de la tesis) resume la magnitud de estos efectos:</p><img src="images/figura10.png" alt="Gráfico de tamaño del efecto por dimensión" class="thesis-image"></div>`,
+            'la_discusion': `<h3>Interpretando los Números</h3><div class="application-context"><p>La discusión se centra en tres grandes ideas:</p><ol><li>El <strong>Efecto de Preservación Actitudinal (EPA)</strong> explica el gran impacto en la dimensión afectiva.</li><li>La persistencia de la <strong>Brecha Actitud-Conducta</strong> explica por qué la mejora en las prácticas fue más modesta.</li><li>El <strong>Hallazgo Metodológico Central</strong> (la baja fiabilidad de la subescala cognitiva) nos enseña sobre la dificultad de medir el conocimiento ambiental.</li></ol><p>La conclusión es que la experiencia (como la salida de campo) sostiene el afecto, y el afecto es la base que habilita la conducta, pero esta última necesita de apoyos institucionales para consolidarse.</p></div><img src="images/discusion.png" alt="Diagrama que muestra la cadena esperada de la pedagogía al impacto: Experiencia, Afecto, Conducta" class="thesis-image">`,
+            'vygotsky': `<h3>La Idea Central</h3><div class="application-context"><p>Lev Vygotsky nos enseñó que no aprendemos solos, sino a través de la interacción con otros. El aprendizaje es un proceso social mediado por el lenguaje y la cultura. La "Zona de Desarrollo Próximo" (ZDP) es el espacio mágico donde un estudiante puede lograr algo con ayuda que aún no puede hacer solo.</p></div><h3>Aplicación en el Estudio</h3><div class="application-context"><p>Diseñamos las actividades (debates, trabajos en grupo) como <strong>"andamiajes"</strong> para mover a los estudiantes a través de su ZDP. El diálogo y la colaboración no fueron un extra, sino el motor principal para co-construir un entendimiento más profundo sobre los problemas ambientales.</p><img src="images/vygotsky.png" alt="Diagrama de la Zona de Desarrollo Próximo de Vygotsky" class="thesis-image"></div>`,
+            'kolb': `<h3>La Idea Central</h3><div class="application-context"><p>David Kolb propuso que el aprendizaje auténtico es un ciclo de cuatro pasos: <strong>Experiencia → Reflexión → Conceptualización → Acción</strong>. Sostiene que el conocimiento se crea a través de la transformación de la experiencia. No basta con leer sobre algo; hay que vivirlo, pensar en ello, entenderlo y luego aplicarlo.</p></div><h3>Aplicación en el Estudio</h3><div class="application-context"><p>Nuestra intervención de 8 semanas fue diseñada siguiendo exactamente este ciclo. La <strong>salida de campo al río Guabas</strong> fue la "Experiencia" que ancló el "Afecto". Los debates y bitácoras fueron la "Reflexión". Las sesiones teóricas fueron la "Conceptualización", y los proyectos finales fueron la "Acción".</p><img src="images/kolb.png" alt="Ciclo de Aprendizaje Experiencial de Kolb" class="thesis-image"></div>`,
+            'eps': `<h3>La Idea Central</h3><div class="application-context"><p>La Educación para la Sostenibilidad (EpS), impulsada por teóricos como Stephen Sterling y Daniella Tilbury, va más allá de la ecología. Es un enfoque que busca un cambio profundo en los valores y las prácticas. Su tesis central es que la conducta sostenible solo perdura cuando existe <strong>coherencia institucional</strong>: la escuela debe practicar lo que predica.</p></div><h3>Aplicación en el Estudio</h3><div class="application-context"><p>La EpS fue nuestro "horizonte ético". Nos recordó que para cerrar la <a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">brecha actitud-conducta</a>, no basta con la pedagogía en el aula. Se necesitan <strong>apoyos institucionales</strong> (normas, roles, oportunidades, recursos) que eliminen las barreras y hagan de la sostenibilidad un hábito, no solo un proyecto.</p><img src="images/eps.png" alt="Diagrama sobre la coherencia institucional en la Educación para la Sostenibilidad" class="thesis-image"></div>`,
+            'intervencion_semana2': `<h3>El Corazón de la Experiencia</h3><div class="application-context"><p>La visita al ecosistema del río Guabas fue la <strong>"Experiencia Concreta"</strong> del modelo de <a href="#" onclick="event.preventDefault(); openConceptModal('kolb')">Kolb</a>. Aquí los estudiantes no leyeron sobre el problema, lo vieron y sintieron. Esta vivencia fue el catalizador que ancló el compromiso afectivo y dio contexto a todo el aprendizaje posterior.</p></div>`,
+            'intervencion_semana4': `<h3>Co-construyendo el Conocimiento</h3><div class="application-context"><p>El debate sobre energías limpias fue un ejercicio práctico del constructivismo de <a href="#" onclick="event.preventDefault(); openConceptModal('vygotsky')">Vygotsky</a>. Al defender posturas y escuchar a sus pares, los estudiantes usaron el lenguaje para negociar significados y construir un conocimiento más complejo, moviéndose a través de su <strong>"Zona de Desarrollo Próximo"</strong>.</p></div>`,
+            'intervencion_semana6': `<h3>Afrontando la Brecha Actitud-Conducta</h3><div class="application-context"><p>El "Reto Ecológico Domiciliario" fue un intento de llevar el aprendizaje a la acción en casa. Su adherencia moderada ilustró perfectamente la <a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">brecha actitud-conducta</a>: aunque los estudiantes tenían la motivación, enfrentaron barreras contextuales (falta de apoyo familiar, de infraestructura, etc.), subrayando la importancia del enfoque de la <a href="#" onclick="event.preventDefault(); openConceptModal('eps')">EpS</a>.</p></div>`,
+            'epa': `<h3>¿Qué es?</h3><div class="application-context"><p>El <strong>Efecto de Preservación Actitudinal (EPA)</strong> es el hallazgo más robusto de nuestro estudio. Describe cómo la intervención logró <strong>proteger y mantener las altas actitudes</strong> proambientales del Grupo Experimental, evitando el descenso que sí se observó en el Grupo Control.</p></div><h3>Evidencia y Magnitud</h3><div class="application-context"><p>El efecto fue <strong>grande (r = .59)</strong>. Mientras el Grupo Experimental mantuvo sus puntajes afectivos, el Grupo Control mostró un claro declive. Visualmente, este efecto se puede apreciar en la Figura 5 de la tesis:</p><img src="images/figura5.png" alt="Gráfico de comparación pretest-postest que muestra el EPA" class="thesis-image"></div>`,
             'brecha': `<h3>¿Qué es?</h3><div class="application-context"><p>Es la conocida discrepancia entre lo que las personas dicen/sienten sobre el medio ambiente y lo que realmente hacen. A pesar de tener actitudes muy positivas, los estudiantes no siempre las traducen en prácticas sostenibles consistentes.</p></div><h3>Evidencia y Magnitud</h3><div class="application-context"><p>Nuestro estudio confirmó esta brecha. El impacto en las actitudes fue grande (r = .59), pero en las conductas fue <strong>pequeño-moderado (r = .27)</strong>. La mejora fue significativa, pero modesta. Esto se explica por las <strong>barreras contextuales</strong> (falta de infraestructura, de apoyo institucional, etc.) que dificultan la acción.</p></div>`,
             'falla_psicometrica': `<h3>¿Qué es?</h3><div class="application-context"><p>Es el hallazgo de que la parte de nuestra encuesta que medía el conocimiento (dimensión cognitiva) tuvo una <strong>fiabilidad inaceptablemente baja (<a href="https://gconchae.github.io/herramientas-estadisticas-tesis/?tool=internal-consistency" target="_blank">α = .387</a>)</strong>. Esto significa que la medición contenía más "ruido" que "señal" de conocimiento real.</p></div><h3>Implicaciones</h3><div class="application-context"><p>Aunque los análisis mostraron una mejora "estadísticamente significativa", no podemos confiar en ese resultado. Por honestidad metodológica, lo declaramos <strong>no concluyente</strong>. Este hallazgo no invalida el estudio, sino que subraya la enorme dificultad de medir un concepto tan complejo como el "saber ambiental" y la urgencia de desarrollar mejores instrumentos.</p></div>`,
             'para_docentes': `<h3>Metodologías Activas y Cierre Conceptual</h3><div class="application-context"><p>La recomendación principal para los docentes es ir más allá de la clase expositiva. Estrategias como <strong>salidas de campo, debates sobre dilemas locales y proyectos</strong> son increíblemente eficaces para anclar el afecto y movilizar el saber. Es crucial complementar estas experiencias con un <strong>cierre conceptual y rúbricas claras</strong> que ayuden a los estudiantes a conectar la experiencia con la teoría.</p></div>`,
             'para_instituciones': `<h3>De Proyecto Aislado a Cultura Escolar</h3><div class="application-context"><p>Las instituciones deben asumir la Educación Ambiental como un <strong>eje del Proyecto Educativo Institucional (PEI)</strong>. Esto implica fortalecer el PRAE, destinar recursos, crear <strong>roles visibles (eco-monitores), normas claras y rutinas</strong>, y ofrecer oportunidades semanales de acción con feedback. El objetivo es pasar del "goteo" de esfuerzos aislados a una cultura de sostenibilidad coherente.</p></div>`,
             'proyecciones_futuras': `<h3>Nuevas Preguntas de Investigación</h3><div class="application-context"><ul><li><strong>Rigor Metodológico:</strong> Realizar diseños experimentales con aleatorización para establecer causalidad de forma más robusta.</li><li><strong>Instrumentos:</strong> La tarea más urgente es refinar la subescala cognitiva, realizando análisis más avanzados (como la Teoría de Respuesta al Ítem) y pilotajes exhaustivos.</li><li><strong>Enfoques Integrales:</strong> Realizar estudios longitudinales (para medir el efecto a largo plazo) y mixtos (para entender las barreras contextuales en profundidad).</li></ul></div>`,
-            'conciencia_ecologica': `<h3>Definición</h3><div class="application-context"><p>Es un constructo multidimensional que integra la comprensión intelectual (<strong>Saber - Cognitiva</strong>), el vínculo emocional (<strong>Sentir - Afectiva</strong>) y las prácticas proambientales (<strong>Hacer - Conductual</strong>). Nuestro estudio demuestra que estas tres dimensiones son interdependientes, pero no siempre se mueven al mismo ritmo.</p></div>`,
+            'conciencia_ecologica': `<h3>Definición</h3><div class="application-context"><p>Es un constructo multidimensional que integra la comprensión intelectual (<strong>Saber - Cognitiva</strong>), el vínculo emocional (<strong>Sentir - Afectiva</strong>) y las prácticas proambientales (<strong>Hacer - Conductual</strong>). Nuestro estudio demuestra que estas tres dimensiones son interdependientes, pero no siempre se mueven al mismo ritmo.</p><img src="images/3d.png" alt="Diagrama de las tres dimensiones de la Conciencia Ecológica: Saber, Sentir y Hacer" class="thesis-image"></div>`,
             'integracion_curricular': `<h3>Definición</h3><div class="application-context"><p>Fue nuestra estrategia de intervención. En lugar de tratar la educación ambiental como un taller aislado, la <strong>integramos sistemáticamente en el currículo de Ciencias Naturales durante 8 semanas</strong>. El objetivo era conectar los contenidos ambientales con los temas regulares de la asignatura, demostrando que la sostenibilidad no es un tema aparte, sino una lente a través de la cual se puede ver toda la ciencia.</p></div>`,
         };
 
         const categoriesData = [
             { id: 'journey', title: 'EL VIAJE DE LA INVESTIGACIÓN', type: 'journey' },
             { id: 'theory', title: 'MARCO TEÓRICO: LOS PILARES DEL ESTUDIO', type: 'theory' },
+            { id: 'intervention', title: 'LA INTERVENCIÓN EN ACCIÓN', type: 'intervention' },
             { id: 'findings', title: 'HALLAZGOS CLAVE', type: 'findings' },
             { id: 'implications', title: 'IMPLICACIONES Y PROYECCIONES', type: 'implications' },
             { id: 'concepts', title: 'CONCEPTOS FUNDAMENTALES', type: 'concepts' }
         ];
 
         const conceptRelations = {
-            'el_problema': ['brecha'],
+            'resumen_ejecutivo': ['el_problema', 'los_resultados', 'la_discusion'],
+            'estado_del_arte': ['brecha', 'falla_psicometrica', 'vygotsky'],
+            'el_problema': ['brecha', 'conciencia_ecologica'],
             'la_pregunta': ['conciencia_ecologica', 'integracion_curricular'],
             'los_resultados': ['epa', 'brecha', 'falla_psicometrica'],
-            'la_discusion': ['epa', 'brecha', 'falla_psicometrica', 'vygotsky', 'kolb', 'eps'],
-            'vygotsky': ['kolb', 'eps'],
-            'kolb': ['vygotsky', 'eps', 'epa'],
-            'eps': ['vygotsky', 'kolb', 'para_instituciones'],
-            'epa': ['los_resultados', 'la_discusion', 'kolb'],
-            'brecha': ['el_problema', 'los_resultados', 'la_discusion', 'eps', 'para_instituciones'],
+            'la_discusion': ['epa', 'brecha', 'falla_psicometrica', 'vygotsky', 'kolb', 'eps', 'intervencion_semana2'],
+            'vygotsky': ['kolb', 'eps', 'intervencion_semana4'],
+            'kolb': ['vygotsky', 'eps', 'epa', 'intervencion_semana2'],
+            'eps': ['vygotsky', 'kolb', 'para_instituciones', 'intervencion_semana6'],
+            'intervencion_semana2': ['kolb', 'epa', 'la_discusion'],
+            'intervencion_semana4': ['vygotsky'],
+            'intervencion_semana6': ['brecha', 'eps'],
+            'epa': ['los_resultados', 'la_discusion', 'kolb', 'intervencion_semana2'],
+            'brecha': ['el_problema', 'los_resultados', 'la_discusion', 'eps', 'para_instituciones', 'intervencion_semana6'],
             'falla_psicometrica': ['los_resultados', 'la_discusion', 'proyecciones_futuras'],
-            'para_docentes': ['kolb', 'vygotsky', 'integracion_curricular'],
+            'para_docentes': ['kolb', 'vygotsky', 'integracion_curricular', 'intervencion_semana2'],
             'para_instituciones': ['eps', 'brecha'],
             'proyecciones_futuras': ['falla_psicometrica'],
         };
@@ -476,7 +266,6 @@
         const categoriesContainer = document.getElementById('categoriesContainer');
         const conceptModal = document.getElementById('conceptModal');
         const modalConceptTitle = document.getElementById('modalConceptTitle');
-        const modalConceptSubtitle = document.getElementById('modalConceptSubtitle');
         const modalConceptBody = document.getElementById('modalConceptBody');
         const closeModal = document.getElementById('closeModal');
         const conceptSearch = document.getElementById('conceptSearch');
@@ -485,11 +274,19 @@
         function renderCategoryCards(filter = '') {
             const lowerCaseFilter = filter.toLowerCase();
             categoriesContainer.innerHTML = '';
+
+            const highlight = (text, filter) => {
+                if (!filter) return text;
+                return text.replace(new RegExp(filter, 'gi'), `<span class="highlight">$&</span>`);
+            };
             
             categoriesData.forEach(category => {
                 const conceptsInCategory = Object.values(conceptData).filter(item => {
                     const matchesCategory = item.category === category.type;
-                    const matchesFilter = filter === '' || item.title.toLowerCase().includes(lowerCaseFilter);
+                    const matchesFilter = filter === '' || 
+                        item.title.toLowerCase().includes(lowerCaseFilter) ||
+                        item.badge.toLowerCase().includes(lowerCaseFilter) ||
+                        item.description.toLowerCase().includes(lowerCaseFilter);
                     return matchesCategory && matchesFilter;
                 });
 
@@ -500,8 +297,12 @@
                     let conceptsHTML = '<ul class="concepts-list">';
                     conceptsInCategory.forEach(concept => {
                         conceptsHTML += `
-                            <li onclick="openConceptModal('${concept.id}')" data-searchable="${concept.title.toLowerCase()}">
-                                ${concept.title}
+                            <li onclick="openConceptModal('${concept.id}')">
+                                <span class="concept-badge">${highlight(concept.badge, lowerCaseFilter)}</span>
+                                <div class="concept-text-container">
+                                    <strong>${highlight(concept.title, lowerCaseFilter)}</strong>
+                                    <small>${highlight(concept.description, lowerCaseFilter)}</small>
+                                </div>
                             </li>
                         `;
                     });
@@ -511,9 +312,14 @@
                     categoriesContainer.appendChild(card);
                 }
             });
-
-            filteredConcepts = Object.values(conceptData).filter(c => c.title.toLowerCase().includes(lowerCaseFilter));
-            noResults.style.display = filteredConcepts.length === 0 ? 'block' : 'none';
+            
+            allConcepts = Object.values(conceptData);
+            filteredConcepts = allConcepts.filter(c => 
+                c.title.toLowerCase().includes(lowerCaseFilter) ||
+                c.badge.toLowerCase().includes(lowerCaseFilter) ||
+                c.description.toLowerCase().includes(lowerCaseFilter)
+            );
+            noResults.style.display = filteredConcepts.length === 0 && lowerCaseFilter !== '' ? 'block' : 'none';
         }
 
         function openConceptModal(contentKey) {
@@ -524,7 +330,6 @@
             const content = conceptContent[contentKey] || '<p>Contenido no disponible.</p>';
             
             modalConceptTitle.textContent = concept.title;
-            modalConceptSubtitle.textContent = concept.subtitle || '';
             
             currentConceptIndex = filteredConcepts.findIndex(c => c.id === contentKey);
             
@@ -550,8 +355,8 @@
             
             modalConceptBody.innerHTML = modalContent;
             
-            document.getElementById('prevConcept').addEventListener('click', navigateToPrevConcept);
-            document.getElementById('nextConcept').addEventListener('click', navigateToNextConcept);
+            document.getElementById('prevConcept')?.addEventListener('click', navigateToPrevConcept);
+            document.getElementById('nextConcept')?.addEventListener('click', navigateToNextConcept);
             
             closeModal.focus();
         }
