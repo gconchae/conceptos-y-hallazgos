@@ -109,6 +109,14 @@
         .nav-btn:hover:not(:disabled) { background: #2980b9; transform: translateY(-2px); }
         .nav-btn:disabled { background: #bdc3c7; cursor: not-allowed; transform: none; }
         .no-results { text-align: center; padding: 40px; color: #7f8c8d; display: none; }
+        .modal-subtitle {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #bdc3c7;
+        }
         
         @media (max-width: 768px) {
             .categories-container { grid-template-columns: 1fr; }
@@ -177,62 +185,524 @@
             'resumen_ejecutivo': { id: 'resumen_ejecutivo', badge: 'La Tesis', title: 'Resumen Ejecutivo (Abstract)', description: 'La investigación completa en 300 palabras.', category: 'journey' },
             'el_problema': { id: 'el_problema', badge: 'El Problema', title: 'La Llave Rota', description: 'La analogía que da inicio a la investigación.', category: 'journey' },
             'la_pregunta': { id: 'la_pregunta', badge: 'La Pregunta', title: 'Hipótesis y Objetivos', description: 'El norte que guió nuestra exploración.', category: 'journey' },
+            'la_intervencion': { id: 'la_intervencion', badge: 'La Intervención', title: 'La Solución Propuesta', description: 'La unidad didáctica diseñada para transformar la conciencia ecológica.', category: 'journey' },
             'los_resultados': { id: 'los_resultados', badge: 'Los Resultados', title: '¿Qué Encontramos?', description: 'Una síntesis del impacto cuantitativo.', category: 'journey' },
             'la_discusion': { id: 'la_discusion', badge: 'La Discusión', title: '¿Qué Significa Todo?', description: 'Interpretando los hallazgos clave.', category: 'journey' },
             
             // MARCO TEÓRICO
+            'intro_marco_teorico': { id: 'intro_marco_teorico', badge: 'Prólogo', title: 'Introducción al Marco Teórico', description: 'Por qué una investigación sólida se apoya en "hombros de gigantes".', category: 'theory' },
             'estado_del_arte': { id: 'estado_del_arte', badge: 'El Contexto', title: 'Diálogo con Otros Autores', description: 'Nuestra contribución a la conversación científica.', category: 'theory' },
             'vygotsky': { id: 'vygotsky', badge: 'Constructivismo', title: 'Vygotsky', description: 'El aprendizaje es un proceso social.', category: 'theory' },
             'kolb': { id: 'kolb', badge: 'Aprendizaje Experiencial', title: 'Kolb', description: 'Se aprende a través de la experiencia.', category: 'theory' },
+            'mezirow': { id: 'mezirow', badge: 'Aprendizaje Transformativo', title: 'Mezirow', description: 'El aprendizaje que cambia nuestra forma de ver el mundo.', category: 'theory' },
             'eps': { id: 'eps', badge: 'Horizonte Ético', title: 'Educación para la Sostenibilidad (EpS)', description: 'Educar para transformar el entorno.', category: 'theory' },
             'modelo_tridimensional': { id: 'modelo_tridimensional', badge: 'Modelo Fundacional', title: 'Modelo Tridimensional (Hungerford y Volk)', description: 'El modelo clásico que define los componentes de la conducta ambiental.', category: 'theory' },
             'pirchio_experiencia_directa': { id: 'pirchio_experiencia_directa', badge: 'Evidencia Empírica', title: 'El Poder de la Experiencia Directa (Pirchio et al.)', description: 'La evidencia científica que respalda la salida de campo como catalizador afectivo.', category: 'theory' },
             'munoz_barreras_estructurales': { id: 'munoz_barreras_estructurales', badge: 'Enfoque Sistémico', title: 'Las Barreras Invisibles (Muñoz Montilla)', description: 'La tesis de que la conducta no ocurre en el vacío, sino que depende del contexto institucional.', category: 'theory' },
+            'conclusion_marco_teorico': { id: 'conclusion_marco_teorico', badge: 'Epílogo', title: 'Conclusión del Marco Teórico', description: 'La sinergia de las teorías que dieron forma a la intervención.', category: 'theory' },
 
             // LA INTERVENCIÓN EN ACCIÓN
+            'intro_intervencion': { id: 'intro_intervencion', badge: 'Prólogo', title: 'Introducción a la Intervención', description: 'Cómo la teoría se convirtió en práctica dentro del aula.', category: 'intervention' },
             'intervencion_semana2': { id: 'intervencion_semana2', badge: 'Semana 2', title: 'La Salida de Campo', description: 'La "Experiencia Concreta" que ancló el afecto.', category: 'intervention' },
             'intervencion_semana4': { id: 'intervencion_semana4', badge: 'Semana 4', title: 'El Debate Energético', description: 'Co-construyendo conocimiento a través del diálogo.', category: 'intervention' },
             'intervencion_semana6': { id: 'intervencion_semana6', badge: 'Semana 6', title: 'El Reto Domiciliario', description: 'Llevando el aprendizaje a la acción en casa.', category: 'intervention' },
+            'conclusion_intervencion': { id: 'conclusion_intervencion', badge: 'Epílogo', title: 'Conclusión de la Intervención', description: 'La síntesis del viaje pedagógico y sus componentes.', category: 'intervention' },
 
             // HALLAZGOS CLAVE
+            'intro_hallazgos': { id: 'intro_hallazgos', badge: 'Prólogo', title: 'Introducción a los Hallazgos', description: 'La "sala de evidencias" donde los datos cuentan su historia.', category: 'findings' },
             'epa': { id: 'epa', badge: 'Hallazgo Afectivo', title: 'Efecto de Preservación Actitudinal (EPA)', description: 'La intervención como "escudo" contra la apatía.', category: 'findings' },
             'brecha': { id: 'brecha', badge: 'Hallazgo Conductual', title: 'La Brecha Actitud-Conducta', description: 'Por qué sentir no siempre se traduce en hacer.', category: 'findings' },
             'falla_psicometrica': { id: 'falla_psicometrica', badge: 'Hallazgo Metodológico', title: 'El Desafío de Medir el Saber', description: 'Un resultado no concluyente que enseña una lección.', category: 'findings' },
+            'conclusion_hallazgos': { id: 'conclusion_hallazgos', badge: 'Epílogo', title: 'Conclusión de los Hallazgos', description: 'La historia completa que cuentan los datos.', category: 'findings' }, 
 
-            // IMPLICACIONES Y PROYECCIONES
+            // IMPLICACIONES Y PROYECCIONES            
+            'intro_implicaciones': { id: 'intro_implicaciones', badge: 'Prólogo', title: 'Introducción a las Implicaciones', description: 'Del hallazgo a la acción: el mapa y la brújula para el futuro.', category: 'implications' },
             'para_docentes': { id: 'para_docentes', badge: 'Para Docentes', title: '¿Qué Puedo Hacer Mañana?', description: 'Recomendaciones prácticas para el aula.', category: 'implications' },
             'para_instituciones': { id: 'para_instituciones', badge: 'Para Instituciones', title: 'La Hoja de Ruta', description: 'Pasando del proyecto a la cultura escolar.', category: 'implications' },
             'proyecciones_futuras': { id: 'proyecciones_futuras', badge: 'Para la Investigación', title: '¿Cuáles son los Siguientes Pasos?', description: 'Nuevas avenidas para explorar.', category: 'implications' },
+            'conclusion_implicaciones': { id: 'conclusion_implicaciones', badge: 'Epílogo', title: 'Conclusión de las Implicaciones', description: 'La necesidad de una acción coordinada en múltiples niveles.', category: 'implications' },
 
             // CONCEPTOS FUNDAMENTALES
+            'intro_conceptos': { id: 'intro_conceptos', badge: 'Prólogo', title: 'Introducción a los Conceptos Fundamentales', description: 'Una revisión de los dos "cimientos" sobre los que se construyó la tesis.', category: 'concepts' },
             'conciencia_ecologica': { id: 'conciencia_ecologica', badge: 'Variable Clave', title: 'Conciencia Ecológica (3D)', description: 'El constructo central: Saber, Sentir y Hacer.', category: 'concepts' },
             'integracion_curricular': { id: 'integracion_curricular', badge: 'Estrategia Clave', title: 'Integración Curricular', description: 'La intervención pedagógica que aplicamos.', category: 'concepts' },
+            'conclusion_final': { id: 'conclusion_final', badge: 'Epílogo', title: 'Conclusión Final', description: 'El cierre del viaje y la invitación a profundizar.', category: 'concepts' },
         };
 
         const conceptContent = {
-            'resumen_ejecutivo': `<h3>Resumen de la Tesis (Abstract)</h3><div class="application-context"><p>La actual crisis socioecológica exige fortalecer la conciencia ecológica, constructo que articula conocimiento, actitudes y conductas. En respuesta a la fragmentación de la educación ambiental en contextos semirrurales de Colombia, este estudio analizó el impacto de la integración curricular de contenidos ambientales.</p><p>Se empleó un diseño cuasiexperimental pretest-postest con una muestra de 89 estudiantes de octavo grado, distribuidos en un grupo experimental (n=63) y uno de control (n=26). La intervención consistió en secuencias didácticas activas. Se midió la conciencia ecológica con una Escala de Conciencia Ambiental (ECA) adaptada, y los datos se analizaron con pruebas no paramétricas y tamaños del efecto (r).</p><p>Los resultados revelaron un impacto significativo. En la medición postest, el grupo experimental superó estadísticamente al control en las dimensiones afectiva (U=339.5, p < .001, r = 0.59) y conductual (U=598.0, p = .046, r = 0.27). La mejora en la dimensión cognitiva se considera metodológicamente no concluyente por la baja fiabilidad de la subescala. El grupo experimental mostró gran mejora cognitiva, moderada conductual y mantenimiento afectivo; impacto afectivo destacó entre grupos postest.</p><p>Se concluye que la integración curricular, mediante metodologías activas, es una estrategia eficaz para consolidar actitudes y fomentar prácticas sostenibles. La falla psicométrica en la medición del conocimiento subraya la necesidad crítica de desarrollar instrumentos más robustos. Asimismo, la consolidación de la conducta demanda un apoyo estructural e institucional que trascienda el aula.</p></div>`,
-            'estado_del_arte': `<h3>La Conversación Académica</h3><div class="application-context"><p>La investigación en Educación Ambiental (EA) es un campo dinámico. Existe un consenso creciente sobre la necesidad de superar la mera transmisión de información para adoptar enfoques más participativos y contextualizados, como señalan autores como <strong>Alfonso Cortés (2024)</strong> y <strong>Cabanillas Urbina (2024)</strong>.</p></div><h3>Los Hallazgos de Otros Autores</h3><div class="application-context"><p>Nuestra investigación dialoga con estudios que demuestran la eficacia de:</p><ul><li><strong>Experiencias directas:</strong> En línea con <strong><a href="#" onclick="event.preventDefault(); openConceptModal('pirchio_experiencia_directa')">Pirchio et al. (2021)</a></strong>, nuestro estudio confirma que el contacto con la naturaleza (la salida de campo) es un potente catalizador del afecto.</li><li><strong>Enfoques sistémicos:</strong> La advertencia de <strong><a href="#" onclick="event.preventDefault(); openConceptModal('munoz_barreras_estructurales')">Muñoz Montilla (2023)</a></strong> sobre las barreras estructurales resuena con nuestros hallazgos sobre la <a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">brecha actitud-conducta</a>.</li><li><strong>Modelos teóricos:</strong> Reforzamos el <strong><a href="#" onclick="event.preventDefault(); openConceptModal('modelo_tridimensional')">modelo de Hungerford y Volk (1990)</a></strong>, que postula que la conducta requiere conocimiento, actitud y, crucialmente, apoyo externo.</li></ul></div><h3>El Vacío que Llena esta Tesis</h3><div class="application-context"><p>A pesar de los avances, la literatura muestra tres vacíos importantes que este estudio aborda directamente:</p><ol><li>La escasez de estudios <strong>cuasiexperimentales</strong> en contextos escolares reales, especialmente en zonas <strong>semirrurales</strong> de Colombia.</li><li>La falta de análisis que midan simultáneamente las tres dimensiones (cognitiva, afectiva, conductual) para obtener una visión integral.</li><li>La necesidad crítica de <strong>validar y reflexionar sobre los instrumentos</strong> de medición, un problema que nuestro <a href="#" onclick="event.preventDefault(); openConceptModal('falla_psicometrica')">hallazgo metodológico</a> pone de relieve.</li></ol></div>`,
-            'el_problema': `<h3>La Analogía de la "Llave Rota"</h3><div class="application-context"><p>Nuestra investigación parte de una imagen simple: una llave de agua goteando en una escuela. Este goteo simboliza la <strong>indiferencia normalizada</strong> frente a un problema ambiental visible y conocido. El problema no es técnico ("ingeniería del grifo"), sino cultural. La solución no es solo arreglar la llave, sino cultivar una <strong>"pedagogía de la mirada"</strong> que nos enseñe a ver el goteo como una interpelación a nuestra responsabilidad.</p></div>`,
-            'la_pregunta': `<h3>La Pregunta Central</h3><div class="application-context"><p>¿Qué efecto ejerce la integración de contenidos de educación ambiental en el currículo escolar sobre las dimensiones <strong>cognitiva, afectiva y conductual</strong> de la conciencia ecológica en estudiantes de octavo grado?</p></div><h3>Los Objetivos de la Investigación</h3><div class="application-context"><h4>Objetivo General</h4><p>Analizar el impacto de la integración curricular de contenidos ambientales sobre la conciencia ecológica de los estudiantes de octavo grado, mediante una intervención pedagógica específica.</p><h4>Objetivos Específicos (en 3 Momentos)</h4><p><strong>Momento 1: Diagnóstico (Pre-intervención)</strong></p><ul><li><strong>1. Diagnosticar</strong> el nivel inicial de conciencia ecológica para establecer una línea base.</li></ul><p><strong>Momento 2: Intervención y Medición</strong></p><ul><li><strong>2. Diseñar e Implementar</strong> una intervención pedagógica con integración curricular en el Grupo Experimental.</li><li><strong>3. Medir</strong> la conciencia ecológica después de la intervención en ambos grupos.</li></ul><p><strong>Momento 3: Análisis e Interpretación</strong></p><ul><li><strong>4. Comparar</strong> los cambios entre los grupos para evaluar el efecto de la intervención.</li><li><strong>5. Interpretar</strong> la influencia de los componentes pedagógicos en las transformaciones observadas.</li></ul></div><h3>La Hipótesis</h3><div class="application-context"><p>Nuestra hipótesis (H₁) fue que la intervención tendría un <strong>efecto significativo y positivo</strong> en las tres dimensiones de la conciencia ecológica.</p></div>`,
-            'los_resultados': `<h3>Resumen del Veredicto</h3><div class="application-context"><p>Los datos confirmaron nuestra hipótesis principal (H₁). La intervención tuvo un impacto global positivo. Específicamente, encontramos:</p><ul><li>Un <strong>efecto grande</strong> en la dimensión <strong>Afectiva</strong> (r = .59), analizado con la <a href="https://gconchae.github.io/herramientas-estadisticas-tesis/?tool=mann-whitney" target="_blank">Prueba U de Mann-Whitney</a>.</li><li>Un efecto <strong>moderado</strong> en la dimensión <strong>Cognitiva</strong> (r = .40), aunque este resultado debe tomarse con cautela.</li><li>Un efecto <strong>pequeño-moderado</strong> en la dimensión <strong>Conductual</strong> (r = .27).</li></ul><p>La siguiente gráfica (Figura 10 de la tesis) resume la magnitud de estos efectos:</p><img src="images/figura10.png" alt="Gráfico de tamaño del efecto por dimensión" class="thesis-image"></div>`,
-            'la_discusion': `<h3>Interpretando los Números</h3><div class="application-context"><p>La discusión se centra en tres grandes ideas:</p><ol><li>El <strong>Efecto de Preservación Actitudinal (EPA)</strong> explica el gran impacto en la dimensión afectiva.</li><li>La persistencia de la <strong>Brecha Actitud-Conducta</strong> explica por qué la mejora en las prácticas fue más modesta.</li><li>El <strong>Hallazgo Metodológico Central</strong> (la baja fiabilidad de la subescala cognitiva) nos enseña sobre la dificultad de medir el conocimiento ambiental.</li></ol><p>La conclusión es que la experiencia (como la salida de campo) sostiene el afecto, y el afecto es la base que habilita la conducta, pero esta última necesita de apoyos institucionales para consolidarse.</p></div><img src="images/discusion.png" alt="Diagrama que muestra la cadena esperada de la pedagogía al impacto: Experiencia, Afecto, Conducta" class="thesis-image">`,
-            'vygotsky': `<h3>La Idea Central</h3><div class="application-context"><p>Lev Vygotsky nos enseñó que no aprendemos solos, sino a través de la interacción con otros. El aprendizaje es un proceso social mediado por el lenguaje y la cultura. La "Zona de Desarrollo Próximo" (ZDP) es el espacio mágico donde un estudiante puede lograr algo con ayuda que aún no puede hacer solo.</p></div><h3>Aplicación en el Estudio</h3><div class="application-context"><p>Diseñamos las actividades (debates, trabajos en grupo) como <strong>"andamiajes"</strong> para mover a los estudiantes a través de su ZDP. El diálogo y la colaboración no fueron un extra, sino el motor principal para co-construir un entendimiento más profundo sobre los problemas ambientales.</p></div><img src="images/vygotsky.png" alt="Diagrama de la Zona de Desarrollo Próximo de Vygotsky" class="thesis-image">`,
-            'kolb': `<h3>La Idea Central</h3><div class="application-context"><p>David Kolb propuso que el aprendizaje auténtico es un ciclo de cuatro pasos: <strong>Experiencia → Reflexión → Conceptualización → Acción</strong>. Sostiene que el conocimiento se crea a través de la transformación de la experiencia. No basta con leer sobre algo; hay que vivirlo, pensar en ello, entenderlo y luego aplicarlo.</p></div><h3>Aplicación en el Estudio</h3><div class="application-context"><p>Nuestra intervención de 8 semanas fue diseñada siguiendo exactamente este ciclo. La <strong>salida de campo al río Guabas</strong> fue la "Experiencia" que ancló el "Afecto". Los debates y bitácoras fueron la "Reflexión". Las sesiones teóricas fueron la "Conceptualización", y los proyectos finales fueron la "Acción".</p></div><img src="images/kolb.png" alt="Ciclo de Aprendizaje Experiencial de Kolb con ancla afectiva" class="thesis-image">`,
-            'eps': `<h3>La Idea Central</h3><div class="application-context"><p>La Educación para la Sostenibilidad (EpS), impulsada por teóricos como Stephen Sterling y Daniella Tilbury, va más allá de la ecología. Es un enfoque que busca un cambio profundo en los valores y las prácticas. Su tesis central es que la conducta sostenible solo perdura cuando existe <strong>coherencia institucional</strong>: la escuela debe practicar lo que predica.</p></div><h3>Aplicación en el Estudio</h3><div class="application-context"><p>La EpS fue nuestro "horizonte ético". Nos recordó que para cerrar la <a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">brecha actitud-conducta</a>, no basta con la pedagogía en el aula. Se necesitan <strong>apoyos institucionales</strong> (normas, roles, oportunidades, recursos) que eliminen las barreras y hagan de la sostenibilidad un hábito, no solo un proyecto.</p></div><img src="images/eps.png" alt="Diagrama sobre la coherencia institucional en la Educación para la Sostenibilidad" class="thesis-image">`,
-            'modelo_tridimensional': `<h3>El Modelo Clásico de la Conducta Ambiental Responsable</h3><div class="application-context"><p>Propuesto por Hungerford y Volk en 1990, este es uno de los modelos más influyentes para entender qué se necesita para que una persona desarrolle una conducta proambiental sostenida. Argumenta que la acción no surge espontáneamente, sino que es el resultado de una progresión a través de diferentes tipos de variables.</p></div><h3>Los Componentes del Modelo</h3><div class="application-context"><p>El modelo se puede entender como una escalera de tres grandes peldaños que llevan a la acción:</p><ol><li><strong>Variables de Entrada (El "Saber" Inicial):</strong> Son la base. Incluyen la sensibilidad y el afecto temprano hacia el ambiente, y un conocimiento básico de los problemas ecológicos.</li><li><strong>Variables de Propiedad (El "Sentir" y la Conexión Personal):</strong> Este es el peldaño crucial donde el problema se vuelve personal. Incluye un conocimiento profundo del problema, la creencia de que uno puede hacer una diferencia (locus de control) y un fuerte sentido de responsabilidad personal.</li><li><strong>Variables de Empoderamiento (El "Saber Hacer"):</strong> Son las herramientas para la acción. Incluyen el conocimiento de las estrategias de acción y las habilidades para aplicarlas eficazmente.</li></ol><p>Solo cuando una persona ha avanzado a través de estos niveles, es más probable que manifieste una <strong>Conducta Ambiental Responsable</strong> de manera consistente.</p></div><h3>Aplicación en Nuestro Estudio</h3><div class="application-context"><p>El constructo de <strong>"Conciencia Ecológica (Saber, Sentir y Hacer)"</strong> utilizado en esta tesis es una simplificación y operacionalización directa de este modelo. Nuestra intervención pedagógica fue diseñada para fortalecer variables en los tres niveles, especialmente en el "Sentir" y el "Hacer".</p></div>`,
-            'pirchio_experiencia_directa': `<h3>La Revisión Sistemática Clave</h3><div class="application-context"><p>En 2021, Pirchio y su equipo publicaron una <strong>revisión sistemática</strong>, uno de los tipos de evidencia científica de mayor peso. Analizaron decenas de estudios para responder una pregunta clave: ¿El contacto directo con la naturaleza realmente mejora el conocimiento, las actitudes y las conductas ambientales de los niños y jóvenes?</p></div><h3>El Hallazgo Principal</h3><div class="application-context"><p>La conclusión de su revisión fue contundente: la experiencia directa con la naturaleza tiene un impacto consistentemente positivo, pero su efecto más fuerte y claro se observa en la <strong>dimensión afectiva</strong>. Es decir, el contacto con el entorno natural es un catalizador especialmente potente para mejorar las <strong>actitudes</strong> y la <strong>conexión emocional</strong> con el medio ambiente.</p></div><h3>Aplicación en Nuestro Estudio</h3><div class="application-context"><p>Este hallazgo fue el fundamento científico para diseñar la <strong><a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana2')">Salida de Campo</a></strong> como la "Experiencia Concreta" inicial en nuestro modelo. Sabíamos, gracias a esta evidencia, que esa actividad sería crucial para anclar el componente afectivo. El gran impacto observado en las actitudes y el <strong><a href="#" onclick="event.preventDefault(); openConceptModal('epa')">Efecto de Preservación Actitudinal (EPA)</a></strong> son una confirmación práctica y directa de las conclusiones de Pirchio y su equipo.</p></div>`,
-            'munoz_barreras_estructurales': `<h3>La Tesis Principal: Ir más allá del Individuo</h3><div class="application-context"><p>La advertencia de Muñoz Montilla (2023) es un llamado a superar la visión individualista de la educación ambiental. Su tesis central es que la conducta proambiental no depende únicamente de la motivación o el conocimiento de una persona, sino de las <strong>condiciones que el sistema (la escuela, la comunidad) habilita o restringe</strong>.</p></div><h3>¿Qué son las Barreras Estructurales?</h3><div class="application-context"><p>Son los "muros invisibles" que impiden que una actitud positiva se traduzca en una acción concreta. En el contexto escolar, estas barreras pueden ser:</p><ul><li><strong>Falta de infraestructura:</strong> No hay suficientes canecas de reciclaje.</li><li><strong>Falta de normas claras:</strong> No existe una política escolar sobre el ahorro de energía.</li><li><strong>Falta de coherencia institucional:</strong> El docente promueve el no uso de plástico, pero la cafetería vende todo en desechables.</li><li><strong>Falta de oportunidades y refuerzo:</strong> No se crean rutinas o roles (eco-monitores) que hagan de la sostenibilidad una práctica visible y valorada.</li></ul></div><h3>Impacto y Aplicación en la Tesis</h3><div class="application-context"><p>Este enfoque es la explicación teórica más directa para nuestro hallazgo de la <strong><a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">Brecha Actitud-Conducta</a></strong>. La intervención fue exitosa en fortalecer el "sentir" de los estudiantes, pero ellos chocaron contra estas barreras estructurales al intentar llevarlo al "hacer".</p><p>La perspectiva de Muñoz Montilla refuerza la importancia de la <strong><a href="#" onclick="event.preventDefault(); openConceptModal('eps')">Educación para la Sostenibilidad (EpS)</a></strong> y fundamenta directamente nuestras recomendaciones para las <strong><a href="#" onclick="event.preventDefault(); openConceptModal('para_instituciones')">instituciones</a></strong>: el cambio real requiere transformar no solo al estudiante, sino todo el ecosistema escolar.</p></div>`,
-            'intervencion_semana2': `<h3>El Corazón de la Experiencia</h3><div class="application-context"><p>La visita al ecosistema del río Guabas fue la <strong>"Experiencia Concreta"</strong> del modelo de <a href="#" onclick="event.preventDefault(); openConceptModal('kolb')">Kolb</a>. Aquí los estudiantes no leyeron sobre el problema, lo vieron y sintieron. Esta vivencia fue el catalizador que ancló el compromiso afectivo y dio contexto a todo el aprendizaje posterior.</p></div>`,
-            'intervencion_semana4': `<h3>Co-construyendo el Conocimiento</h3><div class="application-context"><p>El debate sobre energías limpias fue un ejercicio práctico del constructivismo de <a href="#" onclick="event.preventDefault(); openConceptModal('vygotsky')">Vygotsky</a>. Al defender posturas y escuchar a sus pares, los estudiantes usaron el lenguaje para negociar significados y construir un conocimiento más complejo, moviéndose a través de su <strong>"Zona de Desarrollo Próximo"</strong>.</p></div>`,
+            'resumen_ejecutivo': `<h3 class="modal-subtitle">La Investigación en 300 Palabras</h3><div class="application-context"><p>La actual crisis socioecológica exige fortalecer la conciencia ecológica, constructo que articula conocimiento, actitudes y conductas. En respuesta a la fragmentación de la educación ambiental en contextos semirrurales de Colombia, este estudio analizó el impacto de la integración curricular de contenidos ambientales.</p><p>Se empleó un diseño cuasiexperimental pretest-postest con una muestra de 89 estudiantes de octavo grado, distribuidos en un grupo experimental (n=63) y uno de control (n=26). La intervención consistió en secuencias didácticas activas. Se midió la conciencia ecológica con una Escala de Conciencia Ambiental (ECA) adaptada, y los datos se analizaron con pruebas no paramétricas y tamaños del efecto (r).</p><p>Los resultados revelaron un impacto significativo. En la medición postest, el grupo experimental superó estadísticamente al control en las dimensiones afectiva (U=339.5, p < .001, r = 0.59) y conductual (U=598.0, p = .046, r = 0.27). La mejora en la dimensión cognitiva se considera metodológicamente no concluyente por la baja fiabilidad de la subescala. El grupo experimental mostró gran mejora cognitiva, moderada conductual y mantenimiento afectivo; impacto afectivo destacó entre grupos postest.</p><p>Se concluye que la integración curricular, mediante metodologías activas, es una estrategia eficaz para consolidar actitudes y fomentar prácticas sostenibles. La falla psicométrica en la medición del conocimiento subraya la necesidad crítica de desarrollar instrumentos más robustos. Asimismo, la consolidación de la conducta demanda un apoyo estructural e institucional que trascienda el aula.</p></div>`,
+            'el_problema': `<h3 class="modal-subtitle">El Problema de la Indiferencia Normalizada</h3>
+                <div class="application-context">
+                    <p>Nuestra investigación parte de una imagen simple: una llave de agua goteando en una escuela. Este goteo simboliza la <strong>indiferencia normalizada</strong> frente a un problema ambiental visible y conocido.</p>
+                    <p>El problema no es técnico ("ingeniería del grifo"), sino cultural. La solución no es solo arreglar la llave, sino cultivar una <strong>"pedagogía de la mirada"</strong> que nos enseñe a ver el goteo como una interpelación a nuestra responsabilidad.</p></div>`,
+            'la_pregunta': `
+                <h3 class="modal-subtitle">La Pregunta Central de la Investigación</h3>
+                <div class="application-context">
+                    <p>¿Qué efecto ejerce la integración de contenidos de educación ambiental en el currículo escolar sobre las dimensiones <strong>cognitiva, afectiva y conductual</strong> de la conciencia ecológica en estudiantes de octavo grado?</p>
+                </div>
+
+                <h3 class="modal-subtitle">Los Objetivos: La Hoja de Ruta en Tres Momentos</h3>
+                <div class="application-context">
+                    <h4>Objetivo General</h4>
+                    <p>Analizar el impacto de la integración curricular de contenidos ambientales sobre la conciencia ecológica de los estudiantes.</p>
+                    
+                    <h4 style="margin-top:20px;">Objetivos Específicos</h4>
+                    <p><strong>Momento 1: Diagnóstico (Pre-intervención)</strong></p>
+                    <ol>
+                        <li><strong>Diagnosticar</strong> el nivel inicial de conciencia ecológica para establecer una línea base.</li>
+                    </ol>
+                    <p style="margin-top:15px;"><strong>Momento 2: Intervención y Medición</strong></p>
+                    <ol start="2">
+                        <li><strong>Diseñar e Implementar</strong> una intervención pedagógica en el Grupo Experimental.</li>
+                        <li><strong>Medir</strong> la conciencia ecológica después de la intervención en ambos grupos.</li>
+                    </ol>
+                    <p style="margin-top:15px;"><strong>Momento 3: Análisis e Interpretación</strong></p>
+                    <ol start="4">
+                        <li><strong>Comparar</strong> los cambios entre los grupos para evaluar el efecto de la intervención.</li>
+                        <li><strong>Interpretar</strong> la influencia de los componentes pedagógicos en las transformaciones observadas.</li>
+                    </ol>
+                </div>
+
+                <h3 class="modal-subtitle">La Hipótesis Central del Estudio</h3>
+                <div class="application-context">
+                    <p>Nuestra hipótesis principal (H₁) postuló que la intervención tendría un <strong>efecto significativo y positivo</strong>. Este planteamiento sigue la lógica formal del <a href="#" onclick="event.preventDefault(); openToolModalInOtherApp('stats', 'hipotesis')">duelo de hipótesis (H₀ vs. H₁)</a>, donde buscamos evidencia para rechazar la "presunción de no efecto" (H₀).</p>
+                </div>`,
+
+            'la_intervencion': `
+                <h3 class="modal-subtitle">La Filosofía: Vivir, Problematizar, Actuar</h3>
+                <div class="application-context">
+                    <p>La intervención no fue una clase tradicional. Se diseñó como una unidad didáctica de 8 semanas integrada en Ciencias Naturales, con un principio rector claro: <strong>vivir, problematizar, conceptualizar y actuar</strong> sobre la realidad socioecológica local.</p>
+                </div>
+
+                <h3 class="modal-subtitle">Los Pilares Pedagógicos</h3>
+                <div class="interpretation-guide">
+                    <p>La estructura de la unidad se sostuvo sobre los dos pilares teóricos principales de la tesis:</p>
+                    <ul>
+                        <li><strong>El Ciclo de <a href="#" onclick="event.preventDefault(); openConceptModal('kolb')">Kolb</a>:</strong> Las 8 semanas siguieron el ciclo de aprendizaje experiencial (Experiencia → Reflexión → Conceptualización → Acción).</li>
+                        <li><strong>El Andamiaje de <a href="#" onclick="event.preventDefault(); openConceptModal('vygotsky')">Vygotsky</a>:</strong> Actividades como los debates y proyectos en grupo funcionaron como "andamiajes" para la co-construcción del conocimiento.</li>
+                    </ul>
+                </div>
+                        
+                <h3 class="modal-subtitle">Actividades Clave</h3>
+                <div class="application-context">
+                    <p>Algunas de las experiencias más significativas de la intervención incluyeron:</p>
+                    <ul>
+                        <li>La <strong><a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana2')">Salida de Campo</a></strong> al río Guabas, que actuó como el ancla afectiva.</li>
+                        <li>El <strong><a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana4')">Debate Energético</a></strong>, que fomentó el pensamiento crítico.</li>
+                        <li>El <strong><a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana6')">Reto Domiciliario</a></strong>, que buscó llevar el aprendizaje a la acción.</li>
+                    </ul>
+                </div>`,
+
+            'los_resultados': `
+                <h3 class="modal-subtitle">El Veredicto Cuantitativo</h3>
+                <div class="application-context">
+                    <p>Los datos confirmaron nuestra hipótesis principal (H₁). La intervención tuvo un impacto global positivo. Específicamente, encontramos:</p>
+                    <ul>
+                        <li>Un <strong>efecto grande</strong> en la dimensión <strong>Afectiva</strong> (r = .59), analizado con la <a href="#" onclick="event.preventDefault(); openToolModalInOtherApp('stats', 'mann-whitney')">Prueba U de Mann-Whitney</a>.</li>
+                        <li>Un efecto <strong>moderado</strong> en la dimensión <strong>Cognitiva</strong> (r = .40), aunque este resultado debe tomarse con cautela debido a la <a href="#" onclick="event.preventDefault(); openConceptModal('falla_psicometrica')">baja fiabilidad</a> del instrumento.</li>
+                        <li>Un efecto <strong>pequeño-moderado</strong> en la dimensión <strong>Conductual</strong> (r = .27).</li>
+                    </ul>
+                    <p>La siguiente gráfica (Figura 10 de la tesis) resume la magnitud de estos efectos en la comparación intergrupo:</p>
+                    <img src="https://gconchae.github.io/conceptos-y-hallazgos/images/figura10.png" alt="Gráfico de tamaño del efecto por dimensión" class="thesis-image">
+                </div>`,
+            
+            'la_discusion': `
+                <h3 class="modal-subtitle">La Narrativa Detrás de los Datos</h3>
+                <div class="application-context">
+                    <p>La discusión de los resultados se centra en tres grandes ideas que dan sentido a los números:</p>
+                    <ol>
+                        <li>El <strong><a href="#" onclick="event.preventDefault(); openConceptModal('epa')">Efecto de Preservación Actitudinal (EPA)</a></strong> explica el gran impacto en la dimensión afectiva.</li>
+                        <li>La persistencia de la <strong><a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">Brecha Actitud-Conducta</a></strong> explica por qué la mejora en las prácticas fue más modesta.</li>
+                        <li>El <strong><a href="#" onclick="event.preventDefault(); openConceptModal('falla_psicometrica')">Hallazgo Metodológico Central</a></strong> nos enseña sobre la dificultad de medir el conocimiento ambiental.</li>
+                    </ol>
+                    <p>La conclusión es que la experiencia (como la <a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana2')">salida de campo</a>) sostiene el afecto, y el afecto es la base que habilita la conducta, pero esta última necesita de apoyos institucionales para consolidarse.</p>
+                </div>
+                <img src="https://gconchae.github.io/conceptos-y-hallazgos/images/discusion.png" alt="Diagrama que muestra la cadena esperada de la pedagogía al impacto: Experiencia, Afecto, Conducta" class="thesis-image">`,
+            
+                'intro_marco_teorico': `
+                    <h3 class="modal-subtitle">Construyendo sobre Hombros de Gigantes</h3>
+                    <div class="application-context">
+                        <p>Una investigación rigurosa nunca parte de cero. Se apoya en el conocimiento acumulado y en las teorías desarrolladas por los grandes pensadores que nos precedieron. Esta sección explora los "hombros de gigantes" sobre los cuales se construyó esta tesis.</p>
+                    </div>
+
+                    <h3 class="modal-subtitle">Los Tres Pilares Teóricos</h3>
+                    <div class="interpretation-guide">
+                        <p>El andamiaje conceptual de nuestro estudio se sostiene sobre tres pilares fundamentales que, en conjunto, explican tanto el "cómo" del aprendizaje como el "para qué" de la intervención:</p>
+                        <ol>
+                            <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('vygotsky')">Constructivismo Social (Vygotsky)</a>:</strong> La teoría que nos dice que aprendemos en colaboración con otros.</li>
+                            <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('kolb')">Aprendizaje Experiencial (Kolb)</a>:</strong> El modelo que nos muestra que el conocimiento se forja a través de la experiencia.</li>
+                            <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('eps')">Educación para la Sostenibilidad (EpS)</a>:</strong> El horizonte ético que le da un propósito transformador a nuestra pedagogía.</li>
+                        </ol>
+                    </div>`,
+
+                'estado_del_arte': `
+                <h3 class="modal-subtitle">El Contexto de la Investigación</h3>
+                <div class="application-context">
+                    <p>La investigación en Educación Ambiental (EA) es un campo dinámico. Existe un consenso creciente sobre la necesidad de superar la mera transmisión de información para adoptar enfoques más participativos y contextualizados, como señalan autores como <strong>Alfonso Cortés (2024)</strong> y <strong>Cabanillas Urbina (2024)</strong>.</p>
+                </div>
+
+                <h3 class="modal-subtitle">Construyendo sobre Hombros de Gigantes</h3>
+                <div class="application-context">
+                    <p>Nuestra investigación dialoga con estudios que demuestran la eficacia de:</p>
+                    <ul>
+                        <li><strong>Experiencias directas:</strong> En línea con <strong><a href="#" onclick="event.preventDefault(); openConceptModal('pirchio_experiencia_directa')">Pirchio et al. (2021)</a></strong>, nuestro estudio confirma que el contacto con la naturaleza es un potente catalizador del afecto.</li>
+                        <li><strong>Enfoques sistémicos:</strong> La advertencia de <strong><a href="#" onclick="event.preventDefault(); openConceptModal('munoz_barreras_estructurales')">Muñoz Montilla (2023)</a></strong> sobre las barreras estructurales resuena con nuestros hallazgos sobre la <a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">brecha actitud-conducta</a>.</li>
+                        <li><strong>Modelos teóricos:</strong> Reforzamos el <strong><a href="#" onclick="event.preventDefault(); openConceptModal('modelo_tridimensional')">modelo de Hungerford y Volk (1990)</a></strong>, que postula que la conducta requiere conocimiento, actitud y apoyo externo.</li>
+                    </ul>
+                </div>
+
+                <h3 class="modal-subtitle">El Vacío que Llena esta Tesis</h3>
+                <div class="application-context">
+                    <p>A pesar de los avances, la literatura muestra tres vacíos importantes que este estudio aborda directamente:</p>
+                    <ol>
+                        <li>La escasez de estudios <strong>cuasiexperimentales</strong> en contextos escolares reales y <strong>semirrurales</strong>.</li>
+                        <li>La falta de análisis que midan simultáneamente las <strong>tres dimensiones</strong> (cognitiva, afectiva, conductual).</li>
+                        <li>La necesidad crítica de <strong>validar y reflexionar sobre los instrumentos</strong> de medición, un problema que nuestro <a href="#" onclick="event.preventDefault(); openConceptModal('falla_psicometrica')">hallazgo metodológico</a> pone de relieve.</li>
+                    </ol>
+                </div>`,
+
+            'vygotsky': `
+                <h3 class="modal-subtitle">El Aprendizaje como Co-construcción Social</h3>
+                <div class="application-context">
+                    <p>Lev Vygotsky nos enseñó que no aprendemos solos, sino a través de la interacción con otros. El aprendizaje es un proceso social mediado por el lenguaje y la cultura. La "Zona de Desarrollo Próximo" (ZDP) es el espacio donde un estudiante puede lograr algo con ayuda que aún no puede hacer solo.</p>
+                </div>
+
+                <h3 class="modal-subtitle">El Andamiaje a través de la ZDP</h3>
+                <div class="application-context">
+                    <p>Diseñamos las actividades (como el <a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana4')">debate energético</a>) como <strong>"andamiajes"</strong> para mover a los estudiantes a través de su ZDP. El diálogo y la colaboración no fueron un extra, sino el motor principal para co-construir un entendimiento más profundo sobre los problemas ambientales.</p>
+                </div>
+                <img src="https://gconchae.github.io/conceptos-y-hallazgos/images/vygotsky.png" alt="Diagrama de la Zona de Desarrollo Próximo de Vygotsky" class="thesis-image">`,
+                
+            'kolb': `
+                <h3 class="modal-subtitle">El Ciclo de la Experiencia al Conocimiento</h3>
+                <div class="application-context">
+                    <p>David Kolb propuso que el aprendizaje auténtico es un ciclo de cuatro pasos: <strong>Experiencia → Reflexión → Conceptualización → Acción</strong>. Sostiene que el conocimiento se crea a través de la transformación de la experiencia. No basta con leer sobre algo; hay que vivirlo, pensar en ello, entenderlo y luego aplicarlo.</p>
+                </div>
+
+                <h3 class="modal-subtitle">Diseñando el Viaje del Aprendizaje</h3>
+                <div class="application-context">
+                    <p>Nuestra intervención de 8 semanas fue diseñada siguiendo exactamente este ciclo. La <strong><a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana2')">salida de campo</a></strong> fue la "Experiencia" que ancló el "Afecto". Los debates y bitácoras fueron la "Reflexión". Las sesiones teóricas fueron la "Conceptualización", y los proyectos finales fueron la "Acción".</p>
+                </div>
+                <img src="https://gconchae.github.io/conceptos-y-hallazgos/images/kolb.png" alt="Ciclo de Aprendizaje Experiencial de Kolb con ancla afectiva" class="thesis-image">`,
+            
+            'mezirow': `
+                <h3 class="modal-subtitle">Cambiando las Gafas, no solo la Imagen</h3>
+                <div class="application-context">
+                    <p>La teoría del <strong>Aprendizaje Transformativo</strong> de Jack Mezirow (1991) argumenta que el aprendizaje más significativo no es el que simplemente añade nueva información (cambiar la imagen), sino el que cambia nuestros marcos de referencia y suposiciones (cambiar las gafas con las que vemos el mundo).</p>
+                    <p>Este proceso a menudo es desencadenado por una <strong>"experiencia desorientadora"</strong> que nos obliga a reflexionar críticamente sobre nuestras creencias.</p>
+                </div>
+
+                <h3 class="modal-subtitle">Aplicación: La Raíz del Efecto de Preservación Actitudinal</h3>
+                <div class="application-context">
+                    <p>La teoría de Mezirow ofrece una explicación profunda para nuestro hallazgo del <strong><a href="#" onclick="event.preventDefault(); openConceptModal('epa')">Efecto de Preservación Actitudinal (EPA)</a></strong>.</p>
+                    <p>La <strong><a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana2')">salida de campo</a></strong> al río Guabas no fue solo una "experiencia concreta" en el ciclo de <a href="#" onclick="event.preventDefault(); openConceptModal('kolb')">Kolb</a>; actuó como una experiencia transformadora que llevó a los estudiantes a:</p>
+                    <ul>
+                        <li><strong>Cuestionar suposiciones:</strong> Pasaron de un entendimiento abstracto del "medio ambiente" a una conexión personal con "nuestro río".</li>
+                        <li><strong>Adoptar una nueva perspectiva:</strong> Su rol cambió de observadores pasivos a cuidadores responsables.</li>
+                    </ul>
+                    <p>Esta transformación de su marco de referencia es lo que probablemente hizo que su compromiso afectivo fuera más profundo y resiliente, protegiéndolo del declive observado en el grupo de control.</p>
+                </div>`,
+            
+            'eps': `
+                <h3 class="modal-subtitle">Más Allá de la Ecología: Un Enfoque Sistémico</h3>
+                <div class="application-context">
+                    <p>La Educación para la Sostenibilidad (EpS) es un enfoque que busca un cambio profundo en los valores y las prácticas. Su tesis central es que la conducta sostenible solo perdura cuando existe <strong>coherencia institucional</strong>: la escuela debe practicar lo que predica, vinculando el saber, el ser y el actuar (Tilbury, 1995).</p>
+                </div>
+
+                <h3 class="modal-subtitle">De la Pedagogía a la Cultura Escolar</h3>
+                <div class="application-context">
+                    <p>La EpS fue nuestro "horizonte ético". Nos recordó que para cerrar la <a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">brecha actitud-conducta</a>, no basta con la pedagogía en el aula. Se necesitan <strong>apoyos institucionales</strong> que eliminen las barreras y hagan de la sostenibilidad un hábito, no solo un proyecto (Sterling, 2001).</p>
+                    <p>Este enfoque fundamenta directamente nuestras recomendaciones para las <strong><a href="#" onclick="event.preventDefault(); openConceptModal('para_instituciones')">instituciones</a></strong>: el cambio real requiere transformar no solo al estudiante, sino todo el ecosistema escolar.</p>
+                </div>
+                <img src="https://gconchae.github.io/conceptos-y-hallazgos/images/eps.png" alt="Diagrama sobre la coherencia institucional en la Educación para la Sostenibilidad" class="thesis-image">`,
+            
+            'modelo_tridimensional': `
+                <h3 class="modal-subtitle">El Modelo Clásico de la Conducta Ambiental Responsable</h3>
+                <div class="application-context">
+                    <p>Propuesto por <strong>Hungerford y Volk (1990)</strong>, este es uno de los modelos más influyentes para entender qué se necesita para que una persona desarrolle una conducta proambiental sostenida. Argumenta que la acción no surge espontáneamente, sino que es el resultado de una progresión a través de diferentes tipos de variables.</p>
+                </div>
+
+                <h3 class="modal-subtitle">La Escalera Hacia la Acción</h3>
+                <div class="application-context">
+                    <p>El modelo se puede entender como una escalera de tres grandes peldaños que llevan a la acción:</p>
+                    <ol>
+                        <li><strong>Variables de Entrada (El "Saber" Inicial):</strong> La base, que incluye la sensibilidad y el conocimiento básico de los problemas.</li>
+                        <li><strong>Variables de Propiedad (El "Sentir" y la Conexión Personal):</strong> El peldaño crucial donde el problema se vuelve personal, incluyendo un fuerte sentido de responsabilidad.</li>
+                        <li><strong>Variables de Empoderamiento (El "Saber Hacer"):</strong> Las herramientas para la acción, como el conocimiento de estrategias y habilidades.</li>
+                    </ol>
+                    <p>Solo cuando una persona ha avanzado a través de estos niveles, es más probable que manifieste una <strong>Conducta Ambiental Responsable</strong> de manera consistente.</p>
+                </div>
+
+                <h3 class="modal-subtitle">Operacionalizando el Modelo</h3>
+                <div class="application-context">
+                    <p>El constructo de <strong>"<a href="#" onclick="event.preventDefault(); openConceptModal('conciencia_ecologica')">Conciencia Ecológica (Saber, Sentir y Hacer)</a>"</strong> utilizado en esta tesis es una simplificación y aplicación directa de este modelo. Nuestra intervención pedagógica fue diseñada para fortalecer variables en los tres niveles.</p>
+                </div>`,
+
+            'pirchio_experiencia_directa': `
+                <h3 class="modal-subtitle">La Evidencia de Mayor Peso Científico</h3>
+                <div class="application-context">
+                    <p>En 2021, <strong>Pirchio y su equipo</strong> publicaron una <strong>revisión sistemática</strong>, uno de los tipos de evidencia científica de mayor peso. Analizaron decenas de estudios para responder una pregunta clave: ¿El contacto directo con la naturaleza realmente mejora la conciencia ecológica de los jóvenes?</p>
+                </div>
+
+                <h3 class="modal-subtitle">El Veredicto: El Afecto es la Clave</h3>
+                <div class="application-context">
+                    <p>La conclusión de su revisión fue contundente: la experiencia directa con la naturaleza tiene un impacto consistentemente positivo, pero su efecto más fuerte y claro se observa en la <strong>dimensión afectiva</strong>. Es decir, el contacto con el entorno natural es un catalizador especialmente potente para mejorar las <strong>actitudes</strong> y la <strong>conexión emocional</strong>.</p>
+                </div>
+
+                <h3 class="modal-subtitle">Del Laboratorio al Campo: Validando la Teoría</h3>
+                <div class="application-context">
+                    <p>Este hallazgo fue el fundamento científico para diseñar la <strong><a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana2')">Salida de Campo</a></strong> como la "Experiencia Concreta" inicial en nuestro modelo. Sabíamos, gracias a esta evidencia, que esa actividad sería crucial para anclar el componente afectivo.</p>
+                    <p>El gran impacto observado en las actitudes y el <strong><a href="#" onclick="event.preventDefault(); openConceptModal('epa')">Efecto de Preservación Actitudinal (EPA)</a></strong> son una confirmación práctica y directa de las conclusiones de Pirchio et al. (2021).</p>
+                </div>`,
+            
+            'munoz_barreras_estructurales': `
+                <h3 class="modal-subtitle">La Tesis Principal: Ir más allá del Individuo</h3>
+                <div class="application-context">
+                    <p>La advertencia de <strong>Muñoz Montilla (2023)</strong> es un llamado a superar la visión individualista de la educación ambiental. Su tesis central es que la conducta proambiental no depende únicamente de la motivación de una persona, sino de las <strong>condiciones que el sistema (la escuela, la comunidad) habilita o restringe</strong>.</p>
+                </div>
+
+                <h3 class="modal-subtitle">Los "Muros Invisibles" de la Conducta</h3>
+                <div class="application-context">
+                    <p>Las barreras estructurales son los "muros invisibles" que impiden que una actitud positiva se traduzca en una acción. En el contexto escolar, estas pueden ser:</p>
+                    <ul>
+                        <li><strong>Falta de infraestructura:</strong> No hay canecas de reciclaje.</li>
+                        <li><strong>Falta de normas claras:</strong> No hay una política escolar sobre ahorro de energía.</li>
+                        <li><strong>Falta de coherencia institucional:</strong> La cafetería vende todo en desechables.</li>
+                        <li><strong>Falta de oportunidades y refuerzo:</strong> No se crean rutinas que hagan de la sostenibilidad una práctica visible.</li>
+                    </ul>
+                </div>
+
+                <h3 class="modal-subtitle">La Explicación de Nuestra Brecha</h3>
+                <div class="application-context">
+                    <p>Este enfoque es la explicación teórica más directa para nuestro hallazgo de la <strong><a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">Brecha Actitud-Conducta</a></strong>. La intervención fue exitosa en fortalecer el "sentir", pero los estudiantes chocaron contra estas barreras al intentar llevarlo al "hacer".</p>
+                    <p>La perspectiva de Muñoz Montilla refuerza la importancia de la <strong><a href="#" onclick="event.preventDefault(); openConceptModal('eps')">Educación para la Sostenibilidad (EpS)</a></strong> y fundamenta nuestras recomendaciones para las <strong><a href="#" onclick="event.preventDefault(); openConceptModal('para_instituciones')">instituciones</a></strong>.</p>
+                </div>`,
+
+            'conclusion_marco_teorico': `
+                <h3 class="modal-subtitle">La Sinergia de las Teorías</h3>
+                <div class="application-context">
+                    <p>Los pilares teóricos de este estudio no actúan de forma aislada. Juntos, crean un modelo pedagógico coherente y robusto:</p>
+                    <ul>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('vygotsky')">Vygotsky</a></strong> nos da el <em>mecanismo social</em> (el aprendizaje colaborativo).</li>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('kolb')">Kolb</a></strong> nos da la <em>secuencia práctica</em> (el ciclo de la experiencia).</li>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('mezirow')">Mezirow</a></strong> nos da la <em>profundidad del cambio</em> (la transformación de perspectivas).</li>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('eps')">La EpS</a></strong> nos da el <em>propósito ético</em> (la acción sostenible).</li>
+                    </ul>
+                </div>
+                
+                <div class="cta-banner" style="margin-top: 30px; padding: 25px; border-radius: 10px; background: var(--intervention-color);">
+                    <h3 style="color:white; font-size:1.4rem;">A Continuación...</h3>
+                    <p style="color:white; opacity:0.9; font-size:1rem; margin-bottom:0;">Con este andamiaje teórico tan sólido, la siguiente pregunta es inevitable: ¿Cómo se tradujo toda esta teoría en actividades concretas y significativas para los estudiantes? La siguiente sección nos lleva al corazón de la práctica: <strong>La Intervención en Acción</strong>.</p>
+                </div>`,
+
+            'intro_intervencion': `
+                <h3 class="modal-subtitle">De la Teoría a la Práctica: La Receta Pedagógica</h3>
+                <div class="application-context">
+                    <p>Si el marco teórico nos dio los "principios culinarios", esta sección detalla la "receta" que se aplicó en el aula. Aquí es donde la teoría se transforma en una experiencia de aprendizaje tangible para los estudiantes.</p>
+                </div>
+
+                <h3 class="modal-subtitle">Tres Momentos Estelares</h3>
+                <div class="interpretation-guide">
+                    <p>La intervención fue una unidad didáctica de 8 semanas titulada "Nuestro ecosistema, nuestra responsabilidad". Aunque incluyó muchas actividades, esta sección se centra en tres "momentos estelares" que ilustran perfectamente la aplicación de nuestros pilares teóricos:</p>
+                    <ul>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana2')">La Salida de Campo</a>:</strong> La encarnación de la "Experiencia Concreta" de Kolb.</li>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana4')">El Debate Energético</a>:</strong> Un ejemplo práctico del "Andamiaje" de Vygotsky.</li>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('intervencion_semana6')">El Reto Domiciliario</a>:</strong> El intento de llevar el aprendizaje a la acción, revelando los desafíos de la EpS.</li>
+                    </ul>
+                </div>`,
+            
+            'intervencion_semana2': `
+                <h3 class="modal-subtitle">La "Experiencia Concreta" de Kolb</h3>
+                <div class="application-context">
+                    <p>La visita al ecosistema del río Guabas fue la <strong>"Experiencia Concreta"</strong> que inició el ciclo de aprendizaje de <a href="#" onclick="event.preventDefault(); openConceptModal('kolb')">Kolb</a>.</p>
+                    <p>Aquí los estudiantes no leyeron sobre el problema; lo vieron, lo olieron y lo sintieron. Esta vivencia fue el catalizador que ancló el compromiso afectivo, dio contexto a todo el aprendizaje posterior y se manifestó en el <strong><a href="#" onclick="event.preventDefault(); openConceptModal('epa')">Efecto de Preservación Actitudinal</a></strong>.</p>
+                </div>`,
+            
+            'intervencion_semana4': `
+                <h3 class="modal-subtitle">El "Andamiaje" de Vygotsky en Acción</h3>
+                <div class="application-context">
+                    <p>El debate sobre energías limpias fue un ejercicio práctico del constructivismo de <a href="#" onclick="event.preventDefault(); openConceptModal('vygotsky')">Vygotsky</a>.</p>
+                    <p>Al investigar, defender posturas y escuchar a sus pares, los estudiantes usaron el lenguaje para negociar significados y construir un conocimiento más complejo, moviéndose a través de su <strong>"Zona de Desarrollo Próximo"</strong> con el apoyo del docente y de sus compañeros como "andamiaje".</p>
+                </div>`,
+            
             'intervencion_semana6': `<h3>Afrontando la Brecha Actitud-Conducta</h3><div class="application-context"><p>El "Reto Ecológico Domiciliario" fue un intento de llevar el aprendizaje a la acción en casa. Su adherencia moderada ilustró perfectamente la <a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">brecha actitud-conducta</a>: aunque los estudiantes tenían la motivación, enfrentaron barreras contextuales (falta de apoyo familiar, de infraestructura, etc.), subrayando la importancia del enfoque de la <a href="#" onclick="event.preventDefault(); openConceptModal('eps')">EpS</a>.</p></div>`,
-            'epa': `<h3>¿Qué es?</h3><div class="application-context"><p>El <strong>Efecto de Preservación Actitudinal (EPA)</strong> es el hallazgo más robusto de nuestro estudio. Describe cómo la intervención logró <strong>proteger y mantener las altas actitudes</strong> proambientales del Grupo Experimental, evitando el descenso que sí se observó en el Grupo Control.</p></div><h3>Evidencia y Magnitud</h3><div class="application-context"><p>El efecto fue <strong>grande (r = .59)</strong>. Mientras el Grupo Experimental mantuvo sus puntajes afectivos, el Grupo Control mostró un claro declive. Visualmente, este efecto se puede apreciar en la Figura 5 de la tesis:</p><img src="images/figura5.png" alt="Gráfico de comparación pretest-postest que muestra el EPA" class="thesis-image"></div>`,
-            'brecha': `<h3>¿Qué es?</h3><div class="application-context"><p>Es la conocida discrepancia entre lo que las personas dicen/sienten sobre el medio ambiente y lo que realmente hacen. A pesar de tener actitudes muy positivas, los estudiantes no siempre las traducen en prácticas sostenibles consistentes.</p></div><h3>Evidencia y Magnitud</h3><div class="application-context"><p>Nuestro estudio confirmó esta brecha. El impacto en las actitudes fue grande (r = .59), pero en las conductas fue <strong>pequeño-moderado (r = .27)</strong>. La mejora fue significativa, pero modesta. Esto se explica por las <strong>barreras contextuales</strong> (falta de infraestructura, de apoyo institucional, etc.) que dificultan la acción.</p></div>`,
-            'falla_psicometrica': `<h3>¿Qué es?</h3><div class="application-context"><p>Es el hallazgo de que la parte de nuestra encuesta que medía el conocimiento (dimensión cognitiva) tuvo una <strong>fiabilidad inaceptablemente baja (<a href="https://gconchae.github.io/herramientas-estadisticas-tesis/?tool=internal-consistency" target="_blank">α = .387</a>)</strong>. Esto significa que la medición contenía más "ruido" que "señal" de conocimiento real.</p></div><h3>Implicaciones</h3><div class="application-context"><p>Aunque los análisis mostraron una mejora "estadísticamente significativa", no podemos confiar en ese resultado. Por honestidad metodológica, lo declaramos <strong>no concluyente</strong>. Este hallazgo no invalida el estudio, sino que subraya la enorme dificultad de medir un concepto tan complejo como el "saber ambiental" y la urgencia de desarrollar mejores instrumentos.</p></div>`,
-            'para_docentes': `<h3>Metodologías Activas y Cierre Conceptual</h3><div class="application-context"><p>La recomendación principal para los docentes es ir más allá de la clase expositiva. Estrategias como <strong>salidas de campo, debates sobre dilemas locales y proyectos</strong> son increíblemente eficaces para anclar el afecto y movilizar el saber. Es crucial complementar estas experiencias con un <strong>cierre conceptual y rúbricas claras</strong> que ayuden a los estudiantes a conectar la experiencia con la teoría.</p></div>`,
+
+            'conclusion_intervencion': `
+                <h3 class="modal-subtitle">Un Viaje Pedagógico Coherente</h3>
+                <div class="application-context">
+                    <p>Los ejemplos de esta sección ilustran que la intervención no fue una colección de actividades aisladas, sino un <strong>viaje pedagógico intencionado</strong>.</p>
+                    <p>Cada actividad fue diseñada para cumplir un rol específico dentro del andamiaje teórico, moviendo a los estudiantes desde la experiencia y el sentir hasta la conceptualización y la acción, con el objetivo final de construir una conciencia ecológica más profunda y significativa.</p>
+                </div>
+                
+                <div class="cta-banner" style="margin-top: 30px; padding: 25px; border-radius: 10px; background: var(--finding-color);">
+                    <h3 style="color:white; font-size:1.4rem;">A Continuación...</h3>
+                    <p style="color:white; opacity:0.9; font-size:1rem; margin-bottom:0;">Hemos visto la "receta" en acción. Ahora llega el momento de la verdad, el corazón empírico de la tesis. La siguiente sección presenta los <strong>Hallazgos Clave</strong>: ¿Qué impacto tuvo realmente este viaje en los estudiantes?</p>
+                </div>`,
+            
+            'intro_hallazgos': `
+                <h3 class="modal-subtitle">La Sala de Evidencias</h3>
+                <div class="application-context">
+                    <p>Esta sección es el corazón empírico de la tesis. Es la "sala de evidencias" donde los datos recolectados se analizan para revelar la historia de lo que realmente ocurrió como resultado de la intervención.</p>
+                </div>
+
+                <h3 class="modal-subtitle">Tres Descubrimientos Principales</h3>
+                <div class="interpretation-guide">
+                    <p>El análisis de los datos no arrojó un simple "éxito" o "fracaso", sino una narrativa rica y matizada, articulada en torno a tres hallazgos principales:</p>
+                    <ul>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('epa')">El Efecto de Preservación Actitudinal</a>:</strong> Un descubrimiento sobre el impacto en el 'sentir'.</li>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">La Brecha Actitud-Conducta</a>:</strong> Una confirmación cuantitativa de los desafíos del 'hacer'.</li>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('falla_psicometrica')">El Desafío de Medir el Saber</a>:</strong> Un hallazgo metodológico inesperado pero crucial.</li>
+                    </ul>
+                </div>`,
+
+            'epa': `
+                <h3 class="modal-subtitle">El "Efecto Escudo" de la Intervención</h3>
+                <div class="application-context">
+                    <p>El <strong>Efecto de Preservación Actitudinal (EPA)</strong> es el hallazgo más robusto del estudio. Describe cómo la intervención actuó como un "escudo", logrando <strong>proteger y mantener las altas actitudes</strong> proambientales del Grupo Experimental, evitando el significativo descenso que sí se observó en el Grupo de Control.</p>
+                </div>
+
+                <h3 class="modal-subtitle">La Evidencia del Contraste</h3>
+                <div class="application-context">
+                    <p>El efecto fue <strong>grande (r = .59)</strong>. El siguiente gráfico ilustra cómo, mientras el Grupo Experimental (GE) mantuvo su nivel, el Grupo de Control (GC) mostró un claro declive en su disposición afectiva.</p>
+                    
+                    <div class="explanation-box" style="padding: 10px; margin-top: 20px;">
+                        <svg width="100%" viewBox="0 0 500 150" style="font-family: 'Segoe UI', sans-serif;">
+                            <text x="250" y="15" text-anchor="middle" font-weight="bold" font-size="14" fill="var(--primary-color)">Evolución de la Dimensión Afectiva</text>
+                            <!-- Ejes -->
+                            <line x1="50" y1="120" x2="450" y2="120" stroke="#34495e"/>
+                            <text x="150" y="135" text-anchor="middle" font-size="12">Pretest</text>
+                            <text x="350" y="135" text-anchor="middle" font-size="12">Postest</text>
+                            <!-- Línea GE (Estable) -->
+                            <line x1="150" y1="40" x2="350" y2="40" stroke="var(--secondary-color)" stroke-width="3"/>
+                            <circle cx="150" cy="40" r="5" fill="var(--secondary-color)"/><circle cx="350" cy="40" r="5" fill="var(--secondary-color)"/>
+                            <text x="40" y="45" font-size="12" fill="var(--secondary-color)" font-weight="bold">GE</text>
+                            <!-- Línea GC (Descenso) -->
+                            <line x1="150" y1="60" x2="350" y2="100" stroke="#a9a9a9" stroke-width="3"/>
+                            <circle cx="150" cy="60" r="5" fill="#a9a9a9"/><circle cx="350" cy="100" r="5" fill="#a9a9a9"/>
+                            <text x="40" y="65" font-size="12" fill="#7f8c8d" font-weight="bold">GC</text>
+                        </svg>
+                    </div>
+                </div>`,
+            
+            'falla_psicometrica': `
+                <h3 class="modal-subtitle">El Hallazgo Metodológico Central</h3>
+                <div class="application-context">
+                    <p>Es el hallazgo de que la parte de nuestra encuesta que medía el conocimiento (dimensión cognitiva) tuvo una <strong>fiabilidad inaceptablemente baja (<a href="#" onclick="event.preventDefault(); openToolModalInOtherApp('stats', 'internal-consistency')">α = .387</a>)</strong>. Esto significa que la medición contenía más "ruido" aleatorio que "señal" de conocimiento real.</p>
+                </div>
+
+                <h3 class="modal-subtitle">La Conclusión: Un Veredicto de "No Concluyente"</h3>
+                <div class="interpretation-guide">
+                    <p>Aunque los análisis mostraron una mejora "estadísticamente significativa" en esta dimensión, no podemos confiar en ese resultado. Por honestidad metodológica, el hallazgo se declara <strong>no concluyente</strong>.</p>
+                    <p>Esto no invalida el estudio, sino que se convierte en una lección crucial: subraya la enorme dificultad de medir un concepto tan complejo como el "saber ambiental" y la urgencia de desarrollar y validar mejores instrumentos en futuras investigaciones.</p>
+                </div>`,
+
+            'conclusion_hallazgos': `
+                <h3 class="modal-subtitle">La Historia Completa que Cuentan los Datos</h3>
+                <div class="application-context">
+                    <p>En conjunto, los tres hallazgos clave nos cuentan una historia coherente y matizada:</p>
+                    <p>La intervención fue muy exitosa en <strong>proteger las actitudes</strong> de los estudiantes (el EPA), pero su impacto en las <strong>conductas</strong> fue más modesto, evidenciando la persistencia de la <strong>brecha actitud-conducta</strong>. Al mismo tiempo, el desafío de medir el <strong>conocimiento</strong> nos dejó una valiosa lección metodológica.</p>
+                    <p>El veredicto no es un simple "éxito", sino una visión realista del potencial y los desafíos de la educación ambiental en contextos reales.</p>
+                </div>
+                
+                <div class="cta-banner" style="margin-top: 30px; padding: 25px; border-radius: 10px; background: var(--success-color);">
+                    <h3 style="color:white; font-size:1.4rem;">A Continuación...</h3>
+                    <p style="color:white; opacity:0.9; font-size:1rem; margin-bottom:0;">Ahora que los datos han contado su historia, la pregunta más importante es: ¿qué hacemos con este conocimiento? La siguiente sección explora las <strong>Implicaciones y Proyecciones</strong> de estos hallazgos para docentes, instituciones y futuras investigaciones.</p>
+                </div>`,
+            
+            'intro_implicaciones': `
+                <h3 class="modal-subtitle">Del Mapa a la Brújula</h3>
+                <div class="application-context">
+                    <p>Una investigación no termina con la presentación de los hallazgos. Su verdadero valor reside en su capacidad para informar la acción y abrir nuevas preguntas. Si los hallazgos nos dieron un "mapa" del terreno, esta sección nos proporciona la "brújula" para navegar hacia el futuro.</p>
+                </div>
+
+                <h3 class="modal-subtitle">Direcciones para Tres Audiencias</h3>
+                <div class="interpretation-guide">
+                    <p>Las conclusiones de este estudio ofrecen una hoja de ruta con implicaciones y proyecciones para tres audiencias clave:</p>
+                    <ul>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('para_docentes')">Para los Docentes</a>:</strong> Recomendaciones prácticas y accionables para implementar en el aula mañana mismo.</li>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('para_instituciones')">Para las Instituciones</a>:</strong> Una visión estratégica para pasar de proyectos aislados a una verdadera cultura de sostenibilidad.</li>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('proyecciones_futuras')">Para la Investigación</a>:</strong> Nuevas preguntas y avenidas para que futuros exploradores continúen el viaje.</li>
+                    </ul>
+                </div>`,
+            
+            'para_docentes': `
+                <h3 class="modal-subtitle">De la Teoría a la Práctica en el Aula</h3>
+                <div class="application-context">
+                    <p>La recomendación principal para los docentes es ir más allá de la clase expositiva. Estrategias como <strong>salidas de campo, debates sobre dilemas locales y proyectos</strong> son increíblemente eficaces para anclar el afecto y movilizar el saber.</p>
+                    <p>Es crucial complementar estas experiencias con un <strong>cierre conceptual claro</strong> y rúbricas que ayuden a los estudiantes a conectar la experiencia con la teoría.</p>
+                </div>`,
+            
             'para_instituciones': `<h3>De Proyecto Aislado a Cultura Escolar</h3><div class="application-context"><p>Las instituciones deben asumir la Educación Ambiental como un <strong>eje del Proyecto Educativo Institucional (PEI)</strong>. Esto implica fortalecer el PRAE, destinar recursos, crear <strong>roles visibles (eco-monitores), normas claras y rutinas</strong>, y ofrecer oportunidades semanales de acción con feedback. El objetivo es pasar del "goteo" de esfuerzos aislados a una cultura de sostenibilidad coherente.</p></div>`,
-            'proyecciones_futuras': `<h3>Nuevas Preguntas de Investigación</h3><div class="application-context"><ul><li><strong>Rigor Metodológico:</strong> Realizar diseños experimentales con aleatorización para establecer causalidad de forma más robusta.</li><li><strong>Instrumentos:</strong> La tarea más urgente es refinar la subescala cognitiva, realizando análisis más avanzados (como la Teoría de Respuesta al Ítem) y pilotajes exhaustivos.</li><li><strong>Enfoques Integrales:</strong> Realizar estudios longitudinales (para medir el efecto a largo plazo) y mixtos (para entender las barreras contextuales en profundidad).</li></ul></div>`,
-            'conciencia_ecologica': `<h3>Definición</h3><div class="application-context"><p>Es un constructo multidimensional que integra la comprensión intelectual (<strong>Saber - Cognitiva</strong>), el vínculo emocional (<strong>Sentir - Afectiva</strong>) y las prácticas proambientales (<strong>Hacer - Conductual</strong>). Nuestro estudio demuestra que estas tres dimensiones son interdependientes, pero no siempre se mueven al mismo ritmo.</p></div><img src="images/3d.png" alt="Diagrama de las tres dimensiones de la Conciencia Ecológica: Saber, Sentir y Hacer" class="thesis-image">`,
-            'integracion_curricular': `<h3>Definición</h3><div class="application-context"><p>Fue nuestra estrategia de intervención. En lugar de tratar la educación ambiental como un taller aislado, la <strong>integramos sistemáticamente en el currículo de Ciencias Naturales durante 8 semanas</strong>. El objetivo era conectar los contenidos ambientales con los temas regulares de la asignatura, demostrando que la sostenibilidad no es un tema aparte, sino una lente a través de la cual se puede ver toda la ciencia.</p></div>`,
+            
+            'proyecciones_futuras': `
+                <h3 class="modal-subtitle">Abriendo Nuevas Avenidas de Investigación</h3>
+                <div class="application-context">
+                    <p>Esta tesis responde a algunas preguntas, pero abre otras nuevas. Las futuras líneas de investigación deberían centrarse en:</p>
+                    <ul>
+                        <li><strong>Mayor Rigor Metodológico:</strong> Implementar diseños experimentales puros con aleatorización para establecer causalidad de forma más robusta.</li>
+                        <li><strong>Mejores Instrumentos:</strong> La tarea más urgente es refinar la subescala cognitiva, utilizando análisis psicométricos más avanzados.</li>
+                        <li><strong>Visión a Largo Plazo:</strong> Realizar estudios longitudinales (para medir el efecto a lo largo del tiempo) y mixtos (para entender las barreras contextuales en profundidad).</li>
+                    </ul>
+                </div>`,
+
+            'conclusion_implicaciones': `
+                <h3 class="modal-subtitle">Una Responsabilidad Compartida</h3>
+                <div class="application-context">
+                    <p>La conclusión principal de esta fase es que la transformación hacia la sostenibilidad no es una tarea solitaria. Requiere una <strong>acción coordinada y un compromiso compartido</strong> en múltiples niveles:</p>
+                    <ul>
+                        <li>El <strong>docente</strong> en el aula, con metodologías activas.</li>
+                        <li>La <strong>institución</strong>, creando una cultura y una infraestructura de apoyo.</li>
+                        <li>La <strong>comunidad científica</strong>, continuando la investigación con mayor rigor y profundidad.</li>
+                    </ul>
+                </div>
+                
+                <div class="cta-banner" style="margin-top: 30px; padding: 25px; border-radius: 10px; background: var(--concept-color);">
+                    <h3 style="color:white; font-size:1.4rem;">A Continuación...</h3>
+                    <p style="color:white; opacity:0.9; font-size:1rem; margin-bottom:0;">Para finalizar nuestro recorrido, la última sección sirve como un glosario de referencia rápida, resumiendo los dos <strong>Conceptos Fundamentales</strong> que han sido los pilares de toda esta investigación: la "Conciencia Ecológica" y la "Integración Curricular".</p>
+                </div>`,
+
+            'intro_conceptos': `
+                <h3 class="modal-subtitle">Volviendo a los Cimientos</h3>
+                <div class="application-context">
+                    <p>Después de haber recorrido todo el "edificio" de la investigación, desde los planos hasta las habitaciones terminadas, esta sección final nos invita a volver a inspeccionar los <strong>dos cimientos</strong> sobre los que se construyó todo el proyecto.</p>
+                </div>
+
+                <h3 class="modal-subtitle">El "Qué" y el "Cómo"</h3>
+                <div class="interpretation-guide">
+                    <p>Este apartado sirve como un glosario de referencia rápida para los dos conceptos más importantes de la tesis, que responden a las preguntas fundamentales:</p>
+                    <ul>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('conciencia_ecologica')">Conciencia Ecológica</a>:</strong> El <strong>QUÉ</strong>. ¿Qué es exactamente el constructo complejo que intentamos medir y fortalecer?</li>
+                        <li><strong><a href="#" onclick="event.preventDefault(); openConceptModal('integracion_curricular')">Integración Curricular</a>:</strong> El <strong>CÓMO</strong>. ¿Cuál fue la estrategia pedagógica precisa que utilizamos para influir en ese constructo?</li>
+                    </ul>
+                </div>`,
+            
+            'conciencia_ecologica': `
+                <h3 class="modal-subtitle">El Constructo Central: Saber, Sentir y Hacer</h3>
+                <div class="application-context">
+                    <p>Es un constructo multidimensional que integra la comprensión intelectual (<strong>Saber - Dimensión Cognitiva</strong>), el vínculo emocional (<strong>Sentir - Dimensión Afectiva</strong>) y las prácticas proambientales (<strong>Hacer - Dimensión Conductual</strong>).</p>
+                    <p>Nuestro estudio demuestra que estas tres dimensiones son interdependientes, pero no siempre se mueven al mismo ritmo, lo que da lugar a fenómenos como la <a href="#" onclick="event.preventDefault(); openConceptModal('brecha')">Brecha Actitud-Conducta</a>.</p>
+                </div>
+                <img src="https://gconchae.github.io/conceptos-y-hallazgos/images/3d.png" alt="Diagrama de las tres dimensiones de la Conciencia Ecológica: Saber, Sentir y Hacer" class="thesis-image">`,
+            
+            'integracion_curricular': `
+            <h3 class="modal-subtitle">La Estrategia Pedagógica Central</h3>
+            <div class="application-context">
+                <p>Fue nuestra estrategia de intervención. En lugar de tratar la educación ambiental como un taller aislado, la <strong>integramos sistemáticamente en el currículo de Ciencias Naturales durante 8 semanas</strong>.</p>
+                <p>El objetivo era conectar los contenidos ambientales con los temas regulares de la asignatura, demostrando que la sostenibilidad no es un tema aparte, sino una lente a través de la cual se puede ver toda la ciencia.</p>
+            </div>`,
+
+            'conclusion_final': `
+                <h3 class="modal-subtitle">La Síntesis del Viaje</h3>
+                <div class="application-context">
+                    <p>A lo largo de este recorrido, hemos viajado desde la <strong>pregunta</strong> de investigación, a través del <strong>marco teórico</strong> y la <strong>intervención práctica</strong>, hasta los <strong>hallazgos empíricos</strong> y sus <strong>implicaciones</strong>.</p>
+                    <p>Hemos visto cómo una estrategia pedagógica bien fundamentada puede generar un impacto significativo y cómo un análisis riguroso nos permite entender ese impacto con profundidad y matices.</p>
+                </div>
+                
+                <div class="cta-banner" style="margin-top: 30px; padding: 25px; border-radius: 10px; background: var(--dark-color);">
+                    <h3 style="color:white; font-size:1.4rem;">¿Listo para Profundizar?</h3>
+                    <p style="color:white; opacity:0.9; font-size:1rem; margin-bottom:20px;">Este manual ha sido una exploración interactiva de la tesis. Para conocer el análisis completo, la discusión en profundidad y la totalidad de las referencias, te invitamos a consultar el documento original.</p>
+                    <a href="https://gconchae.github.io/tesis-vision-general/tesis-doctoral.pdf" target="_blank" class="cta-button" style="background-color: var(--secondary-color); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Ver la Tesis Completa (PDF)</a>
+                </div>`,
         };
 
         const categoriesData = [
@@ -249,19 +719,37 @@
             'estado_del_arte': ['brecha', 'falla_psicometrica', 'vygotsky', 'pirchio_experiencia_directa', 'modelo_tridimensional', 'munoz_barreras_estructurales'],
             'el_problema': ['brecha', 'conciencia_ecologica'],
             'la_pregunta': ['conciencia_ecologica', 'integracion_curricular'],
+            'la_intervencion': ['la_pregunta', 'los_resultados', 'kolb', 'vygotsky', 'intervencion_semana2', 'intervencion_semana4', 'intervencion_semana6'],
+            
+            'intro_marco_teorico': ['vygotsky', 'kolb', 'eps', 'estado_del_arte'],
             'los_resultados': ['epa', 'brecha', 'falla_psicometrica'],
             'la_discusion': ['epa', 'brecha', 'falla_psicometrica', 'vygotsky', 'kolb', 'eps', 'intervencion_semana2'],
             'vygotsky': ['kolb', 'eps', 'intervencion_semana4'],
-            'kolb': ['vygotsky', 'eps', 'epa', 'intervencion_semana2'],
+            'mezirow': ['kolb', 'epa', 'intervencion_semana2'],
+            'kolb': ['vygotsky', 'mezirow', 'eps', 'epa', 'intervencion_semana2'],
             'eps': ['vygotsky', 'kolb', 'para_instituciones', 'intervencion_semana6', 'munoz_barreras_estructurales'],
             'modelo_tridimensional': ['conciencia_ecologica', 'brecha', 'eps', 'estado_del_arte'],
+            'conclusion_implicaciones': ['para_docentes', 'para_instituciones', 'proyecciones_futuras'],
+            
+            'intro_conceptos': ['conciencia_ecologica', 'integracion_curricular'],
             'conciencia_ecologica': ['modelo_tridimensional', 'integracion_curricular', 'el_problema'],
-            'intervencion_semana2': ['kolb', 'epa', 'la_discusion', 'pirchio_experiencia_directa'],
+            'integracion_curricular': ['la_intervencion', 'vygotsky', 'kolb', 'conciencia_ecologica'],
+            'conclusion_final': ['resumen_ejecutivo', 'la_discusion', 'proyecciones_futuras'],
+            'conclusion_marco_teorico': ['vygotsky', 'kolb', 'mezirow', 'eps'],
+
+            'intro_intervencion': ['intervencion_semana2', 'intervencion_semana4', 'intervencion_semana6', 'kolb', 'vygotsky'],
+            'intervencion_semana2': ['kolb', 'mezirow', 'epa', 'la_discusion', 'pirchio_experiencia_directa'],
             'intervencion_semana4': ['vygotsky'],
             'intervencion_semana6': ['brecha', 'eps'],
-            'epa': ['los_resultados', 'la_discusion', 'kolb', 'intervencion_semana2'],
+            'conclusion_intervencion': ['intervencion_semana2', 'intervencion_semana4', 'intervencion_semana6', 'la_intervencion'],
+            
+            'intro_hallazgos': ['epa', 'brecha', 'falla_psicometrica', 'los_resultados'],
+            'epa': ['los_resultados', 'la_discusion', 'kolb', 'mezirow', 'intervencion_semana2'],
             'brecha': ['el_problema', 'los_resultados', 'la_discusion', 'eps', 'para_instituciones', 'intervencion_semana6', 'munoz_barreras_estructurales'],
-            'falla_psicometrica': ['los_resultados', 'la_discusion', 'proyecciones_futuras'],
+            'falla_psicometrica': ['los_resultados', 'la_discusion', 'proyecciones_futuras'],            
+            'conclusion_hallazgos': ['epa', 'brecha', 'falla_psicometrica', 'la_discusion'],
+
+            'intro_implicaciones': ['para_docentes', 'para_instituciones', 'proyecciones_futuras'],
             'para_docentes': ['kolb', 'vygotsky', 'integracion_curricular', 'intervencion_semana2'],
             'para_instituciones': ['eps', 'brecha', 'munoz_barreras_estructurales'],
             'proyecciones_futuras': ['falla_psicometrica'],
@@ -387,7 +875,32 @@
             }
         });
 
+        /**
+         * Navega a otra aplicación del ecosistema de la tesis y le pide que abra un modal específico.
+         * @param {string} appName - El nombre corto de la aplicación de destino (ej. 'stats').
+         * @param {string} toolKey - La clave del contenido que se debe abrir en la otra aplicación.
+         */
+        function openToolModalInOtherApp(appName, toolKey) {
+            const appUrls = {
+                'vision': 'https://gconchae.github.io/tesis-vision-general/',
+                'concepts': 'https://gconchae.github.io/conceptos-y-hallazgos/',
+                'stats': 'https://gconchae.github.io/herramientas-estadisticas-tesis/'
+            };
+
+            const baseUrl = appUrls[appName];
+
+            if (baseUrl) {
+                // Construye la URL final con el parámetro de búsqueda ?tool=...
+                const finalUrl = `${baseUrl}?tool=${toolKey}`;
+                // Abre en una nueva pestaña
+                window.open(finalUrl, '_blank');
+            } else {
+                console.error(`Nombre de aplicación no reconocido: ${appName}`);
+            }
+        }
+
         window.openConceptModal = openConceptModal;
+        window.openToolModalInOtherApp = openToolModalInOtherApp;
         
         document.addEventListener('DOMContentLoaded', () => {
             renderCategoryCards();
